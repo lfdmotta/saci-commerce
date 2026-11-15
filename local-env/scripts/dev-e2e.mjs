@@ -109,7 +109,10 @@ check('entrada com CPF e senha', buyer.access_token && buyer.refresh_token && bu
 check('senha errada recusada', (await call('POST', '/v1/identity/sessions', { body: { document: BUYER, password: 'errada!!', client: 'web' } })).json?.code === 'invalid-credentials');
 const refreshed = await call('POST', '/v1/identity/sessions/refresh', { body: { refresh_token: buyer.refresh_token } });
 check('refresh rotativo', refreshed.status === 200 && refreshed.json.refresh_token !== buyer.refresh_token);
-check('refresh usado não vale de novo', (await call('POST', '/v1/identity/sessions/refresh', { body: { refresh_token: buyer.refresh_token } })).status === 401);
+// Contrato: repetir o refresh usado dentro de 60 s (repetição de rede) devolve o MESMO refresh novo;
+// o sandbox recusa na hora. Os dois deixam o refresh antigo sem gerar uma sessão nova.
+const reused = await call('POST', '/v1/identity/sessions/refresh', { body: { refresh_token: buyer.refresh_token } });
+check('refresh usado não gera outro', reused.status === 401 || reused.json?.refresh_token === refreshed.json.refresh_token);
 let token = refreshed.json.access_token;
 const me = await call('GET', '/v1/customers/me', { token });
 check('perfil com endereço do cofre', me.status === 200 && me.json.cpf_masked && me.json.address?.postal_code === '60175047', me.json);

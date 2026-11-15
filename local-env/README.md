@@ -23,6 +23,10 @@ cd ../saci-interface && npm run web       # http://localhost:8081
 
 O servidor faz o papel de toda a borda: CORS para o site do Expo, autenticação equivalente ao autorizador da plataforma (JWT ES256, papéis de vitrine lidos das concessões que o `sellers` grava, guest token do checkout), o `cdn.` e o `files.` (envio direto de imagens, fotos publicadas, etiquetas assinadas) e os layouts de `domains/content/layouts`.
 
+### Com o saci-identity de verdade
+
+Com o `saci-identity-dev` no ar (`task dev` no `saci-identity`, porta 8788), suba este servidor com `SACI_DEV_IDENTITY_URL=http://localhost:8788`: `/v1/identity/*` passa a ser repassado a ele (cadastro, sessões, MFA, pedidos do titular), os alvos internos `identity` (cofre) e `kyc` vão para `/internal/{alvo}` dele, e o `Authorization` é conferido com a chave pública das sessões dele. O resto (payments, finance, assistant) continua no sandbox. As contas de exemplo são as mesmas; o perfil passa a vir com e-mail e celular **mascarados**, como o cofre devolve. Detalhes em `saci-identity/local-env/README.md` e `src/identity_bridge.rs`.
+
 ### Contas de exemplo
 
 Senha de todas: `feira-de-exemplo`. Código de verificação (cadastro, troca de contato, recuperação de senha): `123456`. O CPF completo de cada conta **aparece no terminal quando o servidor sobe**: no repositório ficam só os 9 primeiros dígitos (`sandbox/demo-accounts.json`), para nenhum CPF válido ficar escrito no código (a varredura de CPF da plataforma reprovaria). São os mesmos CPFs dos mocks da interface.
