@@ -1,0 +1,69 @@
+[package]
+name = "saci-commerce-kit"
+version = "0.1.0"
+description = "Comum do saci-commerce: HTTP sem framework, armazenamento por porta, eventos, cursores e idempotência. Núcleo sem nuvem; AWS na feature `aws`."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+# Adaptadores AWS: DynamoDB, Lambda (HTTP, SQS, invocação), SSM, EventBridge.
+aws = [
+  "dep:aws-config",
+  "dep:aws-sdk-dynamodb",
+  "dep:aws-sdk-lambda",
+  "dep:aws-sdk-s3",
+  "dep:aws-sdk-kms",
+  "dep:saci-authorizer",
+  "dep:rsa",
+  "dep:sha1",
+  "dep:aws-sdk-ssm",
+  "dep:aws-sdk-eventbridge",
+  "dep:aws_lambda_events",
+  "dep:lambda_http",
+  "dep:lambda_runtime",
+  "saci-authz/lambda",
+  "saci-events/eventbridge",
+  "dep:saci-outbox",
+  "dep:saci-telemetry",
+]
+
+[dependencies]
+aws-lc-rs.workspace = true
+base64.workspace = true
+hex.workspace = true
+http.workspace = true
+saci-authz.workspace = true
+saci-events.workspace = true
+saci-idempotency.workspace = true
+saci-ids.workspace = true
+saci-mask.workspace = true
+saci-problem.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+time.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+
+aws-config = { workspace = true, optional = true }
+aws-sdk-dynamodb = { workspace = true, optional = true }
+aws-sdk-eventbridge = { workspace = true, optional = true }
+aws-sdk-lambda = { workspace = true, optional = true }
+aws-sdk-s3 = { workspace = true, optional = true }
+aws-sdk-kms = { workspace = true, optional = true }
+saci-authorizer = { workspace = true, optional = true }
+rsa = { version = "0.9", optional = true, default-features = false, features = ["std", "pem", "sha2"] }
+sha1 = { version = "0.10", optional = true, default-features = false, features = ["oid"] }
+aws-sdk-ssm = { workspace = true, optional = true }
+aws_lambda_events = { workspace = true, optional = true }
+lambda_http = { workspace = true, optional = true }
+lambda_runtime = { workspace = true, optional = true }
+saci-outbox = { workspace = true, optional = true, features = ["dynamodb"] }
+saci-telemetry = { workspace = true, optional = true }
+
+[lints]
+workspace = true
