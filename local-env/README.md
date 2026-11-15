@@ -1,0 +1,98 @@
+# Ambiente local
+
+Dois jeitos de rodar o `saci-commerce` na máquina, com **o mesmo código Rust** das Lambdas:
+
+| | Servidor de desenvolvimento | LocalStack |
+| --- | --- | --- |
+| Para | Usar a **interface** contra o back-end real; desenvolver e depurar serviços | Conferir a **infraestrutura**: os mesmos stacks Terraform da nuvem, API Gateway, autorizador da plataforma, filas, streams |
+| Precisa de | Rust | Docker, token do LocalStack, o ambiente local do `saci-boiuna` |
+| Sobe em | segundos (`task dev`) | minutos (`task local:deploy`) |
+| Dados | em memória, sementes a cada início | DynamoDB do LocalStack, sementes pela função `migrate` |
+| Identidade e pagamentos | sandbox em processo (`/v1/identity`, `/v1/payments`) | sandbox nas funções (tabela `saci-local-sandbox`); tokens emitidos com `saci-devtools` |
+
+## Interface + back-end local (servidor de desenvolvimento)
+
+```bash
+# terminal 1: o back-end (http://localhost:8787)
+task dev                                  # ou: cargo run -p saci-commerce-dev
+
+# terminal 2: a interface
+cp local-env/interface.env.example ../saci-interface/.env
+cd ../saci-interface && npm run web       # http://localhost:8081
+```
+
+O servidor faz o papel de toda a borda: CORS para o site do Expo, autenticação equivalente ao autorizador da plataforma (JWT ES256, papéis de vitrine lidos das concessões que o `sellers` grava, guest token do checkout), o `cdn.` e o `files.` (envio direto de imagens, fotos publicadas, etiquetas assinadas) e os layouts de `domains/content/layouts`.
+
+### Contas de exemplo
+
+Senha de todas: `feira-de-exemplo`. Código de verificação (cadastro, troca de contato, recuperação de senha): `123456`. O CPF completo de cada conta **aparece no terminal quando o servidor sobe**: no repositório ficam só os 9 primeiros dígitos (`sandbox/demo-accounts.json`), para nenhum CPF válido ficar escrito no código (a varredura de CPF da plataforma reprovaria). São os mesmos CPFs dos mocks da interface.
+
+| Conta | Começo do CPF | Papel |
+| --- | --- | --- |
+| Marina (quem compra) | `529.982.247` | Compras, endereço, cartão salvo |
+| Helena (responsável) | `390.533.447` | Dona do **Ateliê Barro Vivo** (`/artesaos/barro-vivo`): painel, vendas, chamados, equipe |
+| Joana (equipe) | `714.602.380` | Equipe do Barro Vivo com `anuncios` e `pedidos` |
+
+### Sandbox de pagamento
+
+| Cartão | Resultado |
+| --- | --- |
+| Final `0002` (ex.: `4000 0000 0000 0002`) | Recusado (402 `card-declined`) |
+| Qualquer outro válido (ex.: `4111 1111 1111 1111`) | Aprovado |
+| Pix | Pago automaticamente 20 s depois (a tela de Pix vê `paid` ao consultar) |
+
+### Outras simulações
+
+| Rota (só no servidor de desenvolvimento) | Para |
+| --- | --- |
+| `POST /dev/assistant/handoffs` `{ "storefront_id", "first_name", "message" }` | A Caipora passar uma conversa para a vitrine (abre um chamado) |
+| `POST /dev/carrier/sandbox` `{ "event_id", "tracking_code", "status": "delivered" }` | A transportadora avisar uma entrega (assinado pelo servidor) |
+| `GET /dev/health` | Saúde |
+
+KYC do sandbox: nascimento de menor de 18 anos → `underage`; nascimento em 1º de janeiro → `identity-mismatch`; CNPJ começando por `00` → `cnpj-inactive`, por `99` → `cnpj-not-partner`.
+
+### Teste ponta a ponta
+
+```bash
+task dev            # terminal 1
+task dev:e2e        # terminal 2: 80 verificações pelos caminhos da interface
+```
+
+O roteiro (`scripts/dev-e2e.mjs`) cobre vitrine aberta, conta, compra com cartão, recusa, Pix, compra sem conta, painel, anúncio com foto pela esteira, vendas, etiqueta, entrega pela transportadora, equipe e chamados.
+
+### O que ainda muda na interface
+
+A interface segue os contratos, mas cinco leituras ainda usam o formato anterior ao `saci-contracts` (lista em `saci-contracts/docs/divergencias-da-interface.md`). Com `EXPO_PUBLIC_USE_MOCKS=false`, estas telas precisam do ajuste na interface:
+
+| Rota | A interface lê | O back-end devolve (contrato) |
+| --- | --- | --- |
+| `GET /v1/sellers/storefront-fonts` | `{ options }` | `{ items }` |
+| `GET /v1/catalog/listing-attributes` | `{ attributes }` | `{ items }` |
+| `GET /v1/sellers/me/team` | `{ members }` | `{ items }` |
+| `POST /v1/shipping/quotes` | lista solta | `{ items }` |
+| `GET /v1/support/me/tickets` | `{ tickets }` | `{ items }` (proposta 5.11) |
+| `GET /v1/orders/me/sales` | `{ orders, counts }` | `{ items, counts }` (proposta 5.8) |
+| `PUT /me/storefront`, `PUT /me/listings/{id}` | sem `If-Match` | `If-Match` obrigatório (ETag do `GET`) |
+
+Logotipo e capa enviados no servidor local saem em `http://localhost:8787/dev/cdn/...`; a interface só aceita imagem de vitrine em `https` (S-22), então nessa combinação ela mostra a identidade padrão. As fotos de anúncio aparecem normalmente.
+
+## LocalStack (a infraestrutura de verdade)
+
+```bash
+cd ../saci-boiuna && task local:up local:deploy && cd -   # plataforma: API Gateway, autorizador, barramento, buckets
+task local:deploy                                          # compila os 10 domínios e aplica os stacks com envs/local.tfvars
+task local:smoke                                           # rotas pelo API Gateway local, com o autorizador da plataforma
+```
+
+`local:deploy` aplica `infra/aws/stacks/shared` e, na ordem das dependências das migrações, `sellers → catalog → media → shipping → orders → checkout → customers → reviews → support → notifications`. As sementes rodam pela função `migrate` de cada domínio (`aws_lambda_invocation`).
+
+Diferenças do LocalStack em relação à nuvem: sem VPC nem KMS (como o resto da plataforma no local), verificação de malware desligada (`malware_scan = "none"`: a notificação do S3 dispara a esteira), guest token assinado com a chave de desenvolvimento da plataforma (no SSM) em vez do KMS, e etiquetas com assinatura de desenvolvimento.
+
+## Problemas comuns
+
+| Sintoma | Causa provável |
+| --- | --- |
+| `failed to run custom build command for aws-lc-sys` (Windows) | Falta o NASM: use `AWS_LC_SYS_PREBUILT_NASM=1` (o `Taskfile.yml` já define) |
+| `Uma política de Controle de Aplicativo bloqueou este arquivo` | O Controle Inteligente de Aplicativos do Windows bloqueou um executável recém-compilado; rode de novo ou libere a pasta `target/` |
+| CORS recusado no site | A origem do Expo não está em `SACI_DEV_ORIGINS` (padrão: `localhost:8081` e `localhost:19006`) |
+| `ParameterNotFound` no `local:deploy` | O ambiente local do `saci-boiuna` não foi aplicado |
