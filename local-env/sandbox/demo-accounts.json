@@ -1,0 +1,52 @@
+{
+  "description": "Contas de exemplo do sandbox de identidade (só local e dev). O CPF é gerado a partir dos 9 primeiros dígitos, para nenhum CPF válido ficar escrito no repositório.",
+  "password": "feira-de-exemplo",
+  "verification_code": "123456",
+  "accounts": [
+    {
+      "id": "acc_01M6A6FT00VD38Y9NETHTXE4GA",
+      "cpf_base": "529982247",
+      "name": "Marina Albuquerque de Souza",
+      "preferred_name": "Nina",
+      "email": "marina@exemplo.com.br",
+      "phone": "85988887777",
+      "created_at": "2026-03-14T13:00:00Z",
+      "address": {
+        "kind": "brasil",
+        "recipient": "Marina Albuquerque de Souza",
+        "street": "Rua Professor Dias da Rocha",
+        "number": "1200",
+        "complement": "apto 302",
+        "neighborhood": "Meireles",
+        "city": "Fortaleza",
+        "state": "CE",
+        "postal_code": "60175047"
+      },
+      "payment": {
+        "default_method": "credito",
+        "saved_card": {
+          "id": "card_demo",
+          "kind": "credito",
+          "saved_at": "2026-04-02T22:20:00Z",
+          "brand": "mastercard",
+          "last4": "5454"
+        }
+      }
+    },
+    {
+      "id": "acc_01M6A6FT00CY3KRX93QBFSJ2ZN",
+      "cpf_base": "390533447",
+      "name": "Helena Prado de Almeida",
+      "preferred_name": "Helena",
+      "email": "helena@barrovivo.exemplo",
+      "created_at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "id": "acc_01M6A6FT00ZRW5YDMM2E91NFNM",
+      "cpf_base": "714602380",
+      "name": "Joana Ribeiro Santos",
+      "email": "joana@barrovivo.exemplo",
+      "created_at": "2026-08-02T17:00:00Z"
+    }
+  ]
+}
