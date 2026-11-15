@@ -1,0 +1,44 @@
+# Metadados do serviço (seção 9.7). Validado por ci/schemas/service.schema.json
+# do saci-boiuna e pelas políticas de classe de dado.
+name: orders-api
+domain: orders
+owner: saci-art/commerce
+language: rust
+runtime: aws-lambda
+account: prod
+# Funções (SACI_FUNCTION) do binário saci-orders que pertencem a este serviço (ADR 0003).
+routes:
+  - route: GET /v1/orders/me/purchases
+    access: USER
+  - route: GET /v1/orders/me/purchases/{order_id}
+    access: USER
+  - route: GET /v1/orders/guest/{order_id}
+    access: GUEST
+  - route: GET /v1/orders/me/sales
+    access: SELLER:pedidos
+  - route: GET /v1/orders/me/sales/{sale_id}
+    access: SELLER:pedidos
+  - route: POST /v1/orders/me/sales/{sale_id}/ready
+    access: SELLER:pedidos
+  - route: POST /v1/orders/me/sales/{sale_id}/shipment
+    access: SELLER:pedidos
+data:
+  stores:
+    - name: saci-<env>-orders
+      kind: dynamodb
+      class: C2
+      kms_key_class: C2
+logging:
+  request_body: false
+events:
+  publishes:
+    - orders.sale.ready.v1
+    - orders.sale.shipped.v1
+    - orders.sale.delivered.v1
+  consumes:
+    - shipping.label.purchased.v1
+    - shipping.tracking.updated.v1
+    - finance.payout.sent.v1
+slo:
+  availability: 99.9
+  latency_p99_ms: 300

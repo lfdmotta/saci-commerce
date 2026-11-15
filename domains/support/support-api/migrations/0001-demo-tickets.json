@@ -1,0 +1,146 @@
+{
+  "description": "Chamados de exemplo do Ateliê Barro Vivo (dados fictícios; só fora de produção).",
+  "tickets": [
+    {
+      "protocol": "2026110500342",
+      "subject": "Prazo das tigelas personalizadas",
+      "status": "open",
+      "opened_at": "2026-11-15T12:00:00.000Z",
+      "updated_at": "2026-11-15T12:00:00.000Z",
+      "customer": {
+        "first_name": "Marina",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "order": {
+        "id": "ord_01M6A6FT00919GTD9CH4CWTPKZ",
+        "number": "48231"
+      },
+      "handoff_summary": "Marina quer saber se as tigelas em azul-anil chegam antes do dia 20, para um presente. A Caipora não tem como garantir o prazo da queima.",
+      "unread": 2,
+      "messages": [
+        {
+          "id": "m1",
+          "author": "customer",
+          "author_name": "Marina",
+          "text": "Oi! As tigelas azuis ficam prontas antes do dia 20? É para o aniversário da minha mãe.",
+          "created_at": "2026-11-15T11:00:00.000Z"
+        },
+        {
+          "id": "m2",
+          "author": "caipora",
+          "text": "A queima do Ateliê Barro Vivo leva alguns dias e depende do forno. Vou passar para a Helena, que fez as tigelas: ela responde por aqui mesmo.",
+          "created_at": "2026-11-15T11:00:00.000Z"
+        },
+        {
+          "id": "m3",
+          "author": "system",
+          "text": "Atendimento passado para a vitrine.",
+          "created_at": "2026-11-15T11:00:00.000Z"
+        },
+        {
+          "id": "m4",
+          "author": "customer",
+          "author_name": "Marina",
+          "text": "Obrigada! Se precisar, posso pagar o SEDEX.",
+          "created_at": "2026-11-15T12:00:00.000Z"
+        }
+      ],
+      "id": "tkt_01M6A6FT00JR95TNXR2J7EBFB8",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX"
+    },
+    {
+      "protocol": "2026110300118",
+      "subject": "Tigelas chegaram trincadas",
+      "status": "waiting_customer",
+      "opened_at": "2026-11-14T18:00:00.000Z",
+      "updated_at": "2026-11-14T20:00:00.000Z",
+      "customer": {
+        "first_name": "Bruno",
+        "city": "Campinas",
+        "state": "SP"
+      },
+      "order": {
+        "id": "ord_01M6A6FT00DCX1RW7WRJ920P7Q",
+        "number": "48011"
+      },
+      "handoff_summary": "Bruno recebeu duas tigelas trincadas e mandou fotos. A devolução já foi aberta; ele quer saber se é possível trocar só as duas.",
+      "unread": 0,
+      "messages": [
+        {
+          "id": "m1",
+          "author": "customer",
+          "author_name": "Bruno",
+          "text": "Duas das seis tigelas chegaram trincadas. Dá para trocar só essas duas?",
+          "created_at": "2026-11-14T18:00:00.000Z"
+        },
+        {
+          "id": "m2",
+          "author": "system",
+          "text": "Atendimento passado para a vitrine.",
+          "created_at": "2026-11-14T18:00:00.000Z"
+        },
+        {
+          "id": "m3",
+          "author": "vitrine",
+          "author_name": "Helena",
+          "text": "Bruno, sinto muito. Faço duas novas na próxima fornada e mando sem custo. Pode me confirmar o esmalte da foto?",
+          "created_at": "2026-11-14T20:00:00.000Z"
+        }
+      ],
+      "id": "tkt_01M6A6FT007E9QQSRJ8GC3XFZQ",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX"
+    },
+    {
+      "protocol": "2026102800075",
+      "subject": "Jarra serve para água quente?",
+      "status": "resolved",
+      "opened_at": "2026-11-07T14:00:00.000Z",
+      "updated_at": "2026-11-07T17:00:00.000Z",
+      "customer": {
+        "first_name": "Sofia",
+        "city": "Niterói",
+        "state": "RJ"
+      },
+      "handoff_summary": "Sofia perguntou se a jarra aguenta água quente. A ficha da peça não diz.",
+      "unread": 0,
+      "messages": [
+        {
+          "id": "m1",
+          "author": "customer",
+          "author_name": "Sofia",
+          "text": "A jarra aguenta chá quente?",
+          "created_at": "2026-11-07T14:00:00.000Z"
+        },
+        {
+          "id": "m2",
+          "author": "system",
+          "text": "Atendimento passado para a vitrine.",
+          "created_at": "2026-11-07T14:00:00.000Z"
+        },
+        {
+          "id": "m3",
+          "author": "vitrine",
+          "author_name": "Helena",
+          "text": "Aguenta sim, Sofia. É grés queimado a 1.280 graus. Só evite ir do fogo direto para a água gelada.",
+          "created_at": "2026-11-07T16:00:00.000Z"
+        },
+        {
+          "id": "m4",
+          "author": "customer",
+          "author_name": "Sofia",
+          "text": "Perfeito, obrigada!",
+          "created_at": "2026-11-07T17:00:00.000Z"
+        },
+        {
+          "id": "m5",
+          "author": "system",
+          "text": "Chamado resolvido.",
+          "created_at": "2026-11-07T17:00:00.000Z"
+        }
+      ],
+      "id": "tkt_01M6A6FT00K7F53SQJCDXQM2JF",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX"
+    }
+  ]
+}

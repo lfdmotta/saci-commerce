@@ -1,0 +1,5 @@
+# Finais de linha LF no repositório (scripts rodam em Linux, inclusive no toolbox).
+* text=auto eol=lf
+*.sh text eol=lf
+*.zip binary
+*.pk8 binary

@@ -1,0 +1,116 @@
+# Comandos do repositório (seção 9.5 da proposta): os mesmos nomes em todos os
+# repositórios da Saci, para o CI chamar `task test` sem saber a linguagem.
+#
+#   task --list
+#
+# Requer go-task (https://taskfile.dev), Rust (rust-toolchain.toml), Node 22+
+# (roteiro ponta a ponta) e, para a nuvem e o LocalStack, Terraform e Docker.
+# O saci-boiuna precisa estar clonado ao lado deste repositório (ADR 0002).
+version: "3"
+
+vars:
+  DOMAINS: sellers catalog media shipping orders checkout customers reviews support notifications
+  TOOLBOX: docker compose -f local-env/docker-compose.yml --profile tools run --rm toolbox
+
+env:
+  # aws-lc-sys no Windows sem NASM instalado.
+  AWS_LC_SYS_PREBUILT_NASM: "1"
+
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
+
+  setup:
+    desc: Ganchos de pre-commit e conferência das ferramentas.
+    cmds:
+      - pre-commit install --install-hooks
+      - cargo --version
+      - node --version
+      - test -d ../saci-boiuna || (echo "clone o saci-boiuna ao lado deste repositório" && exit 1)
+
+  lint:
+    desc: rustfmt, clippy (pedantic, -D warnings) e terraform fmt.
+    cmds:
+      - cargo fmt --all -- --check
+      - cargo clippy --workspace --all-targets -- -D warnings
+      - terraform fmt -check -recursive .
+
+  fmt:
+    desc: Formata Rust e Terraform.
+    cmds:
+      - cargo fmt --all
+      - terraform fmt -recursive .
+
+  test:
+    desc: Testes Rust de todos os crates (sem nuvem).
+    cmds:
+      - cargo test --workspace
+
+  build:
+    desc: ZIPs dos domínios para arm64 (target/lambda/saci-<domínio>/bootstrap.zip).
+    cmds:
+      - cargo lambda build --release --arm64 --output-format zip {{range $d := splitList " " .DOMAINS}}--bin saci-{{$d}} {{end}}
+
+  tf:validate:
+    desc: terraform init (sem backend) e validate em todos os stacks.
+    cmds:
+      - for d in infra/aws/stacks/shared domains/*/infra/aws; do (cd "$d" && terraform init -backend=false -input=false >/dev/null && terraform validate) || exit 1; done
+
+  policy:check:
+    desc: repo.yaml e service.yaml contra os esquemas e as políticas de classe de dado da plataforma.
+    cmds:
+      - bash ../saci-boiuna/ci/scripts/check-data-classes.sh . ../saci-boiuna/ci/policies
+
+  deploy:
+    desc: Implantação na nuvem é só pelo CI (deploy.yml → reusable-deploy-service.yml), sem chave fixa.
+    cmds:
+      - echo "Use o workflow deploy.yml. Primeira vez: docs/runbooks/primeira-implantacao.md"
+
+  # --- Desenvolvimento com a interface ----------------------------------------------------
+
+  dev:
+    desc: Servidor de desenvolvimento em http://localhost:8787 (todos os serviços, dados em memória).
+    cmds:
+      - cargo run -p saci-commerce-dev
+
+  dev:e2e:
+    desc: Roteiro ponta a ponta contra o servidor de desenvolvimento (suba com `task dev` antes).
+    cmds:
+      - node local-env/scripts/dev-e2e.mjs
+
+  # --- LocalStack (a infraestrutura de verdade, na máquina) -------------------------------
+
+  local:deploy:
+    desc: Compila e aplica todos os stacks no LocalStack do saci-boiuna (rode antes `task local:up local:deploy` lá).
+    cmds:
+      - "{{.TOOLBOX}} bash local-env/scripts/deploy.sh"
+
+  local:smoke:
+    desc: Teste de fumaça pelo API Gateway local, com o autorizador da plataforma.
+    cmds:
+      - "{{.TOOLBOX}} bash local-env/scripts/smoke.sh"
+
+  local:destroy:
+    desc: Remove os recursos do saci-commerce do LocalStack.
+    cmds:
+      - "{{.TOOLBOX}} bash local-env/scripts/destroy.sh"
+
+  local:shell:
+    desc: Shell na caixa de ferramentas (aws, terraform, cargo lambda apontando para o LocalStack).
+    interactive: true
+    cmds:
+      - "{{.TOOLBOX}} bash"
+
+  # --- Layouts ------------------------------------------------------------------------------
+
+  layouts:validate:
+    desc: Valida os layouts com o validador do saci-contracts (clonado ao lado).
+    cmds:
+      - for f in domains/content/layouts/*.json; do node ../saci-contracts/tooling/validate-layout.mjs "$f" || exit 1; done
+
+  layouts:publish:
+    desc: Publica os layouts no CDN do ambiente (ENV=dev|staging|prod; só pelo CI em staging e prod).
+    cmds:
+      - bash domains/content/content-publisher/publish.sh {{.ENV | default "dev"}}

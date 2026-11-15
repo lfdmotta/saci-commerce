@@ -1,0 +1,388 @@
+{
+  "screen": "home",
+  "version": "2026.10.19-1",
+  "publishedAt": "2026-10-19T09:00:00-03:00",
+  "ttlSeconds": 300,
+  "blocks": [
+    {
+      "id": "caipora-balcao",
+      "type": "caipora",
+      "props": {
+        "greeting": "{periodo}. Eu sou a Caipora.",
+        "headline": "O que você procura na feira hoje?",
+        "placeholderPrompts": [
+          "Um presente para minha mãe, que adora flores…",
+          "Tigelas de cerâmica azul para a mesa posta…",
+          "Algo do Nordeste até R$ 150…",
+          "Uma peça para a varanda que dure muitos anos…"
+        ],
+        "suggestions": [
+          {
+            "id": "s-presente",
+            "label": "Presente até R$ 150",
+            "prompt": "Quero um presente até R$ 150",
+            "icon": "gift"
+          },
+          {
+            "id": "s-mesa",
+            "label": "Para a mesa posta",
+            "prompt": "Peças para a mesa posta de domingo",
+            "icon": "utensils"
+          },
+          {
+            "id": "s-jequi",
+            "label": "Cerâmica do Jequitinhonha",
+            "prompt": "Cerâmica do Vale do Jequitinhonha",
+            "icon": "amphora"
+          },
+          {
+            "id": "s-unica",
+            "label": "Só peças únicas",
+            "prompt": "Quero ver peças únicas",
+            "icon": "gem"
+          }
+        ]
+      },
+      "tracking": {
+        "placement": "home.caipora"
+      }
+    },
+    {
+      "id": "hero-campanhas",
+      "type": "hero-carousel",
+      "props": {
+        "autoplayMs": 7000,
+        "slides": [
+          {
+            "id": "slide-natal",
+            "campaignId": "cmp-natal-2026",
+            "eyebrow": "Natal feito à mão",
+            "title": "Presentes que carregam a mão de quem fez",
+            "body": "Encomendas de Natal até 30 de novembro, direto dos ateliês.",
+            "cta": {
+              "label": "Ver presentes",
+              "href": "/colecoes/natal"
+            },
+            "image": {
+              "url": "https://cdn.saci.art.br/layouts/media/home-hero-1.jpg",
+              "alt": "Bordado de flores em bastidor"
+            },
+            "surface": "lamina"
+          },
+          {
+            "id": "slide-jequitinhonha",
+            "campaignId": "cmp-jequitinhonha",
+            "eyebrow": "Saídas do forno",
+            "title": "Cerâmica do Vale do Jequitinhonha",
+            "body": "Peças queimadas a lenha nesta semana por catorze ceramistas de Minas Gerais.",
+            "cta": {
+              "label": "Conhecer a coleção",
+              "href": "/colecoes/jequitinhonha"
+            },
+            "image": {
+              "url": "https://cdn.saci.art.br/layouts/media/home-hero-2.jpg",
+              "alt": "Vaso de barro de duas alças"
+            },
+            "surface": "mata"
+          },
+          {
+            "id": "slide-mesa",
+            "campaignId": "cmp-mesa-posta",
+            "eyebrow": "Mesa posta",
+            "title": "A mesa de domingo, feita à mão",
+            "body": "Gamelas, tigelas e jarras para servir quem você gosta.",
+            "cta": {
+              "label": "Montar a mesa",
+              "href": "/colecoes/mesa-posta"
+            },
+            "image": {
+              "url": "https://cdn.saci.art.br/layouts/media/home-hero-3.jpg",
+              "alt": "Tigelas de cerâmica esmaltadas"
+            },
+            "surface": "terracota"
+          }
+        ]
+      },
+      "visibility": {
+        "startsAt": "2026-10-01T00:00:00-03:00",
+        "endsAt": "2026-12-25T23:59:59-03:00"
+      },
+      "tracking": {
+        "placement": "home.hero"
+      }
+    },
+    {
+      "id": "categorias",
+      "type": "category-rail",
+      "props": {
+        "eyebrow": "Corredores da feira",
+        "source": {
+          "resource": "categories",
+          "params": {}
+        },
+        "action": {
+          "label": "Ver todos",
+          "href": "/pecas"
+        }
+      }
+    },
+    {
+      "id": "destaques",
+      "type": "listing-shelf",
+      "props": {
+        "eyebrow": "Escolhidos pela curadoria",
+        "title": "Destaques da semana",
+        "source": {
+          "resource": "listings",
+          "params": {
+            "placement": "home.destaques",
+            "limit": 8
+          }
+        },
+        "layout": {
+          "compact": "carousel",
+          "expanded": "grid"
+        },
+        "columns": {
+          "expanded": 4
+        },
+        "action": {
+          "label": "Ver todos",
+          "href": "/destaques"
+        }
+      },
+      "tracking": {
+        "placement": "home.destaques"
+      }
+    },
+    {
+      "id": "promo-frete",
+      "type": "promo-banner",
+      "props": {
+        "surface": "mata",
+        "icon": "truck",
+        "eyebrow": "Até 31 de outubro",
+        "title": "Frete grátis acima de R$ 400",
+        "body": "Em compras de um mesmo ateliê. A peça viaja embalada pelo próprio artesão.",
+        "action": {
+          "label": "Como funciona",
+          "href": "/ajuda/frete"
+        }
+      },
+      "visibility": {
+        "endsAt": "2026-10-31T23:59:59-03:00"
+      },
+      "tracking": {
+        "campaignId": "cmp-frete-out",
+        "placement": "home.faixa-1"
+      }
+    },
+    {
+      "id": "colecoes",
+      "type": "collection-grid",
+      "props": {
+        "eyebrow": "Coleções",
+        "title": "Para cada canto da casa",
+        "cards": [
+          {
+            "id": "col-mesa",
+            "title": "Mesa posta",
+            "action": {
+              "label": "Ver coleção",
+              "href": "/colecoes/mesa-posta"
+            },
+            "source": {
+              "resource": "listings",
+              "params": {
+                "placement": "colecao.mesa",
+                "limit": 4
+              }
+            }
+          },
+          {
+            "id": "col-sala",
+            "title": "Sala e estante",
+            "action": {
+              "label": "Ver coleção",
+              "href": "/colecoes/sala"
+            },
+            "source": {
+              "resource": "listings",
+              "params": {
+                "placement": "colecao.sala",
+                "limit": 4
+              }
+            }
+          },
+          {
+            "id": "col-varanda",
+            "title": "Varanda",
+            "action": {
+              "label": "Ver coleção",
+              "href": "/colecoes/varanda"
+            },
+            "source": {
+              "resource": "listings",
+              "params": {
+                "placement": "colecao.varanda",
+                "limit": 4
+              }
+            }
+          },
+          {
+            "id": "col-presentes",
+            "title": "Presentes até R$ 150",
+            "action": {
+              "label": "Ver presentes",
+              "href": "/colecoes/presentes"
+            },
+            "source": {
+              "resource": "listings",
+              "params": {
+                "placement": "colecao.presentes",
+                "priceMax": 15000,
+                "limit": 4
+              }
+            }
+          }
+        ]
+      },
+      "tracking": {
+        "placement": "home.colecoes"
+      }
+    },
+    {
+      "id": "artesa-do-mes",
+      "type": "artisan-spotlight",
+      "props": {
+        "eyebrow": "Artesã do mês",
+        "artisanId": "art-isabel",
+        "source": {
+          "resource": "listings",
+          "params": {
+            "artisanId": "art-isabel",
+            "limit": 3
+          }
+        },
+        "action": {
+          "label": "Ver a vitrine",
+          "href": "/artesaos/dona-isabel"
+        }
+      },
+      "tracking": {
+        "placement": "home.editorial"
+      }
+    },
+    {
+      "id": "os-feirantes",
+      "type": "promo-banner",
+      "props": {
+        "surface": "madeira-clara",
+        "icon": "store",
+        "eyebrow": "Os feirantes",
+        "title": "Passeie pelas bancas da feira",
+        "body": "Ateliês de norte a sul, corredor por corredor: a matéria, a mão e a origem de quem faz.",
+        "action": {
+          "label": "Conhecer os artesãos",
+          "href": "/artesaos"
+        }
+      },
+      "tracking": {
+        "placement": "home.faixa-artesaos"
+      }
+    },
+    {
+      "id": "saidas-do-forno",
+      "type": "listing-shelf",
+      "props": {
+        "eyebrow": "Novidades",
+        "title": "Saídas do forno",
+        "subtitle": "Peças publicadas pelos ateliês nos últimos dias.",
+        "source": {
+          "resource": "listings",
+          "params": {
+            "placement": "home.forno",
+            "sort": "newest",
+            "limit": 8
+          }
+        },
+        "layout": "grid",
+        "columns": {
+          "compact": 2,
+          "medium": 3,
+          "expanded": 4
+        },
+        "action": {
+          "label": "Ver todas",
+          "href": "/novidades"
+        }
+      },
+      "tracking": {
+        "placement": "home.forno"
+      }
+    },
+    {
+      "id": "patrocinados",
+      "type": "listing-shelf",
+      "props": {
+        "eyebrow": "Anúncios",
+        "title": "Ateliês em destaque",
+        "source": {
+          "resource": "listings",
+          "params": {
+            "placement": "home.patrocinados",
+            "limit": 6
+          }
+        },
+        "layout": {
+          "compact": "carousel",
+          "expanded": "grid"
+        },
+        "columns": {
+          "expanded": 3
+        }
+      },
+      "tracking": {
+        "placement": "home.patrocinados"
+      }
+    },
+    {
+      "id": "promo-app",
+      "type": "promo-banner",
+      "props": {
+        "surface": "madeira-clara",
+        "icon": "smartphone",
+        "eyebrow": "App Saci",
+        "title": "Leve a feira no bolso",
+        "body": "Converse com a Caipora de onde estiver e saiba primeiro das saídas do forno.",
+        "stores": true
+      },
+      "visibility": {
+        "platforms": [
+          "web"
+        ]
+      }
+    },
+    {
+      "id": "promo-avisos",
+      "type": "promo-banner",
+      "props": {
+        "surface": "madeira-clara",
+        "icon": "bell",
+        "eyebrow": "Avisos",
+        "title": "Saiba quando o forno abrir",
+        "body": "Receba um aviso quando seus artesãos favoritos publicarem peças novas.",
+        "action": {
+          "label": "Ativar avisos",
+          "href": "/perfil/avisos"
+        }
+      },
+      "visibility": {
+        "platforms": [
+          "ios",
+          "android"
+        ]
+      }
+    }
+  ]
+}

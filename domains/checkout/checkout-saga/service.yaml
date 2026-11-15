@@ -1,0 +1,34 @@
+# Metadados do serviço (seção 9.7). Validado por ci/schemas/service.schema.json
+# do saci-boiuna e pelas políticas de classe de dado.
+name: checkout-saga
+domain: checkout
+owner: saci-art/commerce
+language: rust
+runtime: aws-lambda
+account: prod
+# Funções (SACI_FUNCTION) do binário saci-checkout que pertencem a este serviço (ADR 0003).
+routes:
+  - route: POST /v1/checkout
+    access: PUB-L
+  - route: GET /v1/checkout/orders/{order_id}/payment
+    access: GUEST
+data:
+  stores:
+    - name: saci-<env>-checkout
+      kind: dynamodb
+      class: C2
+      kms_key_class: C2
+logging:
+  request_body: false
+events:
+  publishes:
+    - checkout.order.confirmed.v1
+    - checkout.order.abandoned.v1
+  consumes:
+    - payments.pix.paid.v1
+    - payments.charge.authorized.v1
+    - payments.pix.expired.v1
+    - payments.charge.failed.v1
+slo:
+  availability: 99.9
+  latency_p99_ms: 1500

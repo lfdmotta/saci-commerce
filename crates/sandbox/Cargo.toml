@@ -1,0 +1,30 @@
+[package]
+name = "saci-commerce-sandbox"
+version = "0.1.0"
+description = "Sandbox dos domínios de outros repositórios (identity/cofre, kyc, payments, finance, assistant) para os ambientes local e dev. Recusado em produção."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+# Cliente interno das Lambdas com o sandbox (LocalStack e dev).
+aws = ["saci-commerce-kit/aws", "dep:aws-config"]
+
+[dependencies]
+aws-config = { workspace = true, optional = true }
+saci-commerce-kit.workspace = true
+saci-ids.workspace = true
+saci-mask.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+hex.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true
+
+[lints]
+workspace = true

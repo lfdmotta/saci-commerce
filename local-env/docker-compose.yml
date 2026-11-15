@@ -1,0 +1,44 @@
+# Caixa de ferramentas do saci-commerce para o LocalStack da plataforma.
+#
+# O LocalStack é o do saci-boiuna (rede `saci-local`): suba-o antes com
+#   (cd ../saci-boiuna && task local:up local:deploy)
+# Depois:
+#   task local:deploy     # compila as Lambdas e aplica os stacks com envs/local
+#   task local:smoke      # rotas pelo API Gateway local, com tokens de desenvolvimento
+#
+# A caixa monta a pasta-mãe (saci-commerce e saci-boiuna lado a lado, ADR 0002)
+# e usa a mesma imagem de ferramentas da plataforma (Rust, cargo-lambda,
+# Terraform, AWS CLI com versões fixas).
+name: saci-commerce-local
+
+services:
+  toolbox:
+    build:
+      context: ../../saci-boiuna/local-env/toolbox
+    working_dir: /code/saci-commerce
+    environment:
+      AWS_ENDPOINT_URL: http://localhost.localstack.cloud:4566
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: sa-east-1
+      AWS_REGION: sa-east-1
+      TF_PLUGIN_CACHE_DIR: /cache/terraform
+      TF_IN_AUTOMATION: "1"
+      AWS_LC_SYS_PREBUILT_NASM: "1"
+    volumes:
+      - ../..:/code
+      - target:/code/saci-commerce/target
+      - cargo-registry:/usr/local/cargo/registry
+      - terraform-cache:/cache/terraform
+    networks:
+      - saci-local
+    profiles: ["tools"]
+
+networks:
+  saci-local:
+    external: true
+
+volumes:
+  target:
+  cargo-registry:
+  terraform-cache:

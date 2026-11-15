@@ -1,0 +1,85 @@
+# CI do saci-commerce.
+#
+# Os crates e módulos da plataforma vêm do saci-boiuna clonado AO LADO deste
+# repositório (ADR 0002), por isso este workflow faz os dois checkouts lado a
+# lado em vez de usar o reusable-rust.yml (que só clona o repositório chamador).
+# A verificação de classes de dado usa o workflow reutilizável da plataforma.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  TERRAFORM_VERSION: "1.17.2"
+
+jobs:
+  rust:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: saci-commerce
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ github.repository_owner }}/saci-boiuna
+          path: saci-boiuna
+          persist-credentials: false
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+        with:
+          workspaces: saci-commerce
+      - name: rustfmt
+        working-directory: saci-commerce
+        run: cargo fmt --all -- --check
+      - name: clippy (pedantic, -D warnings)
+        working-directory: saci-commerce
+        run: cargo clippy --workspace --all-targets -- -D warnings
+      - name: testes
+        working-directory: saci-commerce
+        run: cargo test --workspace
+      - name: ponta a ponta (servidor de desenvolvimento + roteiro da interface)
+        working-directory: saci-commerce
+        run: |
+          cargo build -p saci-commerce-dev
+          ./target/debug/saci-commerce-dev > dev.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf localhost:8787/dev/health && break; sleep 1; done
+          node local-env/scripts/dev-e2e.mjs
+      - name: log do servidor
+        if: failure()
+        working-directory: saci-commerce
+        run: tail -200 dev.log
+
+  terraform:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: saci-commerce
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ github.repository_owner }}/saci-boiuna
+          path: saci-boiuna
+          persist-credentials: false
+      - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+      - name: fmt e validate de todos os stacks
+        working-directory: saci-commerce
+        run: |
+          terraform fmt -check -recursive .
+          for d in infra/aws/stacks/shared domains/*/infra/aws; do
+            (cd "$d" && terraform init -backend=false -input=false >/dev/null && terraform validate)
+          done
+
+  policies:
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-policy-check.yml@v1
+    with:
+      platform-ref: v1

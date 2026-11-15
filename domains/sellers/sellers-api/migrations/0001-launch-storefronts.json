@@ -1,0 +1,518 @@
+{
+  "description": "Vitrines de lançamento, pares de letras e a equipe de exemplo (dados fictícios; só fora de produção).",
+  "font_options": [
+    {
+      "id": "classica",
+      "name": "Clássica",
+      "description": "Serena e bem-acabada, como uma louça de família.",
+      "display": {
+        "family": "Fraunces",
+        "faces": [
+          {
+            "weight": 500,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/fraunces@latest/latin-500-normal.ttf"
+          },
+          {
+            "weight": 600,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/fraunces@latest/latin-600-normal.ttf"
+          }
+        ]
+      },
+      "body": {
+        "family": "DM Sans",
+        "faces": [
+          {
+            "weight": 400,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/dm-sans@latest/latin-400-normal.ttf"
+          },
+          {
+            "weight": 500,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/dm-sans@latest/latin-500-normal.ttf"
+          },
+          {
+            "weight": 600,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/dm-sans@latest/latin-600-normal.ttf"
+          },
+          {
+            "weight": 700,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/dm-sans@latest/latin-700-normal.ttf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "elegante",
+      "name": "Elegante",
+      "description": "Contraste fino, para peças de presente.",
+      "display": {
+        "family": "DM Serif Display",
+        "faces": [
+          {
+            "weight": 400,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/dm-serif-display@latest/latin-400-normal.ttf"
+          }
+        ]
+      },
+      "body": {
+        "family": "Work Sans",
+        "faces": [
+          {
+            "weight": 400,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/work-sans@latest/latin-400-normal.ttf"
+          },
+          {
+            "weight": 500,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/work-sans@latest/latin-500-normal.ttf"
+          },
+          {
+            "weight": 600,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/work-sans@latest/latin-600-normal.ttf"
+          },
+          {
+            "weight": 700,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/work-sans@latest/latin-700-normal.ttf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "manuscrita",
+      "name": "Manuscrita",
+      "description": "Parece escrita à mão, como uma etiqueta de feira.",
+      "display": {
+        "family": "Caveat",
+        "faces": [
+          {
+            "weight": 500,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/caveat@latest/latin-500-normal.ttf"
+          },
+          {
+            "weight": 600,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/caveat@latest/latin-600-normal.ttf"
+          }
+        ]
+      },
+      "body": {
+        "family": "Nunito",
+        "faces": [
+          {
+            "weight": 400,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/nunito@latest/latin-400-normal.ttf"
+          },
+          {
+            "weight": 600,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/nunito@latest/latin-600-normal.ttf"
+          },
+          {
+            "weight": 700,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/nunito@latest/latin-700-normal.ttf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cartaz",
+      "name": "Cartaz",
+      "description": "Letra forte de cartaz, para quem gosta de cor e de festa.",
+      "display": {
+        "family": "Alfa Slab One",
+        "faces": [
+          {
+            "weight": 400,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/alfa-slab-one@latest/latin-400-normal.ttf"
+          }
+        ]
+      },
+      "body": {
+        "family": "Source Sans 3",
+        "faces": [
+          {
+            "weight": 400,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/source-sans-3@latest/latin-400-normal.ttf"
+          },
+          {
+            "weight": 600,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/source-sans-3@latest/latin-600-normal.ttf"
+          },
+          {
+            "weight": 700,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/source-sans-3@latest/latin-700-normal.ttf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "moderna",
+      "name": "Moderna",
+      "description": "Limpa e direta, para peças de traço contemporâneo.",
+      "display": {
+        "family": "Space Grotesk",
+        "faces": [
+          {
+            "weight": 500,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/space-grotesk@latest/latin-500-normal.ttf"
+          },
+          {
+            "weight": 600,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/space-grotesk@latest/latin-600-normal.ttf"
+          }
+        ]
+      },
+      "body": {
+        "family": "Inter",
+        "faces": [
+          {
+            "weight": 400,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-400-normal.ttf"
+          },
+          {
+            "weight": 500,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-500-normal.ttf"
+          },
+          {
+            "weight": 600,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-600-normal.ttf"
+          },
+          {
+            "weight": 700,
+            "style": "normal",
+            "url": "https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-700-normal.ttf"
+          }
+        ]
+      }
+    }
+  ],
+  "storefronts": [
+    {
+      "id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "owner_account_id": "acc_01M6A6FT001KZ9TRZBTJR14XHV",
+      "brand_name": "Dona Isabel",
+      "slogan": "O barro do Jequitinhonha, modelado à mão e queimado a lenha.",
+      "url_name": "dona-isabel",
+      "sells_with": "cpf",
+      "status": "published",
+      "location": {
+        "city": "Minas Novas",
+        "state": "MG",
+        "country": "BR"
+      },
+      "business_address": {
+        "street": "Rua do Rosário",
+        "number": "212",
+        "district": "Centro",
+        "postal_code": "39650000",
+        "city": "Minas Novas",
+        "state": "MG",
+        "country": "BR"
+      },
+      "palette": null,
+      "font_option_id": null,
+      "hero_image_url": "https://images.unsplash.com/photo-1766875127697-8e5d2004cde8?w=2000&h=1000&q=72&auto=format&fit=crop",
+      "created_at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "owner_account_id": "acc_01M6A6FT00X7N5ZFRZ65RVZ7KR",
+      "brand_name": "Seu Antônio",
+      "slogan": "Gamelas de jaqueira caída. Nenhuma árvore derrubada.",
+      "url_name": "seu-antonio",
+      "sells_with": "cpf",
+      "status": "published",
+      "location": {
+        "city": "Porto Seguro",
+        "state": "BA",
+        "country": "BR"
+      },
+      "business_address": {
+        "street": "Rua da Pitinga",
+        "number": "18",
+        "district": "Arraial d’Ajuda",
+        "postal_code": "45816000",
+        "city": "Porto Seguro",
+        "state": "BA",
+        "country": "BR"
+      },
+      "palette": {
+        "primary": "#5E4632",
+        "accent": "#E0B88E"
+      },
+      "font_option_id": null,
+      "hero_image_url": "https://images.unsplash.com/photo-1721508490084-1b1de5b230d4?w=2000&h=1000&q=72&auto=format&fit=crop",
+      "created_at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "owner_account_id": "acc_01M6A6FT002X9557M4S276P01H",
+      "brand_name": "Coop. Tear",
+      "slogan": "Trinta e oito tecelãs, um tear de cada vez.",
+      "url_name": "coop-tear",
+      "sells_with": "cnpj",
+      "status": "published",
+      "location": {
+        "city": "São Bento",
+        "state": "PB",
+        "country": "BR"
+      },
+      "business_address": {
+        "street": "Rua Sete de Setembro",
+        "number": "45",
+        "district": "Centro",
+        "postal_code": "58865000",
+        "city": "São Bento",
+        "state": "PB",
+        "country": "BR"
+      },
+      "palette": {
+        "primary": "#33415C",
+        "accent": "#E3B04B"
+      },
+      "font_option_id": "elegante",
+      "hero_image_url": "https://images.unsplash.com/photo-1638310533874-6c124c012e1d?w=2000&h=1000&q=72&auto=format&fit=crop",
+      "created_at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "owner_account_id": "acc_01M6A6FT00PW33ZVZZ3EJDKRR7",
+      "brand_name": "Ana Baré",
+      "slogan": "Arumã do Alto Rio Negro, trançado como a avó ensinou.",
+      "url_name": "ana-bare",
+      "sells_with": "cpf",
+      "status": "published",
+      "location": {
+        "city": "São Gabriel da Cachoeira",
+        "state": "AM",
+        "country": "BR"
+      },
+      "business_address": {
+        "street": "Rua Dom Pedro Massa",
+        "number": "90",
+        "district": "Centro",
+        "postal_code": "69750000",
+        "city": "São Gabriel da Cachoeira",
+        "state": "AM",
+        "country": "BR"
+      },
+      "palette": null,
+      "font_option_id": null,
+      "hero_image_url": "https://images.unsplash.com/photo-1768902406144-a348c559c73c?w=2000&h=1000&q=72&auto=format&fit=crop",
+      "created_at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "owner_account_id": "acc_01M6A6FT00MZ0AH8A8YMN499Z4",
+      "brand_name": "Dona Lia",
+      "url_name": "dona-lia",
+      "sells_with": "cpf",
+      "status": "published",
+      "location": {
+        "city": "Itapipoca",
+        "state": "CE",
+        "country": "BR"
+      },
+      "business_address": {
+        "street": "Sítio Lagoa das Pedras",
+        "number": "s/n",
+        "district": "Zona rural",
+        "postal_code": "62500000",
+        "city": "Itapipoca",
+        "state": "CE",
+        "country": "BR"
+      },
+      "palette": {
+        "primary": "#B9822B"
+      },
+      "font_option_id": null,
+      "hero_image_url": "https://images.unsplash.com/photo-1534953342533-7711c98712be?w=2000&h=1000&q=72&auto=format&fit=crop",
+      "created_at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "owner_account_id": "acc_01M6A6FT00QHVWBFTBFXY8NCD7",
+      "brand_name": "Ateliê Alto do Moura",
+      "url_name": "alto-do-moura",
+      "sells_with": "cpf",
+      "status": "published",
+      "location": {
+        "city": "Caruaru",
+        "state": "PE",
+        "country": "BR"
+      },
+      "business_address": {
+        "street": "Rua Mestre Vitalino",
+        "number": "120",
+        "district": "Alto do Moura",
+        "postal_code": "55038000",
+        "city": "Caruaru",
+        "state": "PE",
+        "country": "BR"
+      },
+      "palette": null,
+      "font_option_id": null,
+      "hero_image_url": "https://images.unsplash.com/photo-1650197642892-888c103e8f20?w=2000&h=1000&q=72&auto=format&fit=crop",
+      "created_at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "owner_account_id": "acc_01M6A6FT009X2SPYDJAE4PPR9E",
+      "brand_name": "Bordadeiras do Seridó",
+      "slogan": "O bordado de Caicó, igual dos dois lados do pano.",
+      "url_name": "bordadeiras-do-serido",
+      "sells_with": "cpf",
+      "status": "published",
+      "location": {
+        "city": "Caicó",
+        "state": "RN",
+        "country": "BR"
+      },
+      "business_address": {
+        "street": "Rua Otávio Lamartine",
+        "number": "301",
+        "district": "Centro",
+        "postal_code": "59300000",
+        "city": "Caicó",
+        "state": "RN",
+        "country": "BR"
+      },
+      "palette": null,
+      "font_option_id": null,
+      "created_at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "owner_account_id": "acc_01M6A6FT00ETPHXMEC151KTH35",
+      "brand_name": "Oficina Taquara",
+      "url_name": "oficina-taquara",
+      "sells_with": "cpf",
+      "status": "published",
+      "location": {
+        "city": "Morretes",
+        "state": "PR",
+        "country": "BR"
+      },
+      "business_address": {
+        "street": "Rua Almirante Frederico de Oliveira",
+        "number": "77",
+        "district": "Centro Histórico",
+        "postal_code": "83350000",
+        "city": "Morretes",
+        "state": "PR",
+        "country": "BR"
+      },
+      "palette": null,
+      "font_option_id": null,
+      "hero_image_url": "https://images.unsplash.com/photo-1594761077961-cadd185540a4?w=2000&h=1000&q=72&auto=format&fit=crop",
+      "created_at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "owner_account_id": "acc_01M6A6FT00CY3KRX93QBFSJ2ZN",
+      "brand_name": "Ateliê Barro Vivo",
+      "slogan": "Cerâmica de alta temperatura, queimada em forno noborigama na Serra do Mar.",
+      "url_name": "barro-vivo",
+      "sells_with": "cnpj",
+      "status": "published",
+      "location": {
+        "city": "Cunha",
+        "state": "SP",
+        "country": "BR"
+      },
+      "business_address": {
+        "street": "Estrada do Paraibuna",
+        "number": "km 4",
+        "district": "Bairro do Campo Alegre",
+        "postal_code": "12530000",
+        "city": "Cunha",
+        "state": "SP",
+        "country": "BR"
+      },
+      "palette": {
+        "primary": "#2E5E6B",
+        "accent": "#D9B97E"
+      },
+      "font_option_id": "classica",
+      "hero_image_url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=2000&h=1000&q=72&auto=format&fit=crop",
+      "created_at": "2026-01-10T12:00:00Z"
+    },
+    {
+      "id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "owner_account_id": "acc_01M6A6FT000RBYW389JY3SVP9Q",
+      "brand_name": "Coletivo Miçanga",
+      "slogan": "Sementes da Amazônia, miçanga e macramê.",
+      "url_name": "coletivo-micanga",
+      "sells_with": "cpf",
+      "status": "published",
+      "location": {
+        "city": "Belém",
+        "state": "PA",
+        "country": "BR"
+      },
+      "business_address": {
+        "street": "Travessa Quintino Bocaiúva",
+        "number": "1530",
+        "district": "Nazaré",
+        "postal_code": "66035190",
+        "city": "Belém",
+        "state": "PA",
+        "country": "BR"
+      },
+      "palette": {
+        "primary": "#6B3A5B",
+        "accent": "#EBCFAB"
+      },
+      "font_option_id": null,
+      "hero_image_url": "https://images.unsplash.com/photo-1766560360281-d3c264734a1f?w=2000&h=1000&q=72&auto=format&fit=crop",
+      "created_at": "2026-01-10T12:00:00Z"
+    }
+  ],
+  "team": [
+    {
+      "id": "tmb_01M6A6FT00FT7YE0K300RCYWJJ",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "account_id": "acc_01M6A6FT00ZRW5YDMM2E91NFNM",
+      "cpf_masked": "***.602.380-**",
+      "name": "Joana Ribeiro Santos",
+      "status": "active",
+      "permissions": [
+        "anuncios",
+        "pedidos"
+      ],
+      "added_at": "2026-08-02T17:00:00Z"
+    },
+    {
+      "id": "tmb_01M6A6FT00GT0E5RFMMBHVPBFD",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "account_id": null,
+      "cpf_masked": "***.746.305-**",
+      "status": "invited",
+      "permissions": [
+        "atendimento"
+      ],
+      "added_at": "2026-10-20T13:30:00Z"
+    }
+  ]
+}

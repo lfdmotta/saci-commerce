@@ -1,0 +1,49 @@
+# Metadados do serviço (seção 9.7). Validado por ci/schemas/service.schema.json
+# do saci-boiuna e pelas políticas de classe de dado.
+name: catalog-api
+domain: catalog
+owner: saci-art/commerce
+language: rust
+runtime: aws-lambda
+account: prod
+# Funções (SACI_FUNCTION) do binário saci-catalog que pertencem a este serviço (ADR 0003).
+routes:
+  - route: GET /v1/catalog/listings/{listing_id}
+    access: PUB
+  - route: GET /v1/catalog/listing-attributes
+    access: PUB
+  - route: GET /v1/catalog/me/listings
+    access: SELLER:anuncios
+  - route: POST /v1/catalog/me/listings
+    access: SELLER:anuncios
+  - route: GET /v1/catalog/me/listings/{listing_id}
+    access: SELLER:anuncios
+  - route: PUT /v1/catalog/me/listings/{listing_id}
+    access: SELLER:anuncios
+  - route: DELETE /v1/catalog/me/listings/{listing_id}
+    access: SELLER:anuncios
+  - route: POST /v1/catalog/me/listings/{listing_id}/pause
+    access: SELLER:anuncios
+  - route: POST /v1/catalog/me/listings/{listing_id}/resume
+    access: SELLER:anuncios
+data:
+  stores:
+    - name: saci-<env>-catalog
+      kind: dynamodb
+      class: C1
+      kms_key_class: C2
+logging:
+  request_body: false
+events:
+  publishes:
+    - catalog.listing.published.v1
+    - catalog.listing.updated.v1
+    - catalog.listing.paused.v1
+    - catalog.listing.withdrawn.v1
+    - catalog.stock.changed.v1
+  consumes:
+    - sellers.storefront.opened.v1
+    - sellers.storefront.updated.v1
+slo:
+  availability: 99.9
+  latency_p99_ms: 300

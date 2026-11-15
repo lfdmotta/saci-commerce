@@ -1,0 +1,155 @@
+# Manifesto do workspace Rust do saci-commerce.
+#
+# A raiz é organizada por domínio (`domains/<domínio>/<serviço>`), como pede a
+# seção 9.5 da proposta, e não por linguagem. Este arquivo só agrega os crates
+# para dividir o Cargo.lock, o target/ e as versões das dependências.
+#
+# Três tipos de crate (ADR 0001):
+#
+# - `crates/kit`: o comum do repositório (HTTP sem framework, porta de
+#   armazenamento, eventos, cursores, idempotência). O núcleo não conhece nuvem;
+#   os adaptadores AWS ficam atrás da feature `aws`.
+# - `domains/<domínio>/<serviço>`: domínio, casos de uso e rotas de um serviço.
+#   Compila e testa sem nenhum SDK de nuvem; a feature `aws` liga os adaptadores.
+# - `domains/<domínio>/lambda`: o binário implantável do domínio (`saci-<domínio>`),
+#   um só ZIP para todas as funções do domínio, cada uma com papel IAM próprio
+#   (ADR 0003).
+#
+# As bibliotecas da plataforma vêm do saci-boiuna, clonado ao lado deste
+# repositório (ADR 0002).
+[workspace]
+resolver = "3"
+members = [
+  "crates/kit",
+  "crates/sandbox",
+  "domains/catalog/catalog-api",
+  "domains/catalog/search-indexer",
+  "domains/sellers/sellers-api",
+  "domains/customers/customers-api",
+  "domains/reviews/reviews-api",
+  "domains/shipping/shipping-api",
+  "domains/shipping/carrier-webhooks",
+  "domains/orders/orders-api",
+  "domains/checkout/checkout-saga",
+  "domains/media/media-api",
+  "domains/media/media-pipeline",
+  "domains/support/support-api",
+  "domains/notifications/notifications-api",
+  "domains/notifications/dispatcher",
+  "domains/catalog/lambda",
+  "domains/sellers/lambda",
+  "domains/customers/lambda",
+  "domains/reviews/lambda",
+  "domains/media/lambda",
+  "domains/shipping/lambda",
+  "domains/checkout/lambda",
+  "domains/orders/lambda",
+  "domains/support/lambda",
+  "domains/notifications/lambda",
+  "local-env/dev-server",
+]
+
+[workspace.package]
+edition = "2024"
+rust-version = "1.99"
+license = "UNLICENSED"
+publish = false
+repository = "https://github.com/saci-art/saci-commerce"
+
+[workspace.dependencies]
+# --- Este repositório -----------------------------------------------------------------
+saci-commerce-kit = { path = "crates/kit" }
+saci-commerce-sandbox = { path = "crates/sandbox" }
+saci-catalog-api = { path = "domains/catalog/catalog-api" }
+saci-search-indexer = { path = "domains/catalog/search-indexer" }
+saci-sellers-api = { path = "domains/sellers/sellers-api" }
+saci-customers-api = { path = "domains/customers/customers-api" }
+saci-reviews-api = { path = "domains/reviews/reviews-api" }
+saci-media-api = { path = "domains/media/media-api" }
+saci-media-pipeline = { path = "domains/media/media-pipeline" }
+saci-shipping-api = { path = "domains/shipping/shipping-api" }
+saci-carrier-webhooks = { path = "domains/shipping/carrier-webhooks" }
+saci-checkout-saga = { path = "domains/checkout/checkout-saga" }
+saci-orders-api = { path = "domains/orders/orders-api" }
+saci-support-api = { path = "domains/support/support-api" }
+saci-notifications-api = { path = "domains/notifications/notifications-api" }
+saci-notifications-dispatcher = { path = "domains/notifications/dispatcher" }
+
+# --- Plataforma (saci-boiuna, clonado ao lado; ADR 0002) ------------------------------
+saci-problem = { path = "../saci-boiuna/libs/rust/saci-problem" }
+saci-authz = { path = "../saci-boiuna/libs/rust/saci-authz" }
+saci-ids = { path = "../saci-boiuna/libs/rust/saci-ids" }
+saci-events = { path = "../saci-boiuna/libs/rust/saci-events" }
+saci-idempotency = { path = "../saci-boiuna/libs/rust/saci-idempotency" }
+saci-outbox = { path = "../saci-boiuna/libs/rust/saci-outbox" }
+saci-mask = { path = "../saci-boiuna/libs/rust/saci-mask" }
+saci-telemetry = { path = "../saci-boiuna/libs/rust/saci-telemetry" }
+saci-authorizer = { path = "../saci-boiuna/gateway/authorizer" }
+
+# --- Terceiros (versões alinhadas às do saci-boiuna) ----------------------------------
+aws-config = { version = "1.13.2", default-features = false, features = ["behavior-version-latest", "rt-tokio", "default-https-client"] }
+aws-sdk-dynamodb = { version = "1.139.0", default-features = false, features = ["behavior-version-latest", "rt-tokio", "default-https-client"] }
+aws-sdk-lambda = { version = "1", default-features = false, features = ["behavior-version-latest", "rt-tokio", "default-https-client"] }
+aws-sdk-s3 = { version = "1", default-features = false, features = ["behavior-version-latest", "rt-tokio", "default-https-client", "sigv4a"] }
+aws-sdk-sqs = { version = "1", default-features = false, features = ["behavior-version-latest", "rt-tokio", "default-https-client"] }
+aws-sdk-ssm = { version = "1", default-features = false, features = ["behavior-version-latest", "rt-tokio", "default-https-client"] }
+aws-sdk-kms = { version = "1", default-features = false, features = ["behavior-version-latest", "rt-tokio", "default-https-client"] }
+aws-sdk-eventbridge = { version = "1.129.0", default-features = false, features = ["behavior-version-latest", "rt-tokio", "default-https-client"] }
+aws_lambda_events = { version = "1.2.1", default-features = false, features = ["apigw", "dynamodb", "sqs", "s3", "eventbridge"] }
+aws-lc-rs = "1.19.0"
+base64 = "0.23.1"
+hex = "0.4.3"
+http = "1.5.0"
+http-body-util = "0.1"
+hyper = { version = "1.12.0", features = ["server", "http1"] }
+hyper-util = { version = "0.1", features = ["tokio"] }
+image = { version = "0.25", default-features = false, features = ["jpeg", "png", "webp"] }
+lambda_http = { version = "1.3.2", default-features = false, features = ["apigw_rest"] }
+lambda_runtime = "1.5.0"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+sha2 = "0.11.1"
+thiserror = "2.0.21"
+time = { version = "0.3.55", features = ["formatting", "parsing", "macros"] }
+tokio = { version = "1.54.1", features = ["macros", "rt-multi-thread", "sync", "time"] }
+tracing = "0.1.44"
+ulid = "3.0.0"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_debug_implementations = "warn"
+missing_docs = "warn"
+unreachable_pub = "warn"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+unwrap_used = "deny"
+expect_used = "warn"
+panic = "deny"
+dbg_macro = "deny"
+print_stdout = "warn"
+module_name_repetitions = "allow"
+missing_errors_doc = "allow"
+must_use_candidate = "allow"
+doc_markdown = "allow"
+result_large_err = "allow"
+unused_async = "allow"
+too_many_lines = "allow"
+cast_possible_truncation = "allow"
+cast_sign_loss = "allow"
+cast_precision_loss = "allow"
+cast_possible_wrap = "allow"
+missing_panics_doc = "allow"
+# Corpos de chamada declarados junto do uso (struct local com Deserialize) são de propósito.
+items_after_statements = "allow"
+# Option<Option<T>> distingue "null apaga" de "ausente mantém" (PATCH e StorefrontUpdate).
+option_option = "allow"
+
+[profile.release]
+# Binários de Lambda: pequenos e rápidos de iniciar (custo e cold start).
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = "symbols"
+panic = "abort"

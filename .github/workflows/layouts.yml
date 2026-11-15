@@ -1,0 +1,67 @@
+# content-publisher: valida e publica os layouts (proposta 5.14).
+# Pull request: só valida. main: publica em dev; produção com aprovação no ambiente.
+name: layouts
+
+on:
+  pull_request:
+    paths: ["domains/content/layouts/**"]
+  push:
+    branches: [main]
+    paths: ["domains/content/layouts/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: saci-commerce
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ github.repository_owner }}/saci-contracts
+          path: saci-contracts
+          persist-credentials: false
+      - name: Dependências do validador
+        working-directory: saci-contracts
+        run: npm ci --ignore-scripts
+      - name: Valida os layouts
+        run: for f in saci-commerce/domains/content/layouts/*.json; do node saci-contracts/tooling/validate-layout.mjs "$f"; done
+
+  publish:
+    if: github.event_name != 'pull_request'
+    needs: validate
+    strategy:
+      max-parallel: 1
+      matrix:
+        environment: [dev, prod]
+    runs-on: ubuntu-24.04
+    environment: layouts-${{ matrix.environment }}
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: saci-commerce
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ github.repository_owner }}/saci-contracts
+          path: saci-contracts
+          persist-credentials: false
+      - working-directory: saci-contracts
+        run: npm ci --ignore-scripts
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_PUBLISH_ROLE_ARN }}
+          role-session-name: layouts-${{ github.run_id }}
+          aws-region: sa-east-1
+      - name: Publica
+        env:
+          CONTRACTS_DIR: ${{ github.workspace }}/saci-contracts
+        run: bash saci-commerce/domains/content/content-publisher/publish.sh ${{ matrix.environment }}

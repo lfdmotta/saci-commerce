@@ -1,0 +1,26 @@
+[package]
+name = "saci-orders-api"
+version = "0.1.0"
+description = "orders-api: compras, vendas por vitrine, pacotes e o ciclo de cada venda (proposta 5.8)."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+aws = ["saci-commerce-kit/aws"]
+
+[dependencies]
+saci-commerce-kit.workspace = true
+saci-ids.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+time.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,34 @@
+# Metadados do serviço (seção 9.7). Validado por ci/schemas/service.schema.json
+# do saci-boiuna e pelas políticas de classe de dado.
+name: media-api
+domain: media
+owner: saci-art/commerce
+language: rust
+runtime: aws-lambda
+account: prod
+# Funções (SACI_FUNCTION) do binário saci-media que pertencem a este serviço (ADR 0003).
+routes:
+  - route: POST /v1/media/me/uploads
+    access: SELLER:anuncios
+  - route: GET /v1/media/me/uploads/{upload_id}
+    access: SELLER:anuncios
+data:
+  stores:
+    - name: saci-<env>-media
+      kind: dynamodb
+      class: C1
+      kms_key_class: C2
+    - name: saci-<env>-media-quarantine-<conta>
+      kind: s3
+      class: C2
+      kms_key_class: C2
+logging:
+  request_body: false
+events:
+  publishes:
+    - media.upload.ready.v1
+    - media.upload.rejected.v1
+  consumes: []
+slo:
+  availability: 99.9
+  latency_p99_ms: 300

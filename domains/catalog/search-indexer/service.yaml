@@ -1,0 +1,41 @@
+# Metadados do serviço (seção 9.7). Validado por ci/schemas/service.schema.json
+# do saci-boiuna e pelas políticas de classe de dado.
+name: search-indexer
+domain: catalog
+owner: saci-art/commerce
+language: rust
+runtime: aws-lambda
+account: prod
+# Funções (SACI_FUNCTION) do binário saci-catalog que pertencem a este serviço (ADR 0003).
+routes:
+  - route: GET /v1/catalog/categories
+    access: PUB
+  - route: GET /v1/catalog/listings
+    access: PUB
+  - route: GET /v1/catalog/search
+    access: PUB
+  - route: GET /v1/catalog/artisans
+    access: PUB
+  - route: GET /v1/catalog/artisans/{artisan_id}
+    access: PUB
+  - route: GET /v1/catalog/storefronts/{url_name}/listings
+    access: PUB
+data:
+  stores:
+    - name: saci-<env>-catalog-search
+      kind: dynamodb
+      class: C0
+      kms_key_class: aws-managed
+logging:
+  request_body: false
+events:
+  publishes: []
+  consumes:
+    - catalog.listing.published.v1
+    - catalog.listing.updated.v1
+    - catalog.listing.paused.v1
+    - catalog.listing.withdrawn.v1
+    - catalog.stock.changed.v1
+slo:
+  availability: 99.9
+  latency_p99_ms: 300

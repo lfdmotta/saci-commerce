@@ -1,0 +1,26 @@
+[package]
+name = "saci-carrier-webhooks"
+version = "0.1.0"
+description = "carrier-webhooks: rastreio da transportadora recebido em hooks. (assinatura conferida, idempotente)."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+aws = ["saci-commerce-kit/aws"]
+
+[dependencies]
+saci-commerce-kit.workspace = true
+saci-ids.workspace = true
+serde.workspace = true
+hex.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true
+
+[lints]
+workspace = true
