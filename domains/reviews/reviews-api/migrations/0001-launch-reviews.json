@@ -1,0 +1,1865 @@
+{
+  "description": "Avaliações de exemplo: o mesmo conjunto em todas as vitrines, como no mock da interface (só fora de produção).",
+  "reviews": [
+    {
+      "review_id": "rev_01M6A6FT00Z2D16BP2432NER11",
+      "rating": 5,
+      "title": "Chegou ainda mais bonita do que nas fotos",
+      "body": "Comprei para dar de presente para minha mãe e acabei pedindo outra para mim. O acabamento é cuidadoso, dá para ver a mão de quem fez em cada detalhe. Veio embrulhada em papel de seda, com um bilhete escrito à mão contando de onde vinha a matéria.",
+      "author": {
+        "display_name": "Marina S.",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "created_at": "2026-10-12T17:20:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Tigelas esmaltadas sobre a mesa da cliente"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=900&q=72&auto=format&fit=crop",
+          "alt": "Jarra e copos claros servidos no almoço"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT0018BMQ8EVBG2Z78JJ",
+      "rating": 5,
+      "title": "Atendimento atencioso do começo ao fim",
+      "body": "Pedi uma medida um pouco diferente e me responderam no mesmo dia, explicando o que dava e o que não dava para mudar sem perder a resistência da peça. Chegou no prazo combinado.",
+      "author": {
+        "display_name": "Ricardo A.",
+        "city": "Belo Horizonte",
+        "state": "MG"
+      },
+      "created_at": "2026-10-03T12:45:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT007XHZD61B6R7856GA",
+      "rating": 4,
+      "title": "Peça linda, entrega demorou um pouco",
+      "body": "A peça é exatamente o que eu esperava, firme e com a cor bem viva. Só a entrega levou dois dias a mais do que o previsto para o Sul. Nada que tire o valor do trabalho, mas vale se programar se for para uma data.",
+      "author": {
+        "display_name": "Juliana P.",
+        "city": "Porto Alegre",
+        "state": "RS"
+      },
+      "created_at": "2026-09-27T21:10:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=900&q=72&auto=format&fit=crop",
+          "alt": "Cesto de fibra natural na sala da cliente"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00YR0PE44J0Q2Z4BQ7",
+      "rating": 5,
+      "title": "Dá para sentir a história da peça",
+      "body": "Gosto de saber quem fez o que eu levo para casa. Aqui a vitrine conta a história e a peça confirma: nada parece de fábrica. Já é a terceira compra e todas chegaram bem embaladas.",
+      "author": {
+        "display_name": "Helena M.",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "created_at": "2026-09-15T14:30:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00DRT93QKNPPT4YCKJ",
+      "rating": 5,
+      "title": "Presente de casamento que fez sucesso",
+      "body": "Mandei direto para a casa dos noivos, com um cartão. Eles me ligaram para perguntar onde eu tinha encontrado. Recomendo para quem quer dar um presente com significado.",
+      "author": {
+        "display_name": "Paulo R.",
+        "city": "Recife",
+        "state": "PE"
+      },
+      "created_at": "2026-08-30T23:05:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores pendurado na parede dos noivos"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=900&q=72&auto=format&fit=crop",
+          "alt": "Gamelas de madeira escura empilhadas"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=900&q=72&auto=format&fit=crop",
+          "alt": "Moringa de barro sobre a cômoda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00GE80C4XYRDE6TYJ9",
+      "rating": 3,
+      "title": "Bonita, mas menor do que eu imaginava",
+      "body": "A qualidade é boa, mas eu não reparei nas medidas e achei a peça pequena para o espaço que eu tinha. Culpa minha: as medidas estavam na página. Fica a dica de conferir antes.",
+      "author": {
+        "display_name": "Camila T.",
+        "city": "Curitiba",
+        "state": "PR"
+      },
+      "created_at": "2026-08-18T19:40:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT000J588ZV6J7MT0NJ1",
+      "rating": 5,
+      "title": "Feita para durar",
+      "body": "Uso todo dia há quatro meses e continua como chegou. Dá para ver que a matéria foi escolhida com cuidado.",
+      "author": {
+        "display_name": "Antônio L.",
+        "city": "Salvador",
+        "state": "BA"
+      },
+      "created_at": "2026-07-29T11:15:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00KZM0B1GKZV42KKTB",
+      "rating": 4,
+      "title": "Muito boa, embalagem poderia ser mais firme",
+      "body": "A peça chegou inteira, mas a caixa estava amassada num canto. O ateliê respondeu rápido quando avisei e disse que vai reforçar a embalagem para envios longos. Gostei da atenção.",
+      "author": {
+        "display_name": "Fernanda C.",
+        "city": "Manaus",
+        "state": "AM"
+      },
+      "created_at": "2026-07-11T16:50:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00AF7G82CWD2SVCN3J",
+      "rating": 5,
+      "title": "Combinou com a casa inteira",
+      "body": "Ficou no centro da sala e todo mundo que chega pergunta. As cores são mais bonitas pessoalmente.",
+      "author": {
+        "display_name": "Beatriz N.",
+        "city": "Goiânia",
+        "state": "GO"
+      },
+      "created_at": "2026-06-22T22:25:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=900&q=72&auto=format&fit=crop",
+          "alt": "Rede de algodão cru armada na varanda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00ZQ20W942MDWB3FEM",
+      "rating": 5,
+      "title": "Encomenda feita do meu jeito",
+      "body": "Pedi pela Caipora uma versão com as iniciais da família. O ateliê mandou o preço e o prazo antes de eu pagar, e entregou exatamente o combinado.",
+      "author": {
+        "display_name": "Lucas F.",
+        "city": "Brasília",
+        "state": "DF"
+      },
+      "created_at": "2026-06-05T13:00:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT008Z0CKC2515RB803Q",
+      "rating": 5,
+      "title": "Chegou ainda mais bonita do que nas fotos",
+      "body": "Comprei para dar de presente para minha mãe e acabei pedindo outra para mim. O acabamento é cuidadoso, dá para ver a mão de quem fez em cada detalhe. Veio embrulhada em papel de seda, com um bilhete escrito à mão contando de onde vinha a matéria.",
+      "author": {
+        "display_name": "Marina S.",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "created_at": "2026-10-12T17:20:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Tigelas esmaltadas sobre a mesa da cliente"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=900&q=72&auto=format&fit=crop",
+          "alt": "Jarra e copos claros servidos no almoço"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00H29HGTWQH6N5BGEN",
+      "rating": 5,
+      "title": "Atendimento atencioso do começo ao fim",
+      "body": "Pedi uma medida um pouco diferente e me responderam no mesmo dia, explicando o que dava e o que não dava para mudar sem perder a resistência da peça. Chegou no prazo combinado.",
+      "author": {
+        "display_name": "Ricardo A.",
+        "city": "Belo Horizonte",
+        "state": "MG"
+      },
+      "created_at": "2026-10-03T12:45:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT006SG5P6JQZW8K478F",
+      "rating": 4,
+      "title": "Peça linda, entrega demorou um pouco",
+      "body": "A peça é exatamente o que eu esperava, firme e com a cor bem viva. Só a entrega levou dois dias a mais do que o previsto para o Sul. Nada que tire o valor do trabalho, mas vale se programar se for para uma data.",
+      "author": {
+        "display_name": "Juliana P.",
+        "city": "Porto Alegre",
+        "state": "RS"
+      },
+      "created_at": "2026-09-27T21:10:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=900&q=72&auto=format&fit=crop",
+          "alt": "Cesto de fibra natural na sala da cliente"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT006QMZ874Y98T9Z1YZ",
+      "rating": 5,
+      "title": "Dá para sentir a história da peça",
+      "body": "Gosto de saber quem fez o que eu levo para casa. Aqui a vitrine conta a história e a peça confirma: nada parece de fábrica. Já é a terceira compra e todas chegaram bem embaladas.",
+      "author": {
+        "display_name": "Helena M.",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "created_at": "2026-09-15T14:30:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00J7457B72HF64MPR9",
+      "rating": 5,
+      "title": "Presente de casamento que fez sucesso",
+      "body": "Mandei direto para a casa dos noivos, com um cartão. Eles me ligaram para perguntar onde eu tinha encontrado. Recomendo para quem quer dar um presente com significado.",
+      "author": {
+        "display_name": "Paulo R.",
+        "city": "Recife",
+        "state": "PE"
+      },
+      "created_at": "2026-08-30T23:05:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores pendurado na parede dos noivos"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=900&q=72&auto=format&fit=crop",
+          "alt": "Gamelas de madeira escura empilhadas"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=900&q=72&auto=format&fit=crop",
+          "alt": "Moringa de barro sobre a cômoda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00KCXD5XN4Y64HNNPB",
+      "rating": 3,
+      "title": "Bonita, mas menor do que eu imaginava",
+      "body": "A qualidade é boa, mas eu não reparei nas medidas e achei a peça pequena para o espaço que eu tinha. Culpa minha: as medidas estavam na página. Fica a dica de conferir antes.",
+      "author": {
+        "display_name": "Camila T.",
+        "city": "Curitiba",
+        "state": "PR"
+      },
+      "created_at": "2026-08-18T19:40:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00R6Y9WWQ7QS57NHKT",
+      "rating": 5,
+      "title": "Feita para durar",
+      "body": "Uso todo dia há quatro meses e continua como chegou. Dá para ver que a matéria foi escolhida com cuidado.",
+      "author": {
+        "display_name": "Antônio L.",
+        "city": "Salvador",
+        "state": "BA"
+      },
+      "created_at": "2026-07-29T11:15:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00TWPJRZ118J48EW8V",
+      "rating": 4,
+      "title": "Muito boa, embalagem poderia ser mais firme",
+      "body": "A peça chegou inteira, mas a caixa estava amassada num canto. O ateliê respondeu rápido quando avisei e disse que vai reforçar a embalagem para envios longos. Gostei da atenção.",
+      "author": {
+        "display_name": "Fernanda C.",
+        "city": "Manaus",
+        "state": "AM"
+      },
+      "created_at": "2026-07-11T16:50:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00PE6DP0FYYB37R8YS",
+      "rating": 5,
+      "title": "Combinou com a casa inteira",
+      "body": "Ficou no centro da sala e todo mundo que chega pergunta. As cores são mais bonitas pessoalmente.",
+      "author": {
+        "display_name": "Beatriz N.",
+        "city": "Goiânia",
+        "state": "GO"
+      },
+      "created_at": "2026-06-22T22:25:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=900&q=72&auto=format&fit=crop",
+          "alt": "Rede de algodão cru armada na varanda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00TT14X0G9X55QKK16",
+      "rating": 5,
+      "title": "Encomenda feita do meu jeito",
+      "body": "Pedi pela Caipora uma versão com as iniciais da família. O ateliê mandou o preço e o prazo antes de eu pagar, e entregou exatamente o combinado.",
+      "author": {
+        "display_name": "Lucas F.",
+        "city": "Brasília",
+        "state": "DF"
+      },
+      "created_at": "2026-06-05T13:00:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00H9N6JTNB2Q1KWDR8",
+      "rating": 5,
+      "title": "Chegou ainda mais bonita do que nas fotos",
+      "body": "Comprei para dar de presente para minha mãe e acabei pedindo outra para mim. O acabamento é cuidadoso, dá para ver a mão de quem fez em cada detalhe. Veio embrulhada em papel de seda, com um bilhete escrito à mão contando de onde vinha a matéria.",
+      "author": {
+        "display_name": "Marina S.",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "created_at": "2026-10-12T17:20:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Tigelas esmaltadas sobre a mesa da cliente"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=900&q=72&auto=format&fit=crop",
+          "alt": "Jarra e copos claros servidos no almoço"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00939WWHR52RM758AD",
+      "rating": 5,
+      "title": "Atendimento atencioso do começo ao fim",
+      "body": "Pedi uma medida um pouco diferente e me responderam no mesmo dia, explicando o que dava e o que não dava para mudar sem perder a resistência da peça. Chegou no prazo combinado.",
+      "author": {
+        "display_name": "Ricardo A.",
+        "city": "Belo Horizonte",
+        "state": "MG"
+      },
+      "created_at": "2026-10-03T12:45:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00G7WWA7EEQQKJKN22",
+      "rating": 4,
+      "title": "Peça linda, entrega demorou um pouco",
+      "body": "A peça é exatamente o que eu esperava, firme e com a cor bem viva. Só a entrega levou dois dias a mais do que o previsto para o Sul. Nada que tire o valor do trabalho, mas vale se programar se for para uma data.",
+      "author": {
+        "display_name": "Juliana P.",
+        "city": "Porto Alegre",
+        "state": "RS"
+      },
+      "created_at": "2026-09-27T21:10:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=900&q=72&auto=format&fit=crop",
+          "alt": "Cesto de fibra natural na sala da cliente"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT003EEEFPV9XN2SPD9Y",
+      "rating": 5,
+      "title": "Dá para sentir a história da peça",
+      "body": "Gosto de saber quem fez o que eu levo para casa. Aqui a vitrine conta a história e a peça confirma: nada parece de fábrica. Já é a terceira compra e todas chegaram bem embaladas.",
+      "author": {
+        "display_name": "Helena M.",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "created_at": "2026-09-15T14:30:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT0099PR39YY8EX6J85Z",
+      "rating": 5,
+      "title": "Presente de casamento que fez sucesso",
+      "body": "Mandei direto para a casa dos noivos, com um cartão. Eles me ligaram para perguntar onde eu tinha encontrado. Recomendo para quem quer dar um presente com significado.",
+      "author": {
+        "display_name": "Paulo R.",
+        "city": "Recife",
+        "state": "PE"
+      },
+      "created_at": "2026-08-30T23:05:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores pendurado na parede dos noivos"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=900&q=72&auto=format&fit=crop",
+          "alt": "Gamelas de madeira escura empilhadas"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=900&q=72&auto=format&fit=crop",
+          "alt": "Moringa de barro sobre a cômoda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00CVFYMEQD8TGC0FSV",
+      "rating": 3,
+      "title": "Bonita, mas menor do que eu imaginava",
+      "body": "A qualidade é boa, mas eu não reparei nas medidas e achei a peça pequena para o espaço que eu tinha. Culpa minha: as medidas estavam na página. Fica a dica de conferir antes.",
+      "author": {
+        "display_name": "Camila T.",
+        "city": "Curitiba",
+        "state": "PR"
+      },
+      "created_at": "2026-08-18T19:40:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00MG48KEYZ4P2Y74H8",
+      "rating": 5,
+      "title": "Feita para durar",
+      "body": "Uso todo dia há quatro meses e continua como chegou. Dá para ver que a matéria foi escolhida com cuidado.",
+      "author": {
+        "display_name": "Antônio L.",
+        "city": "Salvador",
+        "state": "BA"
+      },
+      "created_at": "2026-07-29T11:15:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00XX1Q4MM1SK3DCR6E",
+      "rating": 4,
+      "title": "Muito boa, embalagem poderia ser mais firme",
+      "body": "A peça chegou inteira, mas a caixa estava amassada num canto. O ateliê respondeu rápido quando avisei e disse que vai reforçar a embalagem para envios longos. Gostei da atenção.",
+      "author": {
+        "display_name": "Fernanda C.",
+        "city": "Manaus",
+        "state": "AM"
+      },
+      "created_at": "2026-07-11T16:50:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00GNXSXXW54D87BSTD",
+      "rating": 5,
+      "title": "Combinou com a casa inteira",
+      "body": "Ficou no centro da sala e todo mundo que chega pergunta. As cores são mais bonitas pessoalmente.",
+      "author": {
+        "display_name": "Beatriz N.",
+        "city": "Goiânia",
+        "state": "GO"
+      },
+      "created_at": "2026-06-22T22:25:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=900&q=72&auto=format&fit=crop",
+          "alt": "Rede de algodão cru armada na varanda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00BYH6NDW78SXHKGE1",
+      "rating": 5,
+      "title": "Encomenda feita do meu jeito",
+      "body": "Pedi pela Caipora uma versão com as iniciais da família. O ateliê mandou o preço e o prazo antes de eu pagar, e entregou exatamente o combinado.",
+      "author": {
+        "display_name": "Lucas F.",
+        "city": "Brasília",
+        "state": "DF"
+      },
+      "created_at": "2026-06-05T13:00:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT0022V6VGQXGQ68XPZ0",
+      "rating": 5,
+      "title": "Chegou ainda mais bonita do que nas fotos",
+      "body": "Comprei para dar de presente para minha mãe e acabei pedindo outra para mim. O acabamento é cuidadoso, dá para ver a mão de quem fez em cada detalhe. Veio embrulhada em papel de seda, com um bilhete escrito à mão contando de onde vinha a matéria.",
+      "author": {
+        "display_name": "Marina S.",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "created_at": "2026-10-12T17:20:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Tigelas esmaltadas sobre a mesa da cliente"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=900&q=72&auto=format&fit=crop",
+          "alt": "Jarra e copos claros servidos no almoço"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00FR016FN8SE5QBM5T",
+      "rating": 5,
+      "title": "Atendimento atencioso do começo ao fim",
+      "body": "Pedi uma medida um pouco diferente e me responderam no mesmo dia, explicando o que dava e o que não dava para mudar sem perder a resistência da peça. Chegou no prazo combinado.",
+      "author": {
+        "display_name": "Ricardo A.",
+        "city": "Belo Horizonte",
+        "state": "MG"
+      },
+      "created_at": "2026-10-03T12:45:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT007GGM04X9T81DM4S3",
+      "rating": 4,
+      "title": "Peça linda, entrega demorou um pouco",
+      "body": "A peça é exatamente o que eu esperava, firme e com a cor bem viva. Só a entrega levou dois dias a mais do que o previsto para o Sul. Nada que tire o valor do trabalho, mas vale se programar se for para uma data.",
+      "author": {
+        "display_name": "Juliana P.",
+        "city": "Porto Alegre",
+        "state": "RS"
+      },
+      "created_at": "2026-09-27T21:10:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=900&q=72&auto=format&fit=crop",
+          "alt": "Cesto de fibra natural na sala da cliente"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT008GK8HDWM7E6A02CP",
+      "rating": 5,
+      "title": "Dá para sentir a história da peça",
+      "body": "Gosto de saber quem fez o que eu levo para casa. Aqui a vitrine conta a história e a peça confirma: nada parece de fábrica. Já é a terceira compra e todas chegaram bem embaladas.",
+      "author": {
+        "display_name": "Helena M.",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "created_at": "2026-09-15T14:30:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00K0QA1SCT0AXSHTYS",
+      "rating": 5,
+      "title": "Presente de casamento que fez sucesso",
+      "body": "Mandei direto para a casa dos noivos, com um cartão. Eles me ligaram para perguntar onde eu tinha encontrado. Recomendo para quem quer dar um presente com significado.",
+      "author": {
+        "display_name": "Paulo R.",
+        "city": "Recife",
+        "state": "PE"
+      },
+      "created_at": "2026-08-30T23:05:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores pendurado na parede dos noivos"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=900&q=72&auto=format&fit=crop",
+          "alt": "Gamelas de madeira escura empilhadas"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=900&q=72&auto=format&fit=crop",
+          "alt": "Moringa de barro sobre a cômoda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT008R5XRC6KADNCKQYK",
+      "rating": 3,
+      "title": "Bonita, mas menor do que eu imaginava",
+      "body": "A qualidade é boa, mas eu não reparei nas medidas e achei a peça pequena para o espaço que eu tinha. Culpa minha: as medidas estavam na página. Fica a dica de conferir antes.",
+      "author": {
+        "display_name": "Camila T.",
+        "city": "Curitiba",
+        "state": "PR"
+      },
+      "created_at": "2026-08-18T19:40:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00CFXX36VB2EPQFFS1",
+      "rating": 5,
+      "title": "Feita para durar",
+      "body": "Uso todo dia há quatro meses e continua como chegou. Dá para ver que a matéria foi escolhida com cuidado.",
+      "author": {
+        "display_name": "Antônio L.",
+        "city": "Salvador",
+        "state": "BA"
+      },
+      "created_at": "2026-07-29T11:15:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00Y6R7J5EG7WD615H7",
+      "rating": 4,
+      "title": "Muito boa, embalagem poderia ser mais firme",
+      "body": "A peça chegou inteira, mas a caixa estava amassada num canto. O ateliê respondeu rápido quando avisei e disse que vai reforçar a embalagem para envios longos. Gostei da atenção.",
+      "author": {
+        "display_name": "Fernanda C.",
+        "city": "Manaus",
+        "state": "AM"
+      },
+      "created_at": "2026-07-11T16:50:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00YDZAC0T3NYSEKWJW",
+      "rating": 5,
+      "title": "Combinou com a casa inteira",
+      "body": "Ficou no centro da sala e todo mundo que chega pergunta. As cores são mais bonitas pessoalmente.",
+      "author": {
+        "display_name": "Beatriz N.",
+        "city": "Goiânia",
+        "state": "GO"
+      },
+      "created_at": "2026-06-22T22:25:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=900&q=72&auto=format&fit=crop",
+          "alt": "Rede de algodão cru armada na varanda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00JRHHQWWT1G8SJ6HH",
+      "rating": 5,
+      "title": "Encomenda feita do meu jeito",
+      "body": "Pedi pela Caipora uma versão com as iniciais da família. O ateliê mandou o preço e o prazo antes de eu pagar, e entregou exatamente o combinado.",
+      "author": {
+        "display_name": "Lucas F.",
+        "city": "Brasília",
+        "state": "DF"
+      },
+      "created_at": "2026-06-05T13:00:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00C3DWP0ZAM5P8EMEN",
+      "rating": 5,
+      "title": "Chegou ainda mais bonita do que nas fotos",
+      "body": "Comprei para dar de presente para minha mãe e acabei pedindo outra para mim. O acabamento é cuidadoso, dá para ver a mão de quem fez em cada detalhe. Veio embrulhada em papel de seda, com um bilhete escrito à mão contando de onde vinha a matéria.",
+      "author": {
+        "display_name": "Marina S.",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "created_at": "2026-10-12T17:20:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Tigelas esmaltadas sobre a mesa da cliente"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=900&q=72&auto=format&fit=crop",
+          "alt": "Jarra e copos claros servidos no almoço"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00HAJ2M223PGDPY1PB",
+      "rating": 5,
+      "title": "Atendimento atencioso do começo ao fim",
+      "body": "Pedi uma medida um pouco diferente e me responderam no mesmo dia, explicando o que dava e o que não dava para mudar sem perder a resistência da peça. Chegou no prazo combinado.",
+      "author": {
+        "display_name": "Ricardo A.",
+        "city": "Belo Horizonte",
+        "state": "MG"
+      },
+      "created_at": "2026-10-03T12:45:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00T7B4QJ04EFP335VQ",
+      "rating": 4,
+      "title": "Peça linda, entrega demorou um pouco",
+      "body": "A peça é exatamente o que eu esperava, firme e com a cor bem viva. Só a entrega levou dois dias a mais do que o previsto para o Sul. Nada que tire o valor do trabalho, mas vale se programar se for para uma data.",
+      "author": {
+        "display_name": "Juliana P.",
+        "city": "Porto Alegre",
+        "state": "RS"
+      },
+      "created_at": "2026-09-27T21:10:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=900&q=72&auto=format&fit=crop",
+          "alt": "Cesto de fibra natural na sala da cliente"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT0046RYQWXFSB24Q2DE",
+      "rating": 5,
+      "title": "Dá para sentir a história da peça",
+      "body": "Gosto de saber quem fez o que eu levo para casa. Aqui a vitrine conta a história e a peça confirma: nada parece de fábrica. Já é a terceira compra e todas chegaram bem embaladas.",
+      "author": {
+        "display_name": "Helena M.",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "created_at": "2026-09-15T14:30:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT004M76T88SZCJ7W0TG",
+      "rating": 5,
+      "title": "Presente de casamento que fez sucesso",
+      "body": "Mandei direto para a casa dos noivos, com um cartão. Eles me ligaram para perguntar onde eu tinha encontrado. Recomendo para quem quer dar um presente com significado.",
+      "author": {
+        "display_name": "Paulo R.",
+        "city": "Recife",
+        "state": "PE"
+      },
+      "created_at": "2026-08-30T23:05:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores pendurado na parede dos noivos"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=900&q=72&auto=format&fit=crop",
+          "alt": "Gamelas de madeira escura empilhadas"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=900&q=72&auto=format&fit=crop",
+          "alt": "Moringa de barro sobre a cômoda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT004F54NZWV8P3N9D4A",
+      "rating": 3,
+      "title": "Bonita, mas menor do que eu imaginava",
+      "body": "A qualidade é boa, mas eu não reparei nas medidas e achei a peça pequena para o espaço que eu tinha. Culpa minha: as medidas estavam na página. Fica a dica de conferir antes.",
+      "author": {
+        "display_name": "Camila T.",
+        "city": "Curitiba",
+        "state": "PR"
+      },
+      "created_at": "2026-08-18T19:40:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00M8Z84S2T7W167T27",
+      "rating": 5,
+      "title": "Feita para durar",
+      "body": "Uso todo dia há quatro meses e continua como chegou. Dá para ver que a matéria foi escolhida com cuidado.",
+      "author": {
+        "display_name": "Antônio L.",
+        "city": "Salvador",
+        "state": "BA"
+      },
+      "created_at": "2026-07-29T11:15:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00M9V9ND3R594APM8J",
+      "rating": 4,
+      "title": "Muito boa, embalagem poderia ser mais firme",
+      "body": "A peça chegou inteira, mas a caixa estava amassada num canto. O ateliê respondeu rápido quando avisei e disse que vai reforçar a embalagem para envios longos. Gostei da atenção.",
+      "author": {
+        "display_name": "Fernanda C.",
+        "city": "Manaus",
+        "state": "AM"
+      },
+      "created_at": "2026-07-11T16:50:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00T6NGKP7J0C1P79BX",
+      "rating": 5,
+      "title": "Combinou com a casa inteira",
+      "body": "Ficou no centro da sala e todo mundo que chega pergunta. As cores são mais bonitas pessoalmente.",
+      "author": {
+        "display_name": "Beatriz N.",
+        "city": "Goiânia",
+        "state": "GO"
+      },
+      "created_at": "2026-06-22T22:25:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=900&q=72&auto=format&fit=crop",
+          "alt": "Rede de algodão cru armada na varanda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00P6T6M8N6R8TG05G2",
+      "rating": 5,
+      "title": "Encomenda feita do meu jeito",
+      "body": "Pedi pela Caipora uma versão com as iniciais da família. O ateliê mandou o preço e o prazo antes de eu pagar, e entregou exatamente o combinado.",
+      "author": {
+        "display_name": "Lucas F.",
+        "city": "Brasília",
+        "state": "DF"
+      },
+      "created_at": "2026-06-05T13:00:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00MX123X1ZR45HCWZ9",
+      "rating": 5,
+      "title": "Chegou ainda mais bonita do que nas fotos",
+      "body": "Comprei para dar de presente para minha mãe e acabei pedindo outra para mim. O acabamento é cuidadoso, dá para ver a mão de quem fez em cada detalhe. Veio embrulhada em papel de seda, com um bilhete escrito à mão contando de onde vinha a matéria.",
+      "author": {
+        "display_name": "Marina S.",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "created_at": "2026-10-12T17:20:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Tigelas esmaltadas sobre a mesa da cliente"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=900&q=72&auto=format&fit=crop",
+          "alt": "Jarra e copos claros servidos no almoço"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT004DARQTNN8A8EZ5V8",
+      "rating": 5,
+      "title": "Atendimento atencioso do começo ao fim",
+      "body": "Pedi uma medida um pouco diferente e me responderam no mesmo dia, explicando o que dava e o que não dava para mudar sem perder a resistência da peça. Chegou no prazo combinado.",
+      "author": {
+        "display_name": "Ricardo A.",
+        "city": "Belo Horizonte",
+        "state": "MG"
+      },
+      "created_at": "2026-10-03T12:45:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00DKZJM1NNKW06RAH6",
+      "rating": 4,
+      "title": "Peça linda, entrega demorou um pouco",
+      "body": "A peça é exatamente o que eu esperava, firme e com a cor bem viva. Só a entrega levou dois dias a mais do que o previsto para o Sul. Nada que tire o valor do trabalho, mas vale se programar se for para uma data.",
+      "author": {
+        "display_name": "Juliana P.",
+        "city": "Porto Alegre",
+        "state": "RS"
+      },
+      "created_at": "2026-09-27T21:10:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=900&q=72&auto=format&fit=crop",
+          "alt": "Cesto de fibra natural na sala da cliente"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00WKGGWCYPZ3XDAA8C",
+      "rating": 5,
+      "title": "Dá para sentir a história da peça",
+      "body": "Gosto de saber quem fez o que eu levo para casa. Aqui a vitrine conta a história e a peça confirma: nada parece de fábrica. Já é a terceira compra e todas chegaram bem embaladas.",
+      "author": {
+        "display_name": "Helena M.",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "created_at": "2026-09-15T14:30:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00ZXNB78T427SQ3P2R",
+      "rating": 5,
+      "title": "Presente de casamento que fez sucesso",
+      "body": "Mandei direto para a casa dos noivos, com um cartão. Eles me ligaram para perguntar onde eu tinha encontrado. Recomendo para quem quer dar um presente com significado.",
+      "author": {
+        "display_name": "Paulo R.",
+        "city": "Recife",
+        "state": "PE"
+      },
+      "created_at": "2026-08-30T23:05:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores pendurado na parede dos noivos"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=900&q=72&auto=format&fit=crop",
+          "alt": "Gamelas de madeira escura empilhadas"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=900&q=72&auto=format&fit=crop",
+          "alt": "Moringa de barro sobre a cômoda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00R9GR7G98GMQBWRXG",
+      "rating": 3,
+      "title": "Bonita, mas menor do que eu imaginava",
+      "body": "A qualidade é boa, mas eu não reparei nas medidas e achei a peça pequena para o espaço que eu tinha. Culpa minha: as medidas estavam na página. Fica a dica de conferir antes.",
+      "author": {
+        "display_name": "Camila T.",
+        "city": "Curitiba",
+        "state": "PR"
+      },
+      "created_at": "2026-08-18T19:40:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00ETB4SFGXN0ZAAQKD",
+      "rating": 5,
+      "title": "Feita para durar",
+      "body": "Uso todo dia há quatro meses e continua como chegou. Dá para ver que a matéria foi escolhida com cuidado.",
+      "author": {
+        "display_name": "Antônio L.",
+        "city": "Salvador",
+        "state": "BA"
+      },
+      "created_at": "2026-07-29T11:15:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00GXV12E1Y3TT4XJ66",
+      "rating": 4,
+      "title": "Muito boa, embalagem poderia ser mais firme",
+      "body": "A peça chegou inteira, mas a caixa estava amassada num canto. O ateliê respondeu rápido quando avisei e disse que vai reforçar a embalagem para envios longos. Gostei da atenção.",
+      "author": {
+        "display_name": "Fernanda C.",
+        "city": "Manaus",
+        "state": "AM"
+      },
+      "created_at": "2026-07-11T16:50:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00EVCJ2ANC4CSTSNA1",
+      "rating": 5,
+      "title": "Combinou com a casa inteira",
+      "body": "Ficou no centro da sala e todo mundo que chega pergunta. As cores são mais bonitas pessoalmente.",
+      "author": {
+        "display_name": "Beatriz N.",
+        "city": "Goiânia",
+        "state": "GO"
+      },
+      "created_at": "2026-06-22T22:25:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=900&q=72&auto=format&fit=crop",
+          "alt": "Rede de algodão cru armada na varanda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00J84PYN76P6F884N1",
+      "rating": 5,
+      "title": "Encomenda feita do meu jeito",
+      "body": "Pedi pela Caipora uma versão com as iniciais da família. O ateliê mandou o preço e o prazo antes de eu pagar, e entregou exatamente o combinado.",
+      "author": {
+        "display_name": "Lucas F.",
+        "city": "Brasília",
+        "state": "DF"
+      },
+      "created_at": "2026-06-05T13:00:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT0080BVV3DTXN7R0P80",
+      "rating": 5,
+      "title": "Chegou ainda mais bonita do que nas fotos",
+      "body": "Comprei para dar de presente para minha mãe e acabei pedindo outra para mim. O acabamento é cuidadoso, dá para ver a mão de quem fez em cada detalhe. Veio embrulhada em papel de seda, com um bilhete escrito à mão contando de onde vinha a matéria.",
+      "author": {
+        "display_name": "Marina S.",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "created_at": "2026-10-12T17:20:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Tigelas esmaltadas sobre a mesa da cliente"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=900&q=72&auto=format&fit=crop",
+          "alt": "Jarra e copos claros servidos no almoço"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00QH43PR0FYX3JNHC9",
+      "rating": 5,
+      "title": "Atendimento atencioso do começo ao fim",
+      "body": "Pedi uma medida um pouco diferente e me responderam no mesmo dia, explicando o que dava e o que não dava para mudar sem perder a resistência da peça. Chegou no prazo combinado.",
+      "author": {
+        "display_name": "Ricardo A.",
+        "city": "Belo Horizonte",
+        "state": "MG"
+      },
+      "created_at": "2026-10-03T12:45:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT006K94VSYQH2J4NWYQ",
+      "rating": 4,
+      "title": "Peça linda, entrega demorou um pouco",
+      "body": "A peça é exatamente o que eu esperava, firme e com a cor bem viva. Só a entrega levou dois dias a mais do que o previsto para o Sul. Nada que tire o valor do trabalho, mas vale se programar se for para uma data.",
+      "author": {
+        "display_name": "Juliana P.",
+        "city": "Porto Alegre",
+        "state": "RS"
+      },
+      "created_at": "2026-09-27T21:10:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=900&q=72&auto=format&fit=crop",
+          "alt": "Cesto de fibra natural na sala da cliente"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00WDVKT5ZTG1F494GH",
+      "rating": 5,
+      "title": "Dá para sentir a história da peça",
+      "body": "Gosto de saber quem fez o que eu levo para casa. Aqui a vitrine conta a história e a peça confirma: nada parece de fábrica. Já é a terceira compra e todas chegaram bem embaladas.",
+      "author": {
+        "display_name": "Helena M.",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "created_at": "2026-09-15T14:30:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00W45X6NXVQ7DVX9Z2",
+      "rating": 5,
+      "title": "Presente de casamento que fez sucesso",
+      "body": "Mandei direto para a casa dos noivos, com um cartão. Eles me ligaram para perguntar onde eu tinha encontrado. Recomendo para quem quer dar um presente com significado.",
+      "author": {
+        "display_name": "Paulo R.",
+        "city": "Recife",
+        "state": "PE"
+      },
+      "created_at": "2026-08-30T23:05:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores pendurado na parede dos noivos"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=900&q=72&auto=format&fit=crop",
+          "alt": "Gamelas de madeira escura empilhadas"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=900&q=72&auto=format&fit=crop",
+          "alt": "Moringa de barro sobre a cômoda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00FDR1917R5B54W4AQ",
+      "rating": 3,
+      "title": "Bonita, mas menor do que eu imaginava",
+      "body": "A qualidade é boa, mas eu não reparei nas medidas e achei a peça pequena para o espaço que eu tinha. Culpa minha: as medidas estavam na página. Fica a dica de conferir antes.",
+      "author": {
+        "display_name": "Camila T.",
+        "city": "Curitiba",
+        "state": "PR"
+      },
+      "created_at": "2026-08-18T19:40:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00ZHRKN3YMB1Z1EPJK",
+      "rating": 5,
+      "title": "Feita para durar",
+      "body": "Uso todo dia há quatro meses e continua como chegou. Dá para ver que a matéria foi escolhida com cuidado.",
+      "author": {
+        "display_name": "Antônio L.",
+        "city": "Salvador",
+        "state": "BA"
+      },
+      "created_at": "2026-07-29T11:15:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT001H13JVAQTDYX8JT8",
+      "rating": 4,
+      "title": "Muito boa, embalagem poderia ser mais firme",
+      "body": "A peça chegou inteira, mas a caixa estava amassada num canto. O ateliê respondeu rápido quando avisei e disse que vai reforçar a embalagem para envios longos. Gostei da atenção.",
+      "author": {
+        "display_name": "Fernanda C.",
+        "city": "Manaus",
+        "state": "AM"
+      },
+      "created_at": "2026-07-11T16:50:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT0098P8N5HMHB1462MB",
+      "rating": 5,
+      "title": "Combinou com a casa inteira",
+      "body": "Ficou no centro da sala e todo mundo que chega pergunta. As cores são mais bonitas pessoalmente.",
+      "author": {
+        "display_name": "Beatriz N.",
+        "city": "Goiânia",
+        "state": "GO"
+      },
+      "created_at": "2026-06-22T22:25:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=900&q=72&auto=format&fit=crop",
+          "alt": "Rede de algodão cru armada na varanda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00TH7NBKXAKFZM8M0X",
+      "rating": 5,
+      "title": "Encomenda feita do meu jeito",
+      "body": "Pedi pela Caipora uma versão com as iniciais da família. O ateliê mandou o preço e o prazo antes de eu pagar, e entregou exatamente o combinado.",
+      "author": {
+        "display_name": "Lucas F.",
+        "city": "Brasília",
+        "state": "DF"
+      },
+      "created_at": "2026-06-05T13:00:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT0050GSG92MZ8WPVFMA",
+      "rating": 5,
+      "title": "Chegou ainda mais bonita do que nas fotos",
+      "body": "Comprei para dar de presente para minha mãe e acabei pedindo outra para mim. O acabamento é cuidadoso, dá para ver a mão de quem fez em cada detalhe. Veio embrulhada em papel de seda, com um bilhete escrito à mão contando de onde vinha a matéria.",
+      "author": {
+        "display_name": "Marina S.",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "created_at": "2026-10-12T17:20:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Tigelas esmaltadas sobre a mesa da cliente"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=900&q=72&auto=format&fit=crop",
+          "alt": "Jarra e copos claros servidos no almoço"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT0072HJM93RWM081BTT",
+      "rating": 5,
+      "title": "Atendimento atencioso do começo ao fim",
+      "body": "Pedi uma medida um pouco diferente e me responderam no mesmo dia, explicando o que dava e o que não dava para mudar sem perder a resistência da peça. Chegou no prazo combinado.",
+      "author": {
+        "display_name": "Ricardo A.",
+        "city": "Belo Horizonte",
+        "state": "MG"
+      },
+      "created_at": "2026-10-03T12:45:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00K2BYDS140M9V4A1J",
+      "rating": 4,
+      "title": "Peça linda, entrega demorou um pouco",
+      "body": "A peça é exatamente o que eu esperava, firme e com a cor bem viva. Só a entrega levou dois dias a mais do que o previsto para o Sul. Nada que tire o valor do trabalho, mas vale se programar se for para uma data.",
+      "author": {
+        "display_name": "Juliana P.",
+        "city": "Porto Alegre",
+        "state": "RS"
+      },
+      "created_at": "2026-09-27T21:10:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=900&q=72&auto=format&fit=crop",
+          "alt": "Cesto de fibra natural na sala da cliente"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT001P5GHP3FENNC1QKF",
+      "rating": 5,
+      "title": "Dá para sentir a história da peça",
+      "body": "Gosto de saber quem fez o que eu levo para casa. Aqui a vitrine conta a história e a peça confirma: nada parece de fábrica. Já é a terceira compra e todas chegaram bem embaladas.",
+      "author": {
+        "display_name": "Helena M.",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "created_at": "2026-09-15T14:30:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00TWGE6YQTSMW4JWCN",
+      "rating": 5,
+      "title": "Presente de casamento que fez sucesso",
+      "body": "Mandei direto para a casa dos noivos, com um cartão. Eles me ligaram para perguntar onde eu tinha encontrado. Recomendo para quem quer dar um presente com significado.",
+      "author": {
+        "display_name": "Paulo R.",
+        "city": "Recife",
+        "state": "PE"
+      },
+      "created_at": "2026-08-30T23:05:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores pendurado na parede dos noivos"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=900&q=72&auto=format&fit=crop",
+          "alt": "Gamelas de madeira escura empilhadas"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=900&q=72&auto=format&fit=crop",
+          "alt": "Moringa de barro sobre a cômoda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00VS8S3VN216G8155D",
+      "rating": 3,
+      "title": "Bonita, mas menor do que eu imaginava",
+      "body": "A qualidade é boa, mas eu não reparei nas medidas e achei a peça pequena para o espaço que eu tinha. Culpa minha: as medidas estavam na página. Fica a dica de conferir antes.",
+      "author": {
+        "display_name": "Camila T.",
+        "city": "Curitiba",
+        "state": "PR"
+      },
+      "created_at": "2026-08-18T19:40:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00YJJDV8TMRN6NMH4A",
+      "rating": 5,
+      "title": "Feita para durar",
+      "body": "Uso todo dia há quatro meses e continua como chegou. Dá para ver que a matéria foi escolhida com cuidado.",
+      "author": {
+        "display_name": "Antônio L.",
+        "city": "Salvador",
+        "state": "BA"
+      },
+      "created_at": "2026-07-29T11:15:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00VW0H2XKJCE4KYQ62",
+      "rating": 4,
+      "title": "Muito boa, embalagem poderia ser mais firme",
+      "body": "A peça chegou inteira, mas a caixa estava amassada num canto. O ateliê respondeu rápido quando avisei e disse que vai reforçar a embalagem para envios longos. Gostei da atenção.",
+      "author": {
+        "display_name": "Fernanda C.",
+        "city": "Manaus",
+        "state": "AM"
+      },
+      "created_at": "2026-07-11T16:50:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00X0CJWAVJTC4460HX",
+      "rating": 5,
+      "title": "Combinou com a casa inteira",
+      "body": "Ficou no centro da sala e todo mundo que chega pergunta. As cores são mais bonitas pessoalmente.",
+      "author": {
+        "display_name": "Beatriz N.",
+        "city": "Goiânia",
+        "state": "GO"
+      },
+      "created_at": "2026-06-22T22:25:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=900&q=72&auto=format&fit=crop",
+          "alt": "Rede de algodão cru armada na varanda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT000F57303Y0TR4S6JX",
+      "rating": 5,
+      "title": "Encomenda feita do meu jeito",
+      "body": "Pedi pela Caipora uma versão com as iniciais da família. O ateliê mandou o preço e o prazo antes de eu pagar, e entregou exatamente o combinado.",
+      "author": {
+        "display_name": "Lucas F.",
+        "city": "Brasília",
+        "state": "DF"
+      },
+      "created_at": "2026-06-05T13:00:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00AEQVVXR74GD8HBZ0",
+      "rating": 5,
+      "title": "Chegou ainda mais bonita do que nas fotos",
+      "body": "Comprei para dar de presente para minha mãe e acabei pedindo outra para mim. O acabamento é cuidadoso, dá para ver a mão de quem fez em cada detalhe. Veio embrulhada em papel de seda, com um bilhete escrito à mão contando de onde vinha a matéria.",
+      "author": {
+        "display_name": "Marina S.",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "created_at": "2026-10-12T17:20:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Tigelas esmaltadas sobre a mesa da cliente"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=900&q=72&auto=format&fit=crop",
+          "alt": "Jarra e copos claros servidos no almoço"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT007GKJXCG0GYJGY5JE",
+      "rating": 5,
+      "title": "Atendimento atencioso do começo ao fim",
+      "body": "Pedi uma medida um pouco diferente e me responderam no mesmo dia, explicando o que dava e o que não dava para mudar sem perder a resistência da peça. Chegou no prazo combinado.",
+      "author": {
+        "display_name": "Ricardo A.",
+        "city": "Belo Horizonte",
+        "state": "MG"
+      },
+      "created_at": "2026-10-03T12:45:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00P1PXV9X6A43TJY0M",
+      "rating": 4,
+      "title": "Peça linda, entrega demorou um pouco",
+      "body": "A peça é exatamente o que eu esperava, firme e com a cor bem viva. Só a entrega levou dois dias a mais do que o previsto para o Sul. Nada que tire o valor do trabalho, mas vale se programar se for para uma data.",
+      "author": {
+        "display_name": "Juliana P.",
+        "city": "Porto Alegre",
+        "state": "RS"
+      },
+      "created_at": "2026-09-27T21:10:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=900&q=72&auto=format&fit=crop",
+          "alt": "Cesto de fibra natural na sala da cliente"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00VEW3A9DJSKRG1391",
+      "rating": 5,
+      "title": "Dá para sentir a história da peça",
+      "body": "Gosto de saber quem fez o que eu levo para casa. Aqui a vitrine conta a história e a peça confirma: nada parece de fábrica. Já é a terceira compra e todas chegaram bem embaladas.",
+      "author": {
+        "display_name": "Helena M.",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "created_at": "2026-09-15T14:30:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT0052B1GX0QYGT9DB82",
+      "rating": 5,
+      "title": "Presente de casamento que fez sucesso",
+      "body": "Mandei direto para a casa dos noivos, com um cartão. Eles me ligaram para perguntar onde eu tinha encontrado. Recomendo para quem quer dar um presente com significado.",
+      "author": {
+        "display_name": "Paulo R.",
+        "city": "Recife",
+        "state": "PE"
+      },
+      "created_at": "2026-08-30T23:05:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores pendurado na parede dos noivos"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=900&q=72&auto=format&fit=crop",
+          "alt": "Gamelas de madeira escura empilhadas"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=900&q=72&auto=format&fit=crop",
+          "alt": "Moringa de barro sobre a cômoda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT0022QQJDNFSHS822CV",
+      "rating": 3,
+      "title": "Bonita, mas menor do que eu imaginava",
+      "body": "A qualidade é boa, mas eu não reparei nas medidas e achei a peça pequena para o espaço que eu tinha. Culpa minha: as medidas estavam na página. Fica a dica de conferir antes.",
+      "author": {
+        "display_name": "Camila T.",
+        "city": "Curitiba",
+        "state": "PR"
+      },
+      "created_at": "2026-08-18T19:40:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00SBV31J2GW9HZ311A",
+      "rating": 5,
+      "title": "Feita para durar",
+      "body": "Uso todo dia há quatro meses e continua como chegou. Dá para ver que a matéria foi escolhida com cuidado.",
+      "author": {
+        "display_name": "Antônio L.",
+        "city": "Salvador",
+        "state": "BA"
+      },
+      "created_at": "2026-07-29T11:15:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00RYAWJB6Z16AMYF4Z",
+      "rating": 4,
+      "title": "Muito boa, embalagem poderia ser mais firme",
+      "body": "A peça chegou inteira, mas a caixa estava amassada num canto. O ateliê respondeu rápido quando avisei e disse que vai reforçar a embalagem para envios longos. Gostei da atenção.",
+      "author": {
+        "display_name": "Fernanda C.",
+        "city": "Manaus",
+        "state": "AM"
+      },
+      "created_at": "2026-07-11T16:50:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00C9AHNKCAW7KB3ZTE",
+      "rating": 5,
+      "title": "Combinou com a casa inteira",
+      "body": "Ficou no centro da sala e todo mundo que chega pergunta. As cores são mais bonitas pessoalmente.",
+      "author": {
+        "display_name": "Beatriz N.",
+        "city": "Goiânia",
+        "state": "GO"
+      },
+      "created_at": "2026-06-22T22:25:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=900&q=72&auto=format&fit=crop",
+          "alt": "Rede de algodão cru armada na varanda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00GYXD8GKHJEG6ZY7W",
+      "rating": 5,
+      "title": "Encomenda feita do meu jeito",
+      "body": "Pedi pela Caipora uma versão com as iniciais da família. O ateliê mandou o preço e o prazo antes de eu pagar, e entregou exatamente o combinado.",
+      "author": {
+        "display_name": "Lucas F.",
+        "city": "Brasília",
+        "state": "DF"
+      },
+      "created_at": "2026-06-05T13:00:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00JPMEMGEER5HKF3G6",
+      "rating": 5,
+      "title": "Chegou ainda mais bonita do que nas fotos",
+      "body": "Comprei para dar de presente para minha mãe e acabei pedindo outra para mim. O acabamento é cuidadoso, dá para ver a mão de quem fez em cada detalhe. Veio embrulhada em papel de seda, com um bilhete escrito à mão contando de onde vinha a matéria.",
+      "author": {
+        "display_name": "Marina S.",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "created_at": "2026-10-12T17:20:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Tigelas esmaltadas sobre a mesa da cliente"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=900&q=72&auto=format&fit=crop",
+          "alt": "Jarra e copos claros servidos no almoço"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00D1GDPBBMH8S8KJE1",
+      "rating": 5,
+      "title": "Atendimento atencioso do começo ao fim",
+      "body": "Pedi uma medida um pouco diferente e me responderam no mesmo dia, explicando o que dava e o que não dava para mudar sem perder a resistência da peça. Chegou no prazo combinado.",
+      "author": {
+        "display_name": "Ricardo A.",
+        "city": "Belo Horizonte",
+        "state": "MG"
+      },
+      "created_at": "2026-10-03T12:45:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00YREMWENTQZHKJPK0",
+      "rating": 4,
+      "title": "Peça linda, entrega demorou um pouco",
+      "body": "A peça é exatamente o que eu esperava, firme e com a cor bem viva. Só a entrega levou dois dias a mais do que o previsto para o Sul. Nada que tire o valor do trabalho, mas vale se programar se for para uma data.",
+      "author": {
+        "display_name": "Juliana P.",
+        "city": "Porto Alegre",
+        "state": "RS"
+      },
+      "created_at": "2026-09-27T21:10:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=900&q=72&auto=format&fit=crop",
+          "alt": "Cesto de fibra natural na sala da cliente"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00204HKBG1FP8YNP8S",
+      "rating": 5,
+      "title": "Dá para sentir a história da peça",
+      "body": "Gosto de saber quem fez o que eu levo para casa. Aqui a vitrine conta a história e a peça confirma: nada parece de fábrica. Já é a terceira compra e todas chegaram bem embaladas.",
+      "author": {
+        "display_name": "Helena M.",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "created_at": "2026-09-15T14:30:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT001FTRAFBW9PH4WMQ9",
+      "rating": 5,
+      "title": "Presente de casamento que fez sucesso",
+      "body": "Mandei direto para a casa dos noivos, com um cartão. Eles me ligaram para perguntar onde eu tinha encontrado. Recomendo para quem quer dar um presente com significado.",
+      "author": {
+        "display_name": "Paulo R.",
+        "city": "Recife",
+        "state": "PE"
+      },
+      "created_at": "2026-08-30T23:05:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=900&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores pendurado na parede dos noivos"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=900&q=72&auto=format&fit=crop",
+          "alt": "Gamelas de madeira escura empilhadas"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=900&q=72&auto=format&fit=crop",
+          "alt": "Moringa de barro sobre a cômoda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00T5N998NAH2AYM329",
+      "rating": 3,
+      "title": "Bonita, mas menor do que eu imaginava",
+      "body": "A qualidade é boa, mas eu não reparei nas medidas e achei a peça pequena para o espaço que eu tinha. Culpa minha: as medidas estavam na página. Fica a dica de conferir antes.",
+      "author": {
+        "display_name": "Camila T.",
+        "city": "Curitiba",
+        "state": "PR"
+      },
+      "created_at": "2026-08-18T19:40:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00XMV4R3MAEF3YECYA",
+      "rating": 5,
+      "title": "Feita para durar",
+      "body": "Uso todo dia há quatro meses e continua como chegou. Dá para ver que a matéria foi escolhida com cuidado.",
+      "author": {
+        "display_name": "Antônio L.",
+        "city": "Salvador",
+        "state": "BA"
+      },
+      "created_at": "2026-07-29T11:15:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT00VVS7R6VSSGGQHX7G",
+      "rating": 4,
+      "title": "Muito boa, embalagem poderia ser mais firme",
+      "body": "A peça chegou inteira, mas a caixa estava amassada num canto. O ateliê respondeu rápido quando avisei e disse que vai reforçar a embalagem para envios longos. Gostei da atenção.",
+      "author": {
+        "display_name": "Fernanda C.",
+        "city": "Manaus",
+        "state": "AM"
+      },
+      "created_at": "2026-07-11T16:50:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT006TTV6FQSGSF8JDV4",
+      "rating": 5,
+      "title": "Combinou com a casa inteira",
+      "body": "Ficou no centro da sala e todo mundo que chega pergunta. As cores são mais bonitas pessoalmente.",
+      "author": {
+        "display_name": "Beatriz N.",
+        "city": "Goiânia",
+        "state": "GO"
+      },
+      "created_at": "2026-06-22T22:25:00Z",
+      "verified_purchase": true,
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=900&q=72&auto=format&fit=crop",
+          "alt": "Rede de algodão cru armada na varanda"
+        }
+      ],
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "status": "published"
+    },
+    {
+      "review_id": "rev_01M6A6FT002WE8A321ZRDVJ5NQ",
+      "rating": 5,
+      "title": "Encomenda feita do meu jeito",
+      "body": "Pedi pela Caipora uma versão com as iniciais da família. O ateliê mandou o preço e o prazo antes de eu pagar, e entregou exatamente o combinado.",
+      "author": {
+        "display_name": "Lucas F.",
+        "city": "Brasília",
+        "state": "DF"
+      },
+      "created_at": "2026-06-05T13:00:00Z",
+      "verified_purchase": true,
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "status": "published"
+    }
+  ]
+}
