@@ -1,0 +1,677 @@
+{
+  "description": "Compras da conta de exemplo e vendas do Ateliê Barro Vivo (dados fictícios; só fora de produção).",
+  "buyer_address": {
+    "kind": "brasil",
+    "recipient": "Marina Albuquerque de Souza",
+    "street": "Rua Professor Dias da Rocha",
+    "number": "1200",
+    "complement": "apto 302",
+    "neighborhood": "Meireles",
+    "city": "Fortaleza",
+    "state": "CE",
+    "postal_code": "60175047"
+  },
+  "purchases": [
+    {
+      "id": "ord_01M6A6FT00D853MM6NFR592B50",
+      "number": "48211",
+      "account_id": "acc_01M6A6FT00VD38Y9NETHTXE4GA",
+      "created_at": "2026-10-24T12:12:00Z",
+      "updated_at": "2026-10-24T18:40:00Z",
+      "status": "preparing",
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT008B53FZ7W55ZXVSGZ",
+          "quantity": 1,
+          "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E"
+        }
+      ]
+    },
+    {
+      "id": "ord_01M6A6FT00AKWNPWSNEC3237JT",
+      "number": "48195",
+      "account_id": "acc_01M6A6FT00VD38Y9NETHTXE4GA",
+      "created_at": "2026-10-19T23:05:00Z",
+      "updated_at": "2026-10-22T14:30:00Z",
+      "status": "shipped",
+      "tracking_code": "QB482913507BR",
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT00T7A3XNBF6AV1RE3Q",
+          "quantity": 1,
+          "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX"
+        },
+        {
+          "listing_id": "lst_01M6A6FT0049PJ1ZDEV5C7N6EA",
+          "quantity": 2,
+          "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S"
+        }
+      ]
+    },
+    {
+      "id": "ord_01M6A6FT00JQ534WAFNEXZ6AP3",
+      "number": "47902",
+      "account_id": "acc_01M6A6FT00VD38Y9NETHTXE4GA",
+      "created_at": "2026-09-21T17:48:00Z",
+      "updated_at": "2026-09-29T13:02:00Z",
+      "status": "delivered",
+      "tracking_code": "QB471100285BR",
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT0044DPKSJXSCYYFRB3",
+          "quantity": 1,
+          "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5"
+        }
+      ]
+    },
+    {
+      "id": "ord_01M6A6FT005HYFGQ4H7BT7N2HP",
+      "number": "47655",
+      "account_id": "acc_01M6A6FT00VD38Y9NETHTXE4GA",
+      "created_at": "2026-08-27T11:30:00Z",
+      "updated_at": "2026-09-04T19:15:00Z",
+      "status": "delivered",
+      "tracking_code": "QB465530914BR",
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT008SCJSHB3T7A51WN7",
+          "quantity": 1,
+          "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X"
+        },
+        {
+          "listing_id": "lst_01M6A6FT00EPQ40EG8NZWKDF49",
+          "quantity": 1,
+          "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X"
+        }
+      ]
+    },
+    {
+      "id": "ord_01M6A6FT00WAHMQZ4PH1PE7QTX",
+      "number": "47310",
+      "account_id": "acc_01M6A6FT00VD38Y9NETHTXE4GA",
+      "created_at": "2026-07-12T20:22:00Z",
+      "updated_at": "2026-07-13T12:00:00Z",
+      "status": "cancelled",
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT0035M0BJNT7VBG2VHT",
+          "quantity": 1,
+          "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD"
+        }
+      ]
+    },
+    {
+      "id": "ord_01M6A6FT00Q3WH027FM3CTN106",
+      "number": "46988",
+      "account_id": "acc_01M6A6FT00VD38Y9NETHTXE4GA",
+      "created_at": "2026-06-02T14:05:00Z",
+      "updated_at": "2026-06-10T16:47:00Z",
+      "status": "delivered",
+      "tracking_code": "QB458821733BR",
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT0044G3DCGX5HH2FNQE",
+          "quantity": 1,
+          "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E"
+        }
+      ]
+    }
+  ],
+  "sales": [
+    {
+      "id": "sal_01M6A6FT00919GTD9CH4CWTPKZ",
+      "number": "48231",
+      "status": "in_production",
+      "placed_at": "2026-11-12T13:00:00Z",
+      "updated_at": "2026-11-12T13:00:00Z",
+      "buyer": {
+        "first_name": "Marina",
+        "city": "Fortaleza",
+        "state": "CE"
+      },
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT00T7A3XNBF6AV1RE3Q",
+          "title": "Tigelas esmaltadas, jogo com 6",
+          "photo_url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=1000&q=72&auto=format&fit=crop",
+          "quantity": 1,
+          "unit_price": {
+            "amount": 32000,
+            "currency": "BRL"
+          },
+          "customization": {
+            "summary": "Jogo de 6 tigelas em azul-anil, com 16 cm de diâmetro",
+            "details": [
+              "Esmalte azul-anil em todas as peças",
+              "Diâmetro de 16 cm (o anúncio tem 14 cm)",
+              "Sem a assinatura no fundo"
+            ],
+            "agreed_with": "caipora",
+            "reference_photo_urls": [
+              "https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?w=600&h=600&q=72&auto=format&fit=crop"
+            ]
+          }
+        }
+      ],
+      "deadline": {
+        "ship_by": "2026-11-21T13:00:00.000Z",
+        "source": "caipora",
+        "production_days": 8
+      },
+      "shipping": {
+        "label_available": false,
+        "service": "Correios PAC",
+        "price": {
+          "amount": 3290,
+          "currency": "BRL"
+        },
+        "estimated_delivery": "2026-12-01T13:00:00.000Z"
+      },
+      "payment": {
+        "items_total": {
+          "amount": 36000,
+          "currency": "BRL"
+        },
+        "fee": {
+          "amount": 4320,
+          "currency": "BRL"
+        },
+        "net": {
+          "amount": 31680,
+          "currency": "BRL"
+        }
+      },
+      "invoice": {
+        "required": true
+      },
+      "ticket_protocol": "2026110500342",
+      "history": [
+        {
+          "status": "in_production",
+          "at": "2026-11-12T13:00:00.000Z"
+        }
+      ],
+      "order_id": "ord_01M6A6FT00919GTD9CH4CWTPKZ",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX"
+    },
+    {
+      "id": "sal_01M6A6FT004S55W5NCP3YJE8M7",
+      "number": "48207",
+      "status": "in_production",
+      "placed_at": "2026-11-06T13:00:00Z",
+      "updated_at": "2026-11-06T13:00:00Z",
+      "buyer": {
+        "first_name": "Paulo",
+        "city": "Belo Horizonte",
+        "state": "MG"
+      },
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT00ZC2V6RH4PTYPA9GE",
+          "title": "Vasos de barro natural",
+          "photo_url": "https://images.unsplash.com/photo-1520408222757-6f9f95d87d5d?w=1000&q=72&auto=format&fit=crop",
+          "quantity": 2,
+          "unit_price": {
+            "amount": 16000,
+            "currency": "BRL"
+          }
+        }
+      ],
+      "deadline": {
+        "ship_by": "2026-11-14T13:00:00.000Z",
+        "source": "listing",
+        "production_days": 5
+      },
+      "shipping": {
+        "label_available": false,
+        "service": "Correios SEDEX",
+        "price": {
+          "amount": 4810,
+          "currency": "BRL"
+        },
+        "estimated_delivery": "2026-11-18T13:00:00.000Z"
+      },
+      "payment": {
+        "items_total": {
+          "amount": 32000,
+          "currency": "BRL"
+        },
+        "fee": {
+          "amount": 3840,
+          "currency": "BRL"
+        },
+        "net": {
+          "amount": 28160,
+          "currency": "BRL"
+        }
+      },
+      "invoice": {
+        "required": true
+      },
+      "history": [
+        {
+          "status": "in_production",
+          "at": "2026-11-06T13:00:00.000Z"
+        }
+      ],
+      "order_id": "ord_01M6A6FT004S55W5NCP3YJE8M7",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX"
+    },
+    {
+      "id": "sal_01M6A6FT000C56X9P9KZF3WF6E",
+      "number": "48198",
+      "status": "awaiting_shipment",
+      "placed_at": "2026-11-09T13:00:00Z",
+      "updated_at": "2026-11-14T13:00:00Z",
+      "buyer": {
+        "first_name": "Carla",
+        "city": "Recife",
+        "state": "PE"
+      },
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT0090WH2MS7M0A67WED",
+          "title": "Jarra de cerâmica com dois copos",
+          "photo_url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=1000&q=72&auto=format&fit=crop",
+          "quantity": 1,
+          "unit_price": {
+            "amount": 24000,
+            "currency": "BRL"
+          }
+        }
+      ],
+      "deadline": {
+        "ship_by": "2026-11-16T13:00:00.000Z",
+        "source": "listing",
+        "production_days": 4
+      },
+      "shipping": {
+        "service": "Correios PAC",
+        "price": {
+          "amount": 3650,
+          "currency": "BRL"
+        },
+        "address": {
+          "recipient": "Carla Menezes",
+          "lines": [
+            "Rua da Aurora, 410, apto 82",
+            "Boa Vista · Recife, PE"
+          ],
+          "postal_code": "50050000"
+        },
+        "label_available": true,
+        "estimated_delivery": "2026-11-25T13:00:00.000Z"
+      },
+      "payment": {
+        "items_total": {
+          "amount": 24000,
+          "currency": "BRL"
+        },
+        "fee": {
+          "amount": 2880,
+          "currency": "BRL"
+        },
+        "net": {
+          "amount": 21120,
+          "currency": "BRL"
+        }
+      },
+      "invoice": {
+        "required": true
+      },
+      "history": [
+        {
+          "status": "in_production",
+          "at": "2026-11-09T13:00:00.000Z"
+        },
+        {
+          "status": "awaiting_shipment",
+          "at": "2026-11-14T13:00:00.000Z"
+        }
+      ],
+      "order_id": "ord_01M6A6FT000C56X9P9KZF3WF6E",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX"
+    },
+    {
+      "id": "sal_01M6A6FT008ZNWFH2E7DVFF3YN",
+      "number": "48150",
+      "status": "shipped",
+      "placed_at": "2026-11-03T13:00:00Z",
+      "updated_at": "2026-11-11T13:00:00Z",
+      "buyer": {
+        "first_name": "Rafael",
+        "city": "Porto Alegre",
+        "state": "RS"
+      },
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT00T7A3XNBF6AV1RE3Q",
+          "title": "Tigelas esmaltadas, jogo com 6",
+          "photo_url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=1000&q=72&auto=format&fit=crop",
+          "quantity": 1,
+          "unit_price": {
+            "amount": 32000,
+            "currency": "BRL"
+          }
+        }
+      ],
+      "deadline": {
+        "ship_by": "2026-11-10T13:00:00.000Z",
+        "source": "listing",
+        "production_days": 5
+      },
+      "shipping": {
+        "label_available": false,
+        "service": "Correios PAC",
+        "price": {
+          "amount": 3990,
+          "currency": "BRL"
+        },
+        "address": {
+          "recipient": "Rafael Couto",
+          "lines": [
+            "Avenida Independência, 1020",
+            "Independência · Porto Alegre, RS"
+          ],
+          "postal_code": "90035076"
+        },
+        "tracking_code": "QB483920571BR",
+        "shipped_at": "2026-11-11T13:00:00.000Z",
+        "estimated_delivery": "2026-11-18T13:00:00.000Z"
+      },
+      "payment": {
+        "items_total": {
+          "amount": 32000,
+          "currency": "BRL"
+        },
+        "fee": {
+          "amount": 3840,
+          "currency": "BRL"
+        },
+        "net": {
+          "amount": 28160,
+          "currency": "BRL"
+        }
+      },
+      "invoice": {
+        "required": true,
+        "number": "000.231"
+      },
+      "history": [
+        {
+          "status": "in_production",
+          "at": "2026-11-03T13:00:00.000Z"
+        },
+        {
+          "status": "awaiting_shipment",
+          "at": "2026-11-09T13:00:00.000Z"
+        },
+        {
+          "status": "shipped",
+          "at": "2026-11-11T13:00:00.000Z"
+        }
+      ],
+      "order_id": "ord_01M6A6FT008ZNWFH2E7DVFF3YN",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX"
+    },
+    {
+      "id": "sal_01M6A6FT00CRKG29Q64QA1NVJ6",
+      "number": "48102",
+      "status": "delivered",
+      "placed_at": "2026-10-26T13:00:00Z",
+      "updated_at": "2026-11-13T13:00:00Z",
+      "buyer": {
+        "first_name": "Teresa",
+        "city": "Salvador",
+        "state": "BA"
+      },
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT00ZC2V6RH4PTYPA9GE",
+          "title": "Vasos de barro natural",
+          "photo_url": "https://images.unsplash.com/photo-1520408222757-6f9f95d87d5d?w=1000&q=72&auto=format&fit=crop",
+          "quantity": 1,
+          "unit_price": {
+            "amount": 16000,
+            "currency": "BRL"
+          }
+        }
+      ],
+      "deadline": {
+        "ship_by": "2026-11-01T13:00:00.000Z",
+        "source": "listing",
+        "production_days": 4
+      },
+      "shipping": {
+        "label_available": false,
+        "service": "Correios PAC",
+        "price": {
+          "amount": 3420,
+          "currency": "BRL"
+        },
+        "tracking_code": "QB471100358BR",
+        "shipped_at": "2026-11-02T13:00:00.000Z",
+        "delivered_at": "2026-11-13T13:00:00.000Z"
+      },
+      "payment": {
+        "items_total": {
+          "amount": 16000,
+          "currency": "BRL"
+        },
+        "fee": {
+          "amount": 1920,
+          "currency": "BRL"
+        },
+        "net": {
+          "amount": 14080,
+          "currency": "BRL"
+        },
+        "payout_date": "2026-11-27T13:00:00.000Z"
+      },
+      "invoice": {
+        "required": true,
+        "number": "000.224"
+      },
+      "history": [
+        {
+          "status": "in_production",
+          "at": "2026-10-26T13:00:00.000Z"
+        },
+        {
+          "status": "awaiting_shipment",
+          "at": "2026-10-31T13:00:00.000Z"
+        },
+        {
+          "status": "shipped",
+          "at": "2026-11-02T13:00:00.000Z"
+        },
+        {
+          "status": "delivered",
+          "at": "2026-11-13T13:00:00.000Z"
+        }
+      ],
+      "order_id": "ord_01M6A6FT00CRKG29Q64QA1NVJ6",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX"
+    },
+    {
+      "id": "sal_01M6A6FT00JHX8MXXYBQ2X7S6Y",
+      "number": "47990",
+      "status": "invoiced",
+      "placed_at": "2026-10-01T13:00:00Z",
+      "updated_at": "2026-11-05T13:00:00Z",
+      "buyer": {
+        "first_name": "Luiza",
+        "city": "Curitiba",
+        "state": "PR"
+      },
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT0090WH2MS7M0A67WED",
+          "title": "Jarra de cerâmica com dois copos",
+          "photo_url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=1000&q=72&auto=format&fit=crop",
+          "quantity": 1,
+          "unit_price": {
+            "amount": 24000,
+            "currency": "BRL"
+          }
+        },
+        {
+          "listing_id": "lst_01M6A6FT00ZC2V6RH4PTYPA9GE",
+          "title": "Vasos de barro natural",
+          "photo_url": "https://images.unsplash.com/photo-1520408222757-6f9f95d87d5d?w=1000&q=72&auto=format&fit=crop",
+          "quantity": 1,
+          "unit_price": {
+            "amount": 16000,
+            "currency": "BRL"
+          }
+        }
+      ],
+      "deadline": {
+        "ship_by": "2026-10-08T13:00:00.000Z",
+        "source": "listing",
+        "production_days": 5
+      },
+      "shipping": {
+        "label_available": false,
+        "service": "Correios SEDEX",
+        "price": {
+          "amount": 5290,
+          "currency": "BRL"
+        },
+        "tracking_code": "QB455002914BR",
+        "shipped_at": "2026-10-09T13:00:00.000Z",
+        "delivered_at": "2026-10-13T13:00:00.000Z"
+      },
+      "payment": {
+        "items_total": {
+          "amount": 40000,
+          "currency": "BRL"
+        },
+        "fee": {
+          "amount": 4800,
+          "currency": "BRL"
+        },
+        "net": {
+          "amount": 35200,
+          "currency": "BRL"
+        },
+        "payout_date": "2026-11-05T13:00:00.000Z"
+      },
+      "invoice": {
+        "required": true,
+        "number": "000.198"
+      },
+      "history": [
+        {
+          "status": "in_production",
+          "at": "2026-10-01T13:00:00.000Z"
+        },
+        {
+          "status": "awaiting_shipment",
+          "at": "2026-10-07T13:00:00.000Z"
+        },
+        {
+          "status": "shipped",
+          "at": "2026-10-09T13:00:00.000Z"
+        },
+        {
+          "status": "delivered",
+          "at": "2026-10-13T13:00:00.000Z"
+        },
+        {
+          "status": "invoiced",
+          "at": "2026-11-05T13:00:00.000Z"
+        }
+      ],
+      "order_id": "ord_01M6A6FT00JHX8MXXYBQ2X7S6Y",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX"
+    },
+    {
+      "id": "sal_01M6A6FT00DCX1RW7WRJ920P7Q",
+      "number": "48011",
+      "status": "return_opened",
+      "placed_at": "2026-10-21T13:00:00Z",
+      "updated_at": "2026-11-14T13:00:00Z",
+      "buyer": {
+        "first_name": "Bruno",
+        "city": "Campinas",
+        "state": "SP"
+      },
+      "items": [
+        {
+          "listing_id": "lst_01M6A6FT00T7A3XNBF6AV1RE3Q",
+          "title": "Tigelas esmaltadas, jogo com 6",
+          "photo_url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=1000&q=72&auto=format&fit=crop",
+          "quantity": 1,
+          "unit_price": {
+            "amount": 32000,
+            "currency": "BRL"
+          }
+        }
+      ],
+      "deadline": {
+        "ship_by": "2026-10-27T13:00:00.000Z",
+        "source": "listing",
+        "production_days": 5
+      },
+      "shipping": {
+        "label_available": false,
+        "service": "Correios PAC",
+        "price": {
+          "amount": 2190,
+          "currency": "BRL"
+        },
+        "tracking_code": "QB460218863BR",
+        "shipped_at": "2026-10-28T13:00:00.000Z",
+        "delivered_at": "2026-11-03T13:00:00.000Z"
+      },
+      "payment": {
+        "items_total": {
+          "amount": 32000,
+          "currency": "BRL"
+        },
+        "fee": {
+          "amount": 3840,
+          "currency": "BRL"
+        },
+        "net": {
+          "amount": 28160,
+          "currency": "BRL"
+        }
+      },
+      "invoice": {
+        "required": true,
+        "number": "000.207"
+      },
+      "return": {
+        "reason": "Duas tigelas chegaram trincadas. O cliente mandou fotos pela Caipora.",
+        "opened_at": "2026-11-14T13:00:00.000Z"
+      },
+      "ticket_protocol": "2026110300118",
+      "history": [
+        {
+          "status": "in_production",
+          "at": "2026-10-21T13:00:00.000Z"
+        },
+        {
+          "status": "awaiting_shipment",
+          "at": "2026-10-26T13:00:00.000Z"
+        },
+        {
+          "status": "shipped",
+          "at": "2026-10-28T13:00:00.000Z"
+        },
+        {
+          "status": "delivered",
+          "at": "2026-11-03T13:00:00.000Z"
+        },
+        {
+          "status": "return_opened",
+          "at": "2026-11-14T13:00:00.000Z"
+        }
+      ],
+      "order_id": "ord_01M6A6FT00DCX1RW7WRJ920P7Q",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX"
+    }
+  ]
+}
