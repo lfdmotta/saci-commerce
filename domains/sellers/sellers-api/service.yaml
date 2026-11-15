@@ -1,0 +1,64 @@
+# Metadados do serviço (seção 9.7). Validado por ci/schemas/service.schema.json
+# do saci-boiuna e pelas políticas de classe de dado.
+name: sellers-api
+domain: sellers
+owner: saci-art/commerce
+language: rust
+runtime: aws-lambda
+account: prod
+# Funções (SACI_FUNCTION) do binário saci-sellers que pertencem a este serviço (ADR 0003).
+routes:
+  - route: GET /v1/sellers/storefronts/{url_name}
+    access: PUB
+  - route: GET /v1/sellers/storefront-fonts
+    access: PUB
+  - route: GET /v1/sellers/storefronts/availability
+    access: USER
+  - route: POST /v1/sellers/onboarding/identity
+    access: USER
+  - route: POST /v1/sellers/onboarding/business
+    access: USER
+  - route: POST /v1/sellers/storefronts
+    access: USER+
+  - route: GET /v1/sellers/me/workspace
+    access: USER
+  - route: GET /v1/sellers/me/storefront
+    access: SELLER:vitrine
+  - route: PUT /v1/sellers/me/storefront
+    access: SELLER:vitrine
+  - route: GET /v1/sellers/me/team
+    access: OWNER
+  - route: POST /v1/sellers/me/team
+    access: OWNER+
+  - route: PATCH /v1/sellers/me/team/{member_id}
+    access: OWNER+
+  - route: DELETE /v1/sellers/me/team/{member_id}
+    access: OWNER+
+  - route: GET /v1/sellers/me/team-invitations
+    access: USER
+  - route: POST /v1/sellers/me/team-invitations/{invitation_id}/accept
+    access: USER+
+  - route: POST /v1/sellers/me/team-invitations/{invitation_id}/decline
+    access: USER+
+data:
+  stores:
+    - name: saci-<env>-sellers
+      kind: dynamodb
+      class: C2
+      kms_key_class: C2
+logging:
+  request_body: false
+events:
+  publishes:
+    - sellers.storefront.opened.v1
+    - sellers.storefront.updated.v1
+    - sellers.team.member_changed.v1
+  consumes:
+    - catalog.listing.published.v1
+    - checkout.order.confirmed.v1
+    - orders.sale.ready.v1
+    - support.ticket.opened.v1
+    - identity.account.verified.v1
+slo:
+  availability: 99.9
+  latency_p99_ms: 300

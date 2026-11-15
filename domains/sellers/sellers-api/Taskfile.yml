@@ -1,0 +1,35 @@
+# Comandos do serviço (seção 9.7: "test | build | migrate | deploy").
+version: "3"
+
+vars:
+  CRATE: saci-sellers-api
+  BIN: saci-sellers
+  ENV: '{{.ENV | default "dev"}}'
+
+tasks:
+  test:
+    desc: Testes do serviço (sem nuvem).
+    cmds:
+      - cargo test -p {{.CRATE}}
+
+  build:
+    desc: ZIP do domínio para arm64 (target/lambda/{{.BIN}}/bootstrap.zip).
+    cmds:
+      - cargo lambda build --release --arm64 --output-format zip --bin {{.BIN}}
+
+  migrate:
+    desc: As migrações rodam pela função `migrate` do domínio depois de cada implantação (aws_lambda_invocation).
+    cmds:
+      - echo "Veja domains/sellers/infra/aws (função migrate) e src/seed.rs do serviço."
+
+  plan:
+    desc: Plano do Terraform do domínio (ENV=dev|staging|prod).
+    dir: ../infra/aws
+    cmds:
+      - terraform init -input=false -backend-config=envs/{{.ENV}}.s3.tfbackend
+      - terraform plan -var-file=envs/{{.ENV}}.tfvars
+
+  deploy:
+    desc: Implantação só pelo CI (reusable-deploy-service.yml da plataforma), sem chave fixa.
+    cmds:
+      - echo "Use o workflow deploy.yml do repositório."
