@@ -1,0 +1,126 @@
+LICENÇA PROPRIETÁRIA DA SACI LTDA
+
+Copyright (c) 2025 Saci Ltda.
+Todos os direitos reservados.
+
+A Saci Ltda ("Saci") detém todos os direitos de propriedade intelectual, industrial,
+patrimonial e de uso sobre este software, incluindo, sem limitação, código-fonte,
+código objeto, documentação, especificações, modelos, processos, metodologias,
+algoritmos, designs, interfaces, bases de dados, arquivos, materiais técnicos,
+metadados e demais conteúdos correlatos ("Software").
+
+Este arquivo representa a licença de uso do Software e deve ser entendido como uma
+convenção de uso restrito, confidencial e não transferível.
+
+1. CONCESSÃO DE LICENÇA
+   A Saci concede ao destinatário uma licença limitada, pessoal, não exclusiva,
+   não transferível e revogável para usar o Software apenas para a finalidade
+   expressamente autorizada por escrito pela Saci. Nenhuma outra permissão é
+   conferida.
+
+2. RESTRIÇÕES
+   É expressamente proibido ao destinatário:
+   a) copiar, reproduzir, distribuir, publicar, vender, alugar, sublicenciar,
+      transmitir, transferir, ceder, disponibilizar ou divulgar o Software a
+      terceiros, total ou parcialmente;
+   b) modificar, adaptar, traduzir, incorporar, criar obras derivadas,
+      concatenar, integrar, combinar ou alterar o Software;
+   c) remover, alterar ou ocultar avisos de propriedade intelectual, direitos
+      autorais, marcas, legendas, identificações, etiquetas ou qualquer outra
+      informação de titularidade da Saci;
+   d) realizar engenharia reversa, descompilação, desmontagem, extração de
+      código-fonte, análise de estrutura, mapeamento de interfaces ou qualquer
+      outra técnica para obter conhecimento do funcionamento interno do Software;
+   e) usar o Software para fins ilícitos, não autorizados, ilegais, fraudulentos,
+      de concorrência desleal, de violação de direitos de terceiros ou de qualquer
+      outra forma que contrarie a legislação aplicável;
+   f) acessar, armazenar, reproduzir, publicar, transferir ou compartilhar o
+      código-fonte, arquivos de execução, modelos, documentos técnicos ou demais
+      materiais do Software sem autorização prévia e por escrito da Saci.
+
+3. PROPRIEDADE INTELECTUAL
+   O Software e todos os seus componentes, incluindo, mas não se limitando a
+   código-fonte, algoritmos, estruturas, interfaces, documentação, bases de dados,
+   desenhos, fluxos, processo, know-how e materiais correlatos, continuam sendo
+   propriedade integral, exclusiva e inalienável da Saci, bem como de seus
+   licenciadores, quando houver.
+
+   Nenhuma licença, autorização, direito, título ou interesse sobre qualquer
+   elemento de propriedade intelectual é transferido ao destinatário, exceto a
+   permissão limitada e específica expressamente prevista nesta licença.
+
+4. CONFIDENCIALIDADE
+   O Software deve ser tratado como informação confidencial e estritamente
+   reservada. O destinatário compromete-se a manter sigilo absoluto sobre todos
+   os aspectos do Software, incluindo suas características, funcionalidades,
+   estruturas, dados e documentação, e a não revelar, divulgar, publicar,
+   transferir ou disponibilizar tais informações a terceiros sem autorização
+   prévia e por escrito da Saci.
+
+   A obrigação de confidencialidade subsiste mesmo após o término desta licença,
+   por prazo indeterminado, salvo quando a informação for de domínio público por
+   ato da Saci ou por obrigação legal.
+
+5. USO AUTORIZADO E LIMITAÇÕES
+   O destinatário poderá utilizar o Software apenas para a finalidade expressamente
+   autorizada pela Saci e em conformidade com as condições estabelecidas nesta
+   licença. Qualquer uso diverso, em especial uso comercial, operacional,
+   integração, reprodução, distribuição, modificação, compartilhamento ou
+   suporte sem autorização prévia, constitui ato ilícito e enseja as medidas
+   legais cabíveis.
+
+6. TERMOS E VIGÊNCIA
+   Esta licença entra em vigor na data da sua aceitação expressa pelo destinatário
+   e permanece válida enquanto o destinatário estiver autorizado pela Saci a usar
+   o Software. A Saci poderá revogar ou suspender a licença a qualquer tempo,
+   por qualquer motivo, mediante comunicação escrita, sem prejuízo das demais
+   medidas legais e civis cabíveis.
+
+   Na hipótese de término ou revogação, o destinatário deverá, imediatamente,
+   cessar todo e qualquer uso do Software, devolver ou destruir, à escolha da
+   Saci, todos os materiais e cópias em sua posse ou sob seu controle, e
+   confirmar por escrito tal destruição ou entrega.
+
+7. ISENÇÃO DE GARANTIAS
+   O SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA" E "CONFORME DISPONÍVEL",
+   SEM GARANTIAS DE QUALQUER NATUREZA, EXPRESSAS OU IMPLÍCITAS, INCLUSIVE,
+   SEM LIMITAÇÃO, GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UM DETERMINADO FIM,
+   NÃO VIOLAÇÃO, SEGURANÇA, FUNCIONAMENTO ININTERRUPTO, QUALIDADE, EXATIDÃO,
+   PERFORMANCE OU DISPOSIÇÃO PARA DETERMINADO USO.
+
+   A Saci não garante que o Software será livre de erros, defeitos, falhas,
+   interrupções, ameaças, vulnerabilidades ou que atenderá às necessidades
+   específicas do destinatário.
+
+8. LIMITAÇÃO DE RESPONSABILIDADE
+   Em nenhuma hipótese a Saci, seus sócios, dirigentes, colaboradores, afiliadas
+   ou representantes serão responsáveis por danos diretos, indiretos, incidentais,
+   especiais, consequenciais, punitivos ou exemplares, incluindo perda de dados,
+   prejuízo financeiro, interrupção de negócios, perda de reputação ou qualquer
+   outro dano decorrente do uso, impossibilidade de uso, falha, erro, defeito,
+   indisponibilidade ou indiscrição do Software, mesmo que informada da
+   possibilidade de tais danos.
+
+9. LEGISLAÇÃO APLICÁVEL
+   Esta licença será regida e interpretada conforme as leis da República
+   Federativa do Brasil, sem considerar conflitos de normas. Qualquer controvérsia
+   decorrente do presente instrumento será submetida ao foro da comarca de
+   [cidade/estado], Brasil, com exclusão de qualquer outro, salvo disposição
+   legal imperativa em contrário.
+
+10. DISPOSIÇÕES FINAIS
+    Qualquer cláusula desta licença que seja considerada inválida, nula, inexequível
+    ou não aplicável será, na medida do possível, interpretada de forma a refletir
+    a intenção original das partes, e as demais cláusulas permanecerão em pleno vigor.
+
+    Esta licença constitui o acordo integral entre as partes sobre o uso do Software
+    e substitui qualquer acordo, entendimento, representação ou comunicação oral ou
+    escrita anterior, relativa ao tema.
+
+    O destinatário reconhece que leu, compreendeu e aceita expressamente todas as
+    condições desta licença e que o uso do Software sem a autorização por escrito
+    da Saci constitui violação de direitos de propriedade intelectual e de
+    confidencialidade.
+
+    Saci Ltda
+    Todos os direitos reservados.
