@@ -1,0 +1,39 @@
+# Metadados do serviço (seção 9.7). Validado por ci/schemas/service.schema.json
+# do saci-boiuna e pelas políticas de classe de dado.
+name: customers-api
+domain: customers
+owner: saci-art/commerce
+language: rust
+runtime: aws-lambda
+account: prod
+# Funções (SACI_FUNCTION) do binário saci-customers que pertencem a este serviço (ADR 0003).
+routes:
+  - route: GET /v1/customers/me
+    access: USER
+  - route: PATCH /v1/customers/me
+    access: USER
+  - route: PUT /v1/customers/me/address
+    access: USER
+  - route: GET /v1/customers/me/favorites
+    access: USER
+  - route: PUT /v1/customers/me/favorites/{listing_id}
+    access: USER
+  - route: DELETE /v1/customers/me/favorites/{listing_id}
+    access: USER
+  - route: POST /v1/customers/newsletter-subscriptions
+    access: PUB-L
+data:
+  stores:
+    - name: saci-<env>-customers
+      kind: dynamodb
+      class: C2
+      kms_key_class: C2
+logging:
+  request_body: false
+events:
+  publishes: []
+  consumes:
+    - identity.account.verified.v1
+slo:
+  availability: 99.9
+  latency_p99_ms: 300
