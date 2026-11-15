@@ -1,0 +1,12 @@
+# Donos por pasta (seção 9.5). Revisão extra da plataforma em infra/ e
+# da segurança nos domínios que tocam dinheiro, dados pessoais e envio de arquivos.
+*                                   @saci-art/commerce
+/infra/                             @saci-art/commerce @saci-art/platform
+/domains/*/infra/                   @saci-art/commerce @saci-art/platform
+/domains/*/*/migrations/            @saci-art/commerce
+/domains/checkout/                  @saci-art/commerce @saci-art/security
+/domains/media/                     @saci-art/commerce @saci-art/security
+/crates/kit/src/auth.rs             @saci-art/commerce @saci-art/security
+/crates/kit/src/idempotency.rs      @saci-art/commerce @saci-art/security
+/crates/sandbox/                    @saci-art/commerce @saci-art/security
+/.github/workflows/                 @saci-art/commerce @saci-art/platform

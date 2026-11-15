@@ -1,0 +1,5 @@
+# Toolchain fixa para builds reprodutíveis (local, CI e toolbox do local-env).
+[toolchain]
+channel = "1.99.1"
+components = ["rustfmt", "clippy"]
+profile = "minimal"

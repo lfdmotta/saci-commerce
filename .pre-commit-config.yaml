@@ -1,0 +1,42 @@
+# Ganchos de pre-commit (seção 9.5: "varredura de segredos e de CPF/CNPJ com
+# dígito válido"). Instale com `task setup`.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-json
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: [--maxkb=512]
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.109.5
+    hooks:
+      - id: terraform_fmt
+
+  - repo: local
+    hooks:
+      - id: saci-pii-scan
+        name: CPF/CNPJ com dígito válido
+        # cargo install --git https://github.com/saci-art/saci-boiuna --tag v0.1.0 saci-pii-scan
+        entry: saci-pii-scan
+        language: system
+        types: [text]
+        exclude: ^(Cargo\.lock|target/)
+
+      - id: cargo-fmt
+        name: rustfmt
+        entry: cargo fmt --all -- --check
+        language: system
+        types: [rust]
+        pass_filenames: false

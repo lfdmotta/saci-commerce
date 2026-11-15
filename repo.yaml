@@ -1,0 +1,21 @@
+# Metadados do repositório (seção 9.5 da proposta). Validado no CI contra
+# ci/schemas/repo.schema.json e pelas políticas de classe de dado do saci-boiuna.
+name: saci-commerce
+kind: dominio
+owner: saci-art/commerce
+description: >-
+  Os domínios da compra e da vitrine aberta: catálogo e busca, vitrines,
+  clientes, avaliações, mídia, frete, checkout, pedidos, atendimento,
+  notificações e a publicação dos layouts.
+# Seção 9.4: C2, com só referências ao C3 (o cofre de dados pessoais fica no saci-identity, D9).
+max_data_class: C2
+accounts:
+  - prod
+  - staging
+  - dev
+clouds:
+  - aws
+languages:
+  - rust
+  - terraform
+proposal: https://github.com/saci-art/saci-sume/blob/main/back-end-proposta.md
