@@ -1,0 +1,26 @@
+[package]
+name = "saci-checkout-saga"
+version = "0.1.0"
+description = "checkout-saga: a compra como saga com compensação (estoque, pedido, cobrança), idempotência e guest token (proposta 3.3 e 5.7)."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+aws = ["saci-commerce-kit/aws"]
+
+[dependencies]
+saci-commerce-kit.workspace = true
+saci-ids.workspace = true
+serde.workspace = true
+saci-mask.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true
+
+[lints]
+workspace = true
