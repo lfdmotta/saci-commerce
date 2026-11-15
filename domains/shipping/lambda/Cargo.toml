@@ -1,0 +1,27 @@
+[package]
+name = "saci-shipping-lambda"
+version = "0.1.0"
+description = "Binário implantável do domínio shipping: um ZIP para todas as funções do domínio, cada uma escolhida por SACI_FUNCTION (ADR 0003)."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[[bin]]
+# cargo lambda build gera target/lambda/saci-shipping/bootstrap.zip.
+name = "saci-shipping"
+path = "src/main.rs"
+
+[dependencies]
+aws-config.workspace = true
+lambda_runtime.workspace = true
+saci-commerce-kit = { workspace = true, features = ["aws"] }
+saci-commerce-sandbox = { workspace = true, features = ["aws"] }
+serde_json.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+saci-shipping-api = { workspace = true, features = ["aws"] }
+saci-carrier-webhooks = { workspace = true, features = ["aws"] }
+
+[lints]
+workspace = true

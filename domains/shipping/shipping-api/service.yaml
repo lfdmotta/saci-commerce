@@ -1,0 +1,36 @@
+# Metadados do serviço (seção 9.7). Validado por ci/schemas/service.schema.json
+# do saci-boiuna e pelas políticas de classe de dado.
+name: shipping-api
+domain: shipping
+owner: saci-art/commerce
+language: rust
+runtime: aws-lambda
+account: prod
+# Funções (SACI_FUNCTION) do binário saci-shipping que pertencem a este serviço (ADR 0003).
+routes:
+  - route: GET /v1/shipping/postal-codes/{postal_code}
+    access: PUB
+  - route: POST /v1/shipping/quotes
+    access: PUB-L
+  - route: GET /v1/shipping/me/sales/{sale_id}/label
+    access: SELLER:pedidos
+# A etiqueta (PDF com endereço, C3) vai para o balde de files. da plataforma
+# (edge, SSE-KMS de classe C3), aberto só por URL assinada: não é armazenamento
+# deste repositório (seção 9.3: o shipping abre a referência ao gerar a etiqueta).
+data:
+  stores:
+    - name: saci-<env>-shipping
+      kind: dynamodb
+      class: C1
+      kms_key_class: C2
+logging:
+  request_body: false
+events:
+  publishes:
+    - shipping.label.purchased.v1
+  consumes:
+    - orders.sale.ready.v1
+    - orders.sale.shipped.v1
+slo:
+  availability: 99.9
+  latency_p99_ms: 300
