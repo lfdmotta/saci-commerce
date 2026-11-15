@@ -1,0 +1,3167 @@
+{
+  "description": "Vitrines e peças de lançamento (dados fictícios, sem dado real; só fora de produção).",
+  "categories": [
+    {
+      "id": "cat_ceramica",
+      "slug": "ceramica",
+      "name": "Cerâmica",
+      "icon": "amphora",
+      "order": 1
+    },
+    {
+      "id": "cat_madeira",
+      "slug": "madeira",
+      "name": "Madeira",
+      "icon": "tree",
+      "order": 2
+    },
+    {
+      "id": "cat_cestaria",
+      "slug": "cestaria",
+      "name": "Cestaria",
+      "icon": "basket",
+      "order": 3
+    },
+    {
+      "id": "cat_tecelagem",
+      "slug": "tecelagem",
+      "name": "Tecelagem",
+      "icon": "spool",
+      "order": 4
+    },
+    {
+      "id": "cat_trancados",
+      "slug": "trancados",
+      "name": "Palha",
+      "icon": "wheat",
+      "order": 5
+    },
+    {
+      "id": "cat_bordado",
+      "slug": "bordado",
+      "name": "Bordado",
+      "icon": "flower",
+      "order": 6
+    },
+    {
+      "id": "cat_figuras",
+      "slug": "figuras",
+      "name": "Figuras",
+      "icon": "figure",
+      "order": 7
+    },
+    {
+      "id": "cat_biojoias",
+      "slug": "biojoias",
+      "name": "Biojoias",
+      "icon": "gem",
+      "order": 8
+    }
+  ],
+  "attribute_specs": [
+    {
+      "key": "material",
+      "label": "Material",
+      "kind": "text-option",
+      "options": [
+        "Barro",
+        "Grés",
+        "Porcelana",
+        "Madeira",
+        "Palha",
+        "Capim dourado",
+        "Fibra de buriti",
+        "Arumã",
+        "Algodão",
+        "Linho",
+        "Couro",
+        "Sementes",
+        "Miçanga",
+        "Metal",
+        "Vidro",
+        "Plástico reciclado"
+      ],
+      "help": "A matéria principal da peça."
+    },
+    {
+      "key": "altura",
+      "label": "Altura",
+      "kind": "number",
+      "units": [
+        "cm",
+        "m"
+      ]
+    },
+    {
+      "key": "largura",
+      "label": "Largura",
+      "kind": "number",
+      "units": [
+        "cm",
+        "m"
+      ]
+    },
+    {
+      "key": "comprimento",
+      "label": "Comprimento",
+      "kind": "number",
+      "units": [
+        "cm",
+        "m"
+      ]
+    },
+    {
+      "key": "diametro",
+      "label": "Diâmetro",
+      "kind": "number",
+      "units": [
+        "cm",
+        "m"
+      ]
+    },
+    {
+      "key": "peso",
+      "label": "Peso",
+      "kind": "number",
+      "units": [
+        "kg"
+      ],
+      "help": "Ajuda a calcular o frete."
+    },
+    {
+      "key": "capacidade",
+      "label": "Capacidade",
+      "kind": "number",
+      "units": [
+        "ml",
+        "l"
+      ]
+    },
+    {
+      "key": "acabamento",
+      "label": "Acabamento",
+      "kind": "text",
+      "help": "Esmalte, verniz, óleo vegetal, cru…"
+    },
+    {
+      "key": "cor",
+      "label": "Cor",
+      "kind": "text"
+    },
+    {
+      "key": "aro",
+      "label": "Tamanho do aro",
+      "kind": "number-option",
+      "options": [
+        12,
+        14,
+        16,
+        18,
+        20,
+        22
+      ]
+    }
+  ],
+  "suggested_attributes": {
+    "ceramica": [
+      "material",
+      "altura",
+      "diametro",
+      "capacidade",
+      "acabamento"
+    ],
+    "madeira": [
+      "material",
+      "comprimento",
+      "largura",
+      "acabamento"
+    ],
+    "cestaria": [
+      "material",
+      "altura",
+      "diametro"
+    ],
+    "tecelagem": [
+      "material",
+      "comprimento",
+      "largura",
+      "cor"
+    ],
+    "trancados": [
+      "material",
+      "altura",
+      "diametro"
+    ],
+    "bordado": [
+      "material",
+      "comprimento",
+      "largura",
+      "cor"
+    ],
+    "figuras": [
+      "material",
+      "altura",
+      "peso"
+    ],
+    "biojoias": [
+      "material",
+      "comprimento",
+      "aro"
+    ]
+  },
+  "default_suggested_attributes": [
+    "material",
+    "altura",
+    "largura",
+    "comprimento",
+    "peso"
+  ],
+  "artisans": [
+    {
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "name": "Dona Isabel",
+      "city": "Minas Novas",
+      "state": "MG",
+      "region": "Sudeste",
+      "storefront_url_name": "dona-isabel",
+      "craft": "Ceramista",
+      "since": 1979,
+      "bio": "Aprendeu com a mãe a modelar o barro do Vale do Jequitinhonha. Queima as peças em forno a lenha, no quintal de casa.",
+      "quote": "A forma vem da mão de quem modela. A cor vem do fogo.",
+      "portrait": {
+        "url": "https://images.unsplash.com/photo-1766875127697-8e5d2004cde8?w=1200&q=72&auto=format&fit=crop",
+        "alt": "Mãos modelando barro no torno"
+      },
+      "slogan": "O barro do Jequitinhonha, modelado à mão e queimado a lenha."
+    },
+    {
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "name": "Seu Antônio",
+      "city": "Porto Seguro",
+      "state": "BA",
+      "region": "Nordeste",
+      "storefront_url_name": "seu-antonio",
+      "craft": "Entalhador",
+      "since": 1986,
+      "bio": "Entalha gamelas e fruteiras em jaqueira caída, sem derrubar árvore.",
+      "quote": "A madeira já sabe o que quer ser. Eu só tiro o excesso.",
+      "portrait": {
+        "url": "https://images.unsplash.com/photo-1721508490084-1b1de5b230d4?w=1200&q=72&auto=format&fit=crop",
+        "alt": "Artesão entalhando madeira"
+      },
+      "slogan": "Gamelas de jaqueira caída. Nenhuma árvore derrubada."
+    },
+    {
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "name": "Coop. Tear",
+      "city": "São Bento",
+      "state": "PB",
+      "region": "Nordeste",
+      "storefront_url_name": "coop-tear",
+      "craft": "Tecelagem",
+      "since": 2004,
+      "bio": "Cooperativa de 38 tecelãs da capital das redes. Algodão cru, tingimento natural.",
+      "quote": "Cada rede leva uma semana de tear e a conversa de muitas mãos.",
+      "portrait": {
+        "url": "https://images.unsplash.com/photo-1638310533874-6c124c012e1d?w=1200&q=72&auto=format&fit=crop",
+        "alt": "Tecelã trabalhando no tear"
+      },
+      "slogan": "Trinta e oito tecelãs, um tear de cada vez."
+    },
+    {
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "name": "Ana Baré",
+      "city": "São Gabriel da Cachoeira",
+      "state": "AM",
+      "region": "Norte",
+      "storefront_url_name": "ana-bare",
+      "craft": "Cestaria",
+      "since": 1998,
+      "bio": "Trança arumã como aprendeu com a avó, no Alto Rio Negro.",
+      "quote": "O arumã é cortado na lua certa, senão a fibra não dura.",
+      "portrait": {
+        "url": "https://images.unsplash.com/photo-1768902406144-a348c559c73c?w=1200&q=72&auto=format&fit=crop",
+        "alt": "Mãos trançando um cesto"
+      },
+      "slogan": "Arumã do Alto Rio Negro, trançado como a avó ensinou."
+    },
+    {
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "name": "Dona Lia",
+      "city": "Itapipoca",
+      "state": "CE",
+      "region": "Nordeste",
+      "storefront_url_name": "dona-lia",
+      "craft": "Trançado de palha",
+      "since": 1991,
+      "bio": "Trança palha de carnaúba em chapéus e bolsas, ao lado das filhas.",
+      "quote": "Palha boa é a que seca no sol de agosto.",
+      "portrait": {
+        "url": "https://images.unsplash.com/photo-1534953342533-7711c98712be?w=1200&q=72&auto=format&fit=crop",
+        "alt": "Mãos trançando palha"
+      }
+    },
+    {
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "name": "Ateliê Alto do Moura",
+      "city": "Caruaru",
+      "state": "PE",
+      "region": "Nordeste",
+      "storefront_url_name": "alto-do-moura",
+      "craft": "Figuras de barro",
+      "since": 2001,
+      "bio": "Família de figureiros do maior centro de arte figurativa das Américas.",
+      "quote": "Barro de Caruaru conta a história de quem vive aqui.",
+      "portrait": {
+        "url": "https://images.unsplash.com/photo-1650197642892-888c103e8f20?w=1200&q=72&auto=format&fit=crop",
+        "alt": "Figuras de barro pintadas"
+      }
+    },
+    {
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "name": "Bordadeiras do Seridó",
+      "city": "Caicó",
+      "state": "RN",
+      "region": "Nordeste",
+      "storefront_url_name": "bordadeiras-do-serido",
+      "craft": "Bordado",
+      "since": 2010,
+      "bio": "Grupo de bordadeiras que mantém vivo o bordado de Caicó.",
+      "quote": "Um bordado bem feito é igual dos dois lados do pano.",
+      "portrait": {
+        "url": "https://images.unsplash.com/photo-1771409046893-d5c43a196743?w=1200&q=72&auto=format&fit=crop",
+        "alt": "Bordado floral em bastidor"
+      },
+      "slogan": "O bordado de Caicó, igual dos dois lados do pano."
+    },
+    {
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "name": "Oficina Taquara",
+      "city": "Morretes",
+      "state": "PR",
+      "region": "Sul",
+      "storefront_url_name": "oficina-taquara",
+      "craft": "Marcenaria",
+      "since": 2015,
+      "bio": "Utensílios de cozinha em madeira de reflorestamento, acabados com óleo vegetal.",
+      "quote": "Colher de pau boa passa de mãe para filha.",
+      "portrait": {
+        "url": "https://images.unsplash.com/photo-1594761077961-cadd185540a4?w=1200&q=72&auto=format&fit=crop",
+        "alt": "Utensílios de madeira"
+      }
+    },
+    {
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "name": "Ateliê Barro Vivo",
+      "city": "Cunha",
+      "state": "SP",
+      "region": "Sudeste",
+      "storefront_url_name": "barro-vivo",
+      "craft": "Cerâmica de alta temperatura",
+      "since": 2008,
+      "bio": "Cerâmica de forno noborigama, esmaltes feitos com cinzas da própria queima.",
+      "quote": "Abrir o forno é sempre uma surpresa.",
+      "portrait": {
+        "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=1200&q=72&auto=format&fit=crop",
+        "alt": "Tigelas esmaltadas"
+      },
+      "slogan": "Cerâmica de alta temperatura, queimada em forno noborigama na Serra do Mar."
+    },
+    {
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "name": "Coletivo Miçanga",
+      "city": "Belém",
+      "state": "PA",
+      "region": "Norte",
+      "storefront_url_name": "coletivo-micanga",
+      "craft": "Biojoias e fios",
+      "since": 2017,
+      "bio": "Jovens artesãs que unem sementes da Amazônia, miçanga e macramê.",
+      "quote": "Cada cor tem um nome que a gente dá.",
+      "portrait": {
+        "url": "https://images.unsplash.com/photo-1766560360281-d3c264734a1f?w=1200&q=72&auto=format&fit=crop",
+        "alt": "Pulseiras de miçanga"
+      },
+      "slogan": "Sementes da Amazônia, miçanga e macramê."
+    }
+  ],
+  "listings": [
+    {
+      "id": "lst_01M6A6FT00DDQ097R5SX1GDGF1",
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "title": "Vaso de barro queimado",
+      "description": "Modelado à mão, sem torno, como Dona Isabel aprendeu com a mãe no Vale do Jequitinhonha. As duas alças são puxadas do próprio corpo do vaso, ainda úmido.\n\nA cor vem do fogo. Na queima a lenha, a chama encosta no barro e deixa manchas escuras que nenhuma outra peça repete.\n\nSob encomenda, Dona Isabel faz outro da mesma família de formas, em outra altura ou com uma alça só.",
+      "category": "ceramica",
+      "category_path": "Decoração > Vasos e moringas",
+      "price": {
+        "amount": 28000,
+        "currency": "BRL"
+      },
+      "quantity": 1,
+      "stock": 1,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "Barro do Vale do Jequitinhonha"
+        },
+        {
+          "key": "livre:queima",
+          "label": "Queima",
+          "kind": "text",
+          "value": "Forno a lenha"
+        },
+        {
+          "key": "livre:altura",
+          "label": "Altura",
+          "kind": "text",
+          "value": "32 cm"
+        },
+        {
+          "key": "livre:diametro",
+          "label": "Diâmetro",
+          "kind": "text",
+          "value": "22 cm"
+        },
+        {
+          "key": "livre:peso",
+          "label": "Peso",
+          "kind": "text",
+          "value": "2,1 kg"
+        },
+        {
+          "key": "livre:acabamento",
+          "label": "Acabamento",
+          "kind": "text",
+          "value": "Engobe natural, sem verniz"
+        },
+        {
+          "key": "livre:cuidados",
+          "label": "Cuidados",
+          "kind": "text",
+          "value": "Para flores secas, ou água num recipiente interno"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00NPS3N3CMZR16FK6W",
+          "url": "https://images.unsplash.com/photo-1618722060945-b87f7326995b?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Vaso de barro de duas alças sobre mesa"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00HEVZXQ46R9EWEJ3W",
+          "url": "https://images.unsplash.com/photo-1618722060945-b87f7326995b?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.5&fp-y=0.45",
+          "alt": "De perto: vaso de barro de duas alças sobre mesa"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00T2TMTQJDN5B039CC",
+          "url": "https://images.unsplash.com/photo-1766875127697-8e5d2004cde8?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Mãos modelando barro no torno, no ateliê de Dona Isabel"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "peca-unica"
+      ],
+      "materials": [
+        "barro",
+        "queima a lenha"
+      ],
+      "tags": [
+        "vaso",
+        "decoração",
+        "sala",
+        "presente",
+        "jequitinhonha",
+        "terroso"
+      ],
+      "rank": 100,
+      "placements": [
+        "home.destaques",
+        "colecao.sala"
+      ],
+      "seq": 1,
+      "created_at": "2026-10-02T00:00:00Z",
+      "updated_at": "2026-10-02T00:00:00Z",
+      "published_at": "2026-10-02T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00CC8Y0M9DQ2NNBSYW",
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "title": "Trio de moringas de barro cru",
+      "description": "Três moringas de barro cru, em três alturas. O barro sem esmalte respira: a água transpira pelas paredes e fica fresca sem geladeira.\n\nAntes do primeiro uso, deixe cheias de água por um dia. O cheiro de terra molhada some na primeira semana.",
+      "category": "ceramica",
+      "category_path": "Cozinha > Moringas e potes de água",
+      "price": {
+        "amount": 19000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "Barro cru"
+        },
+        {
+          "key": "livre:pecas",
+          "label": "Peças",
+          "kind": "text",
+          "value": "3 moringas"
+        },
+        {
+          "key": "livre:alturas",
+          "label": "Alturas",
+          "kind": "text",
+          "value": "18, 22 e 26 cm"
+        },
+        {
+          "key": "livre:capacidade",
+          "label": "Capacidade",
+          "kind": "text",
+          "value": "0,8 a 1,5 L"
+        },
+        {
+          "key": "livre:cuidados",
+          "label": "Cuidados",
+          "kind": "text",
+          "value": "Lavar só com água, sem detergente"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00JS3BGV3NN7YGJF4X",
+          "url": "https://images.unsplash.com/photo-1510828561531-05a3388f6d3d?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Três moringas de barro cru"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00R4BV8C15RFNT7535",
+          "url": "https://images.unsplash.com/photo-1510828561531-05a3388f6d3d?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.2&fp-x=0.5&fp-y=0.4",
+          "alt": "De perto: três moringas de barro cru"
+        },
+        {
+          "photo_id": "pho_01M6A6FT007BQDFRX91W9F178N",
+          "url": "https://images.unsplash.com/photo-1766875127697-8e5d2004cde8?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Mãos modelando barro no torno, no ateliê de Dona Isabel"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "barro cru"
+      ],
+      "tags": [
+        "moringa",
+        "decoração",
+        "água",
+        "presente",
+        "jequitinhonha",
+        "terroso"
+      ],
+      "rank": 101,
+      "placements": [
+        "home.destaques",
+        "colecao.sala"
+      ],
+      "seq": 2,
+      "created_at": "2026-09-18T00:00:00Z",
+      "updated_at": "2026-09-18T00:00:00Z",
+      "published_at": "2026-09-18T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00T7A3XNBF6AV1RE3Q",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Tigelas esmaltadas, jogo com 6",
+      "description": "Seis tigelas de grés queimadas no forno noborigama do ateliê, em Cunha. O esmalte é feito com as cinzas da própria lenha: cada fornada sai com um tom diferente de azul, verde e âmbar.\n\nFeitas para o uso de todo dia — caldo, salada, sobremesa. Vão à lava-louças e ao micro-ondas.\n\nO ateliê aceita montar o jogo numa cor só ou em outra quantidade de peças.",
+      "category": "ceramica",
+      "category_path": "Mesa posta > Tigelas",
+      "price": {
+        "amount": 32000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "Grés de alta temperatura"
+        },
+        {
+          "key": "livre:esmalte",
+          "label": "Esmalte",
+          "kind": "text",
+          "value": "Cinzas da própria queima"
+        },
+        {
+          "key": "livre:pecas",
+          "label": "Peças",
+          "kind": "text",
+          "value": "6 tigelas"
+        },
+        {
+          "key": "livre:diametro",
+          "label": "Diâmetro",
+          "kind": "text",
+          "value": "14 cm"
+        },
+        {
+          "key": "livre:altura",
+          "label": "Altura",
+          "kind": "text",
+          "value": "7 cm"
+        },
+        {
+          "key": "livre:cor",
+          "label": "Cor",
+          "kind": "text",
+          "value": "Azul, verde e âmbar, variadas"
+        },
+        {
+          "key": "livre:cuidados",
+          "label": "Cuidados",
+          "kind": "text",
+          "value": "Vai à lava-louças e ao micro-ondas"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00RPWR1MS981PYD0ED",
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Tigelas de cerâmica esmaltadas em cores variadas"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00SQ115PWPNSS06RPY",
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.6&fp-x=0.45&fp-y=0.5",
+          "alt": "De perto: tigelas de cerâmica esmaltadas em cores variadas"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "novo"
+      ],
+      "materials": [
+        "grés",
+        "esmalte de cinzas"
+      ],
+      "tags": [
+        "tigela",
+        "mesa posta",
+        "cozinha",
+        "azul",
+        "colorido",
+        "presente",
+        "jantar"
+      ],
+      "section": {
+        "slug": "conjuntos",
+        "name": "Conjuntos para a mesa"
+      },
+      "rank": 1,
+      "placements": [
+        "home.forno",
+        "colecao.mesa",
+        "home.patrocinados"
+      ],
+      "sponsored": "cmp-barro-vivo-out",
+      "seq": 3,
+      "created_at": "2026-10-14T00:00:00Z",
+      "updated_at": "2026-10-14T00:00:00Z",
+      "published_at": "2026-10-14T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT0090WH2MS7M0A67WED",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Jarra de cerâmica com dois copos",
+      "description": "Jarra e dois copos de grés claro, com a borda deixada crua para mostrar a matéria. O bico foi moldado com o dedo, ainda no torno, e não pinga.",
+      "category": "ceramica",
+      "category_path": "Mesa posta > Jarras e copos",
+      "price": {
+        "amount": 24000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "Grés"
+        },
+        {
+          "key": "livre:jarra",
+          "label": "Jarra",
+          "kind": "text",
+          "value": "1,2 L"
+        },
+        {
+          "key": "livre:copos",
+          "label": "Copos",
+          "kind": "text",
+          "value": "2 de 250 ml"
+        },
+        {
+          "key": "livre:cor",
+          "label": "Cor",
+          "kind": "text",
+          "value": "Branco-gelo com borda crua"
+        },
+        {
+          "key": "livre:cuidados",
+          "label": "Cuidados",
+          "kind": "text",
+          "value": "Vai à lava-louças"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00AH1PEMNTB2QZ1BPM",
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Jarra e copos de cerâmica clara"
+        },
+        {
+          "photo_id": "pho_01M6A6FT0036TWEPHXX130471C",
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.2&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: jarra e copos de cerâmica clara"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "grés"
+      ],
+      "tags": [
+        "jarra",
+        "mesa posta",
+        "cozinha",
+        "presente",
+        "claro"
+      ],
+      "section": {
+        "slug": "jarras",
+        "name": "Jarras e copos"
+      },
+      "rank": 103,
+      "placements": [
+        "home.forno",
+        "colecao.mesa"
+      ],
+      "seq": 4,
+      "created_at": "2026-10-11T00:00:00Z",
+      "updated_at": "2026-10-11T00:00:00Z",
+      "published_at": "2026-10-11T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00ZC2V6RH4PTYPA9GE",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Vasos de barro natural",
+      "description": "Três vasos de barro natural, polidos com pedra de rio antes da queima. O polimento deixa a superfície lisa, quase acetinada, sem nenhum verniz.\n\nSob encomenda, o ateliê faz o trio em outras alturas.",
+      "category": "ceramica",
+      "category_path": "Decoração > Vasos e moringas",
+      "price": {
+        "amount": 16000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "Barro"
+        },
+        {
+          "key": "livre:pecas",
+          "label": "Peças",
+          "kind": "text",
+          "value": "3 vasos"
+        },
+        {
+          "key": "livre:alturas",
+          "label": "Alturas",
+          "kind": "text",
+          "value": "12, 16 e 20 cm"
+        },
+        {
+          "key": "livre:cor",
+          "label": "Cor",
+          "kind": "text",
+          "value": "Tons de terra"
+        },
+        {
+          "key": "livre:acabamento",
+          "label": "Acabamento",
+          "kind": "text",
+          "value": "Polido com pedra"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00FQEXYDT0PX0NGKM3",
+          "url": "https://images.unsplash.com/photo-1520408222757-6f9f95d87d5d?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Vasos de barro em tons de terra"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00HCPP30D4H5NWPTVJ",
+          "url": "https://images.unsplash.com/photo-1520408222757-6f9f95d87d5d?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.5&fp-y=0.55",
+          "alt": "De perto: vasos de barro em tons de terra"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "barro"
+      ],
+      "tags": [
+        "vaso",
+        "decoração",
+        "sala",
+        "terroso",
+        "presente"
+      ],
+      "section": {
+        "slug": "vasos",
+        "name": "Vasos e potes"
+      },
+      "rank": 104,
+      "placements": [
+        "home.forno",
+        "colecao.sala"
+      ],
+      "seq": 5,
+      "created_at": "2026-10-09T00:00:00Z",
+      "updated_at": "2026-10-09T00:00:00Z",
+      "published_at": "2026-10-09T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT004KGGD4HTN2V6KMP9",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Potes de cerâmica texturizada",
+      "description": "Potes de grés com a superfície marcada à mão, um a um, com um pente de madeira. Servem para guardar o que for na estante: chá, botões, cartas.",
+      "category": "ceramica",
+      "category_path": "Decoração > Potes e caixas",
+      "price": {
+        "amount": 21000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "Grés"
+        },
+        {
+          "key": "livre:pecas",
+          "label": "Peças",
+          "kind": "text",
+          "value": "3 potes com tampa"
+        },
+        {
+          "key": "livre:alturas",
+          "label": "Alturas",
+          "kind": "text",
+          "value": "8, 10 e 12 cm"
+        },
+        {
+          "key": "livre:cor",
+          "label": "Cor",
+          "kind": "text",
+          "value": "Areia e cinza-claro"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00TTR24RQKSCCQDSX9",
+          "url": "https://images.unsplash.com/photo-1597696929736-6d13bed8e6a8?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Potes de cerâmica em tons neutros"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00WWQNM355211JKW4T",
+          "url": "https://images.unsplash.com/photo-1597696929736-6d13bed8e6a8?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: potes de cerâmica em tons neutros"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "grés"
+      ],
+      "tags": [
+        "pote",
+        "decoração",
+        "estante",
+        "claro",
+        "presente"
+      ],
+      "section": {
+        "slug": "vasos",
+        "name": "Vasos e potes"
+      },
+      "rank": 105,
+      "placements": [
+        "colecao.sala"
+      ],
+      "seq": 6,
+      "created_at": "2026-08-30T00:00:00Z",
+      "updated_at": "2026-08-30T00:00:00Z",
+      "published_at": "2026-08-30T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT0044G3DCGX5HH2FNQE",
+      "storefront_id": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
+      "title": "Moringa de barro escuro",
+      "description": "Moringa de barro escurecida na queima abafada: no fim do fogo, Dona Isabel cobre o forno e a fumaça entra no barro. A cor fica para sempre, sem tinta nenhuma.",
+      "category": "ceramica",
+      "category_path": "Cozinha > Moringas e potes de água",
+      "price": {
+        "amount": 13000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "Barro"
+        },
+        {
+          "key": "livre:queima",
+          "label": "Queima",
+          "kind": "text",
+          "value": "Forno a lenha, abafada"
+        },
+        {
+          "key": "livre:altura",
+          "label": "Altura",
+          "kind": "text",
+          "value": "24 cm"
+        },
+        {
+          "key": "livre:capacidade",
+          "label": "Capacidade",
+          "kind": "text",
+          "value": "1,2 L"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00DJNGPQB65A4J9YY4",
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Moringa de barro sobre fundo escuro"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00NEJ1P7WGV2Y7Y40E",
+          "url": "https://images.unsplash.com/photo-1611078295948-10b3961e1e40?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.2&fp-x=0.5&fp-y=0.45",
+          "alt": "De perto: moringa de barro sobre fundo escuro"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00M1KTC1FNRTFV3YP1",
+          "url": "https://images.unsplash.com/photo-1766875127697-8e5d2004cde8?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Mãos modelando barro no torno, no ateliê de Dona Isabel"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "barro",
+        "queima a lenha"
+      ],
+      "tags": [
+        "moringa",
+        "água",
+        "decoração",
+        "jequitinhonha"
+      ],
+      "rank": 106,
+      "placements": [
+        "home.forno"
+      ],
+      "seq": 7,
+      "created_at": "2026-10-12T00:00:00Z",
+      "updated_at": "2026-10-12T00:00:00Z",
+      "published_at": "2026-10-12T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00X85DBNVF283TGH0A",
+      "storefront_id": "stf_01M6A6FT00S16N771RZJ88N1A1",
+      "title": "Bichos de barro pintados à mão",
+      "description": "Bichos de barro do Alto do Moura, em Caruaru, modelados e pintados à mão pela família do ateliê. Cada bicho tem a cara de quem fez — não existem dois iguais.\n\nDá para pedir outros bichos do sertão, ou as cores da sua casa.",
+      "category": "figuras",
+      "category_path": "Decoração > Figuras e esculturas",
+      "price": {
+        "amount": 13500,
+        "currency": "BRL"
+      },
+      "quantity": 1,
+      "stock": 1,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "Barro de Caruaru"
+        },
+        {
+          "key": "livre:pintura",
+          "label": "Pintura",
+          "kind": "text",
+          "value": "Tinta à base d’água, à mão"
+        },
+        {
+          "key": "livre:pecas",
+          "label": "Peças",
+          "kind": "text",
+          "value": "5 figuras"
+        },
+        {
+          "key": "livre:altura",
+          "label": "Altura",
+          "kind": "text",
+          "value": "6 a 9 cm"
+        },
+        {
+          "key": "livre:indicacao",
+          "label": "Indicação",
+          "kind": "text",
+          "value": "Decorativo — não é brinquedo para menores de 3 anos"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00653KVDRP8KNZFEPD",
+          "url": "https://images.unsplash.com/photo-1650197642892-888c103e8f20?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Pequenas figuras de animais em barro pintado"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00CWBFR8DZY8AXJFBS",
+          "url": "https://images.unsplash.com/photo-1650197642892-888c103e8f20?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.6&fp-x=0.45&fp-y=0.55",
+          "alt": "De perto: pequenas figuras de animais em barro pintado"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "peca-unica"
+      ],
+      "materials": [
+        "barro",
+        "pintura à mão"
+      ],
+      "tags": [
+        "figura",
+        "criança",
+        "presente",
+        "colorido",
+        "caruaru",
+        "decoração",
+        "natal"
+      ],
+      "rank": 107,
+      "placements": [
+        "home.destaques",
+        "colecao.presentes"
+      ],
+      "seq": 8,
+      "created_at": "2026-09-28T00:00:00Z",
+      "updated_at": "2026-09-28T00:00:00Z",
+      "published_at": "2026-09-28T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00Q2YK4SYJ2J3N3B10",
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "title": "Gamela entalhada em jaqueira",
+      "description": "Gamela entalhada a enxó em jaqueira caída, recolhida nos sítios de Porto Seguro. Seu Antônio não derruba árvore: espera a madeira que o tempo já deitou.\n\nOs veios escuros são da própria jaqueira. O acabamento é com óleo mineral próprio para alimentos.\n\nSob encomenda, Seu Antônio grava um nome ou uma data na borda.",
+      "category": "madeira",
+      "category_path": "Mesa posta > Gamelas e travessas",
+      "price": {
+        "amount": 19000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:madeira",
+          "label": "Madeira",
+          "kind": "text",
+          "value": "Jaqueira caída, reaproveitada"
+        },
+        {
+          "key": "livre:comprimento",
+          "label": "Comprimento",
+          "kind": "text",
+          "value": "42 cm"
+        },
+        {
+          "key": "livre:largura",
+          "label": "Largura",
+          "kind": "text",
+          "value": "24 cm"
+        },
+        {
+          "key": "livre:altura",
+          "label": "Altura",
+          "kind": "text",
+          "value": "8 cm"
+        },
+        {
+          "key": "livre:acabamento",
+          "label": "Acabamento",
+          "kind": "text",
+          "value": "Óleo mineral alimentar"
+        },
+        {
+          "key": "livre:cuidados",
+          "label": "Cuidados",
+          "kind": "text",
+          "value": "Lavar à mão e secar logo"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00J3SV59HG7BBV1NCX",
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Gamelas de madeira escura empilhadas"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00FCFSY4DNC2X9TJEP",
+          "url": "https://images.unsplash.com/photo-1628245612384-6d8bf598a2e4?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.5&fp-y=0.4",
+          "alt": "De perto: gamelas de madeira escura empilhadas"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00QYAASZ9MX5F7P01G",
+          "url": "https://images.unsplash.com/photo-1721508490084-1b1de5b230d4?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Artesão entalhando madeira, no ateliê de Seu Antônio"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "sustentavel"
+      ],
+      "materials": [
+        "jaqueira de reaproveitamento"
+      ],
+      "tags": [
+        "gamela",
+        "mesa posta",
+        "cozinha",
+        "servir",
+        "presente"
+      ],
+      "rank": 108,
+      "placements": [
+        "home.destaques",
+        "colecao.mesa"
+      ],
+      "seq": 9,
+      "created_at": "2026-09-21T00:00:00Z",
+      "updated_at": "2026-09-21T00:00:00Z",
+      "published_at": "2026-09-21T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT0047M4HSG59WJ9JB0D",
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "title": "Fruteira de pé torneada",
+      "description": "Fruteira de pé torneada numa peça só de pinus de reflorestamento. A madeira clara deixa a cor das frutas aparecer.\n\nPode ser feita mais alta ou mais larga, para o tamanho da sua mesa.",
+      "category": "madeira",
+      "category_path": "Mesa posta > Fruteiras",
+      "price": {
+        "amount": 22000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:madeira",
+          "label": "Madeira",
+          "kind": "text",
+          "value": "Pinus de reflorestamento"
+        },
+        {
+          "key": "livre:diametro",
+          "label": "Diâmetro",
+          "kind": "text",
+          "value": "30 cm"
+        },
+        {
+          "key": "livre:altura",
+          "label": "Altura",
+          "kind": "text",
+          "value": "14 cm"
+        },
+        {
+          "key": "livre:acabamento",
+          "label": "Acabamento",
+          "kind": "text",
+          "value": "Cera de abelha"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00A3XVGKZP5FTMF0W0",
+          "url": "https://images.unsplash.com/photo-1728034261632-1090136fac85?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Fruteira de madeira clara com pé"
+        },
+        {
+          "photo_id": "pho_01M6A6FT003KY8WDF9SMZY6VT2",
+          "url": "https://images.unsplash.com/photo-1728034261632-1090136fac85?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.2&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: fruteira de madeira clara com pé"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00J65B9CFNNHB6R4W0",
+          "url": "https://images.unsplash.com/photo-1721508490084-1b1de5b230d4?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Artesão entalhando madeira, no ateliê de Seu Antônio"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "pinus de reflorestamento"
+      ],
+      "tags": [
+        "fruteira",
+        "mesa posta",
+        "cozinha",
+        "claro",
+        "presente"
+      ],
+      "rank": 109,
+      "placements": [
+        "colecao.mesa",
+        "home.forno"
+      ],
+      "seq": 10,
+      "created_at": "2026-10-07T00:00:00Z",
+      "updated_at": "2026-10-07T00:00:00Z",
+      "published_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT0049PJ1ZDEV5C7N6EA",
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "title": "Par de colheres de pau",
+      "description": "Duas colheres de pau entalhadas em cedro de reflorestamento e curadas com óleo vegetal. Leves, firmes, sem farpas — feitas para durar mais que a panela.\n\nA Oficina Taquara grava iniciais no cabo, a fogo.",
+      "category": "madeira",
+      "category_path": "Cozinha > Utensílios",
+      "price": {
+        "amount": 6800,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:madeira",
+          "label": "Madeira",
+          "kind": "text",
+          "value": "Cedro de reflorestamento"
+        },
+        {
+          "key": "livre:pecas",
+          "label": "Peças",
+          "kind": "text",
+          "value": "2 colheres"
+        },
+        {
+          "key": "livre:comprimento",
+          "label": "Comprimento",
+          "kind": "text",
+          "value": "30 cm"
+        },
+        {
+          "key": "livre:acabamento",
+          "label": "Acabamento",
+          "kind": "text",
+          "value": "Óleo vegetal"
+        },
+        {
+          "key": "livre:cuidados",
+          "label": "Cuidados",
+          "kind": "text",
+          "value": "Lavar à mão; passar óleo de vez em quando"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00CHBF0QZB9N5XD4PB",
+          "url": "https://images.unsplash.com/photo-1549859455-746ef4fae03b?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Duas colheres de pau sobre mesa de madeira"
+        },
+        {
+          "photo_id": "pho_01M6A6FT007A65DAS4M6GG3JTB",
+          "url": "https://images.unsplash.com/photo-1549859455-746ef4fae03b?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.55&fp-y=0.5",
+          "alt": "De perto: duas colheres de pau sobre mesa de madeira"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "sustentavel"
+      ],
+      "materials": [
+        "cedro de reflorestamento",
+        "óleo vegetal"
+      ],
+      "tags": [
+        "colher",
+        "cozinha",
+        "presente",
+        "barato",
+        "utensílio"
+      ],
+      "rank": 110,
+      "placements": [
+        "colecao.presentes",
+        "home.patrocinados"
+      ],
+      "sponsored": "cmp-taquara-out",
+      "seq": 11,
+      "created_at": "2026-09-02T00:00:00Z",
+      "updated_at": "2026-09-02T00:00:00Z",
+      "published_at": "2026-09-02T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT0014JM4AC27VMAR19P",
+      "storefront_id": "stf_01M6A6FT00M00TJZEQH2WSSX3S",
+      "title": "Utensílios de madeira com porta-talheres",
+      "description": "Espátula, colher, garfo de salada e concha, com um porta-talheres torneado do mesmo cedro.",
+      "category": "madeira",
+      "category_path": "Cozinha > Utensílios",
+      "price": {
+        "amount": 11000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:madeira",
+          "label": "Madeira",
+          "kind": "text",
+          "value": "Cedro de reflorestamento"
+        },
+        {
+          "key": "livre:pecas",
+          "label": "Peças",
+          "kind": "text",
+          "value": "4 utensílios e 1 porta-talheres"
+        },
+        {
+          "key": "livre:comprimento",
+          "label": "Comprimento",
+          "kind": "text",
+          "value": "28 a 32 cm"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT0072RH03PHSGQKR1XJ",
+          "url": "https://images.unsplash.com/photo-1594761077961-cadd185540a4?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Utensílios de madeira em um copo de madeira"
+        },
+        {
+          "photo_id": "pho_01M6A6FT003DJJX0MM69FAMZ0A",
+          "url": "https://images.unsplash.com/photo-1594761077961-cadd185540a4?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.2&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: utensílios de madeira em um copo de madeira"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "cedro de reflorestamento"
+      ],
+      "tags": [
+        "utensílio",
+        "cozinha",
+        "presente",
+        "conjunto"
+      ],
+      "rank": 111,
+      "placements": [
+        "colecao.mesa",
+        "colecao.presentes"
+      ],
+      "seq": 12,
+      "created_at": "2026-08-12T00:00:00Z",
+      "updated_at": "2026-08-12T00:00:00Z",
+      "published_at": "2026-08-12T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00S86PRXBQQK9JHQSK",
+      "storefront_id": "stf_01M6A6FT0024V0MGVZ3HHJXYH6",
+      "title": "Tigelas de cedro, jogo com 4",
+      "description": "Quatro tigelas torneadas em cedro, empilháveis. O torno deixa anéis finos na madeira, como os de um tronco.",
+      "category": "madeira",
+      "category_path": "Mesa posta > Tigelas",
+      "price": {
+        "amount": 16000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:madeira",
+          "label": "Madeira",
+          "kind": "text",
+          "value": "Cedro"
+        },
+        {
+          "key": "livre:pecas",
+          "label": "Peças",
+          "kind": "text",
+          "value": "4 tigelas"
+        },
+        {
+          "key": "livre:diametro",
+          "label": "Diâmetro",
+          "kind": "text",
+          "value": "15 cm"
+        },
+        {
+          "key": "livre:acabamento",
+          "label": "Acabamento",
+          "kind": "text",
+          "value": "Óleo mineral alimentar"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00QTYSR1P2TE16NWHP",
+          "url": "https://images.unsplash.com/photo-1779110416136-022feebe4192?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Tigelas de madeira torneada empilhadas"
+        },
+        {
+          "photo_id": "pho_01M6A6FT0029BD5ZP2A8SCRD2R",
+          "url": "https://images.unsplash.com/photo-1779110416136-022feebe4192?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: tigelas de madeira torneada empilhadas"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00FXHN4X1NGSQFQ4AN",
+          "url": "https://images.unsplash.com/photo-1721508490084-1b1de5b230d4?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Artesão entalhando madeira, no ateliê de Seu Antônio"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "cedro"
+      ],
+      "tags": [
+        "tigela",
+        "mesa posta",
+        "cozinha",
+        "servir"
+      ],
+      "rank": 112,
+      "placements": [
+        "colecao.mesa"
+      ],
+      "seq": 13,
+      "created_at": "2026-08-20T00:00:00Z",
+      "updated_at": "2026-08-20T00:00:00Z",
+      "published_at": "2026-08-20T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT0044DPKSJXSCYYFRB3",
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "title": "Rede de algodão cru",
+      "description": "Rede de algodão cru tecida no tear manual pela Cooperativa Tear, em São Bento — a capital das redes. Cada pano leva uma semana de trabalho e passa pelas mãos de várias tecelãs.\n\nO algodão cru é macio desde o primeiro dia e fica mais macio a cada lavagem.\n\nAs tecelãs fazem a rede em outra cor, com outra varanda ou em tamanho de casal.",
+      "category": "tecelagem",
+      "category_path": "Casa > Redes e descanso",
+      "price": {
+        "amount": 42000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:tecido",
+          "label": "Tecido",
+          "kind": "text",
+          "value": "Algodão cru, fio 8/8"
+        },
+        {
+          "key": "livre:varanda",
+          "label": "Varanda",
+          "kind": "text",
+          "value": "Crochê de algodão"
+        },
+        {
+          "key": "livre:comprimento",
+          "label": "Comprimento",
+          "kind": "text",
+          "value": "3,6 m com punhos"
+        },
+        {
+          "key": "livre:largura-do-pano",
+          "label": "Largura do pano",
+          "kind": "text",
+          "value": "1,6 m"
+        },
+        {
+          "key": "livre:suporta",
+          "label": "Suporta",
+          "kind": "text",
+          "value": "Até 120 kg"
+        },
+        {
+          "key": "livre:cor",
+          "label": "Cor",
+          "kind": "text",
+          "value": "Cru natural"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT003WEDRFWMGJP80XMX",
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Rede de algodão cru armada entre árvores"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00FHAT863DRP072FDF",
+          "url": "https://images.unsplash.com/photo-1559965368-a6adb91e12fe?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.6&fp-x=0.5&fp-y=0.6",
+          "alt": "De perto: rede de algodão cru armada entre árvores"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00HKAZ6EXEQ3D1Q6C7",
+          "url": "https://images.unsplash.com/photo-1638310533874-6c124c012e1d?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Tecelã trabalhando no tear, no ateliê de Coop. Tear"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "sustentavel"
+      ],
+      "materials": [
+        "algodão cru",
+        "tingimento natural"
+      ],
+      "tags": [
+        "rede",
+        "varanda",
+        "descanso",
+        "casa",
+        "presente",
+        "claro"
+      ],
+      "rank": 113,
+      "placements": [
+        "home.destaques",
+        "colecao.varanda"
+      ],
+      "seq": 14,
+      "created_at": "2026-09-10T00:00:00Z",
+      "updated_at": "2026-09-10T00:00:00Z",
+      "published_at": "2026-09-10T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT007YX7P1NHY2XMVWN4",
+      "storefront_id": "stf_01M6A6FT00SWAM863WBREDFZV5",
+      "title": "Tapete de retalhos trançado",
+      "description": "Tapete trançado com retalhos de algodão que sobram das confecções da região. Nada se perde: o que seria descarte vira trama colorida.\n\nPode ser feito em outra medida ou numa paleta de cores escolhida por você.",
+      "category": "tecelagem",
+      "category_path": "Casa > Tapetes",
+      "price": {
+        "amount": 26000,
+        "currency": "BRL"
+      },
+      "compare_at_price": {
+        "amount": 31000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "Retalhos de algodão"
+        },
+        {
+          "key": "livre:medidas",
+          "label": "Medidas",
+          "kind": "text",
+          "value": "60 × 120 cm"
+        },
+        {
+          "key": "livre:cor",
+          "label": "Cor",
+          "kind": "text",
+          "value": "Variadas"
+        },
+        {
+          "key": "livre:lavagem",
+          "label": "Lavagem",
+          "kind": "text",
+          "value": "À mão, em água fria"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00V0APPBBTP7X7RVF1",
+          "url": "https://images.unsplash.com/photo-1592914486106-fa452cfc092c?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Tapete colorido de retalhos"
+        },
+        {
+          "photo_id": "pho_01M6A6FT001R21PZFCF58V4W0M",
+          "url": "https://images.unsplash.com/photo-1592914486106-fa452cfc092c?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.6&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: tapete colorido de retalhos"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00Y2RHSPS90GH7Q6PN",
+          "url": "https://images.unsplash.com/photo-1638310533874-6c124c012e1d?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Tecelã trabalhando no tear, no ateliê de Coop. Tear"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "sustentavel"
+      ],
+      "materials": [
+        "retalhos de algodão"
+      ],
+      "tags": [
+        "tapete",
+        "sala",
+        "quarto",
+        "colorido",
+        "decoração"
+      ],
+      "rank": 114,
+      "placements": [
+        "colecao.varanda",
+        "home.forno"
+      ],
+      "seq": 15,
+      "created_at": "2026-10-05T00:00:00Z",
+      "updated_at": "2026-10-05T00:00:00Z",
+      "published_at": "2026-10-05T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT008B53FZ7W55ZXVSGZ",
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "title": "Cesto de arumã com alça",
+      "description": "Cesto de arumã trançado por Ana Baré, no Alto Rio Negro, com a técnica que aprendeu com a avó. A fibra é cortada na lua certa — senão não dura.\n\nA alça é de cipó, trançada junto com o corpo do cesto.",
+      "category": "cestaria",
+      "category_path": "Casa > Cestos e organização",
+      "price": {
+        "amount": 15000,
+        "currency": "BRL"
+      },
+      "quantity": 2,
+      "stock": 2,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:fibra",
+          "label": "Fibra",
+          "kind": "text",
+          "value": "Arumã do Alto Rio Negro"
+        },
+        {
+          "key": "livre:altura",
+          "label": "Altura",
+          "kind": "text",
+          "value": "28 cm"
+        },
+        {
+          "key": "livre:diametro",
+          "label": "Diâmetro",
+          "kind": "text",
+          "value": "30 cm"
+        },
+        {
+          "key": "livre:alca",
+          "label": "Alça",
+          "kind": "text",
+          "value": "Cipó trançado"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00Y91MVM69WHHJQ3HF",
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Cesto de fibra natural com alça"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00WRKM9J48MGXT42R4",
+          "url": "https://images.unsplash.com/photo-1578678809626-a3741782f0b8?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.6&fp-x=0.5&fp-y=0.55",
+          "alt": "De perto: cesto de fibra natural com alça"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00AVKQY1R698F3WF95",
+          "url": "https://images.unsplash.com/photo-1768902406144-a348c559c73c?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Mãos trançando um cesto, no ateliê de Ana Baré"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "ultimas"
+      ],
+      "materials": [
+        "arumã"
+      ],
+      "tags": [
+        "cesto",
+        "organização",
+        "decoração",
+        "amazônia",
+        "presente"
+      ],
+      "rank": 115,
+      "placements": [
+        "home.destaques",
+        "colecao.varanda"
+      ],
+      "seq": 16,
+      "created_at": "2026-09-25T00:00:00Z",
+      "updated_at": "2026-09-25T00:00:00Z",
+      "published_at": "2026-09-25T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00RDY4N4WY6TN3KZGC",
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "title": "Cesto trançado com tampa",
+      "description": "Cesto de arumã e cipó com tampa encaixada. Guarda mantas, brinquedos, linhas de bordado.\n\nAna Baré faz o cesto em outros tamanhos, sob encomenda.",
+      "category": "cestaria",
+      "category_path": "Casa > Cestos e organização",
+      "price": {
+        "amount": 21000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:fibra",
+          "label": "Fibra",
+          "kind": "text",
+          "value": "Arumã e cipó"
+        },
+        {
+          "key": "livre:altura",
+          "label": "Altura",
+          "kind": "text",
+          "value": "34 cm"
+        },
+        {
+          "key": "livre:diametro",
+          "label": "Diâmetro",
+          "kind": "text",
+          "value": "36 cm"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00HWV32781SJWNKZ05",
+          "url": "https://images.unsplash.com/photo-1455669175216-9017c9b02fc6?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Cestos de vime de vários formatos"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00FM5J4D3P3B8N5YVP",
+          "url": "https://images.unsplash.com/photo-1455669175216-9017c9b02fc6?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: cestos de vime de vários formatos"
+        },
+        {
+          "photo_id": "pho_01M6A6FT0081Y97GPP054T346R",
+          "url": "https://images.unsplash.com/photo-1768902406144-a348c559c73c?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Mãos trançando um cesto, no ateliê de Ana Baré"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "arumã",
+        "cipó"
+      ],
+      "tags": [
+        "cesto",
+        "organização",
+        "amazônia",
+        "decoração"
+      ],
+      "rank": 116,
+      "placements": [
+        "colecao.varanda"
+      ],
+      "seq": 17,
+      "created_at": "2026-07-30T00:00:00Z",
+      "updated_at": "2026-07-30T00:00:00Z",
+      "published_at": "2026-07-30T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT001TQ91VXR625BMGA9",
+      "storefront_id": "stf_01M6A6FT00FHF4Q1TYCWFHS34E",
+      "title": "Bowls de fibra trançada, trio",
+      "description": "Trio de bowls de fibra de tucumã, em espiral, que se encaixam um dentro do outro. Para pão, frutas secas, chaves na entrada.",
+      "category": "cestaria",
+      "category_path": "Mesa posta > Cestos de pão e bowls",
+      "price": {
+        "amount": 12000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:fibra",
+          "label": "Fibra",
+          "kind": "text",
+          "value": "Tucumã"
+        },
+        {
+          "key": "livre:pecas",
+          "label": "Peças",
+          "kind": "text",
+          "value": "3 bowls"
+        },
+        {
+          "key": "livre:diametros",
+          "label": "Diâmetros",
+          "kind": "text",
+          "value": "16, 20 e 24 cm"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00VW86F6T8RCB89HR5",
+          "url": "https://images.unsplash.com/photo-1626037235530-fe56de7d6459?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Três bowls de fibra trançada empilhados"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00HEA9V8G5TAH082R4",
+          "url": "https://images.unsplash.com/photo-1626037235530-fe56de7d6459?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.6&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: três bowls de fibra trançada empilhados"
+        },
+        {
+          "photo_id": "pho_01M6A6FT007JESD6DE2SE0YWR3",
+          "url": "https://images.unsplash.com/photo-1768902406144-a348c559c73c?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Mãos trançando um cesto, no ateliê de Ana Baré"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "novo"
+      ],
+      "materials": [
+        "fibra de tucumã"
+      ],
+      "tags": [
+        "bowl",
+        "mesa posta",
+        "organização",
+        "claro",
+        "presente"
+      ],
+      "rank": 117,
+      "placements": [
+        "home.forno",
+        "colecao.mesa"
+      ],
+      "seq": 18,
+      "created_at": "2026-10-15T00:00:00Z",
+      "updated_at": "2026-10-15T00:00:00Z",
+      "published_at": "2026-10-15T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT0035M0BJNT7VBG2VHT",
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "title": "Chapéu de palha de carnaúba",
+      "description": "Chapéu de palha de carnaúba trançado por Dona Lia e as filhas, em Itapipoca. A palha seca no sol de agosto e fica clara e resistente.\n\nFeito sob medida: diga a circunferência da cabeça e a cor da faixa.",
+      "category": "trancados",
+      "category_path": "Moda e acessórios > Chapéus",
+      "price": {
+        "amount": 7500,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:palha",
+          "label": "Palha",
+          "kind": "text",
+          "value": "Carnaúba"
+        },
+        {
+          "key": "livre:aba",
+          "label": "Aba",
+          "kind": "text",
+          "value": "9 cm"
+        },
+        {
+          "key": "livre:tamanho",
+          "label": "Tamanho",
+          "kind": "text",
+          "value": "54 a 60 cm de circunferência"
+        },
+        {
+          "key": "livre:faixa",
+          "label": "Faixa",
+          "kind": "text",
+          "value": "Algodão cru"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT009ZX997VAP3X9KV8F",
+          "url": "https://images.unsplash.com/photo-1779447810263-9ac2da5cf6f9?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Chapéu de palha trançada com faixa clara"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00WZX4QY17BTJTG446",
+          "url": "https://images.unsplash.com/photo-1779447810263-9ac2da5cf6f9?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.6&fp-x=0.5&fp-y=0.45",
+          "alt": "De perto: chapéu de palha trançada com faixa clara"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00KYAGPED2YYNMFS3W",
+          "url": "https://images.unsplash.com/photo-1534953342533-7711c98712be?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Mãos trançando palha, no ateliê de Dona Lia"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "palha de carnaúba"
+      ],
+      "tags": [
+        "chapéu",
+        "praia",
+        "verão",
+        "presente",
+        "barato",
+        "acessório"
+      ],
+      "rank": 118,
+      "placements": [
+        "home.destaques",
+        "colecao.presentes"
+      ],
+      "seq": 19,
+      "created_at": "2026-09-30T00:00:00Z",
+      "updated_at": "2026-09-30T00:00:00Z",
+      "published_at": "2026-09-30T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT004TSSE4MZ7TVK2A3W",
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "title": "Bolsa de palha com alça de couro",
+      "description": "Bolsa de palha de carnaúba com alças de couro curtido no vegetal. Forro de algodão com bolso interno.\n\nA alça pode vir em couro natural, caramelo ou café.",
+      "category": "trancados",
+      "category_path": "Moda e acessórios > Bolsas",
+      "price": {
+        "amount": 18000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:palha",
+          "label": "Palha",
+          "kind": "text",
+          "value": "Carnaúba"
+        },
+        {
+          "key": "livre:alca",
+          "label": "Alça",
+          "kind": "text",
+          "value": "Couro curtido no vegetal"
+        },
+        {
+          "key": "livre:medidas",
+          "label": "Medidas",
+          "kind": "text",
+          "value": "38 × 30 × 12 cm"
+        },
+        {
+          "key": "livre:forro",
+          "label": "Forro",
+          "kind": "text",
+          "value": "Algodão, com bolso"
+        },
+        {
+          "key": "livre:cor",
+          "label": "Cor",
+          "kind": "text",
+          "value": "Palha natural"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT005PF0X10NE0AD9JS4",
+          "url": "https://images.unsplash.com/photo-1524679813234-66a389fe1a42?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Bolsas de palha trançada com alças de couro"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00Y8XPHF996JVJPQA6",
+          "url": "https://images.unsplash.com/photo-1524679813234-66a389fe1a42?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: bolsas de palha trançada com alças de couro"
+        },
+        {
+          "photo_id": "pho_01M6A6FT0072EDWEE9JMMNARD8",
+          "url": "https://images.unsplash.com/photo-1534953342533-7711c98712be?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Mãos trançando palha, no ateliê de Dona Lia"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "palha de carnaúba",
+        "couro"
+      ],
+      "tags": [
+        "bolsa",
+        "acessório",
+        "praia",
+        "verão",
+        "presente"
+      ],
+      "rank": 119,
+      "placements": [
+        "colecao.presentes",
+        "home.patrocinados"
+      ],
+      "sponsored": "cmp-lia-verao",
+      "seq": 20,
+      "created_at": "2026-09-14T00:00:00Z",
+      "updated_at": "2026-09-14T00:00:00Z",
+      "published_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT006GZVBWYVJ0RJ0W3K",
+      "storefront_id": "stf_01M6A6FT00Q05RRM25XWSWE8HD",
+      "title": "Bolsa redonda de fibra",
+      "description": "Bolsa redonda de fibra de bananeira, trançada em espiral, com alça longa para levar no ombro.",
+      "category": "trancados",
+      "category_path": "Moda e acessórios > Bolsas",
+      "price": {
+        "amount": 14500,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:fibra",
+          "label": "Fibra",
+          "kind": "text",
+          "value": "Bananeira"
+        },
+        {
+          "key": "livre:diametro",
+          "label": "Diâmetro",
+          "kind": "text",
+          "value": "24 cm"
+        },
+        {
+          "key": "livre:alca",
+          "label": "Alça",
+          "kind": "text",
+          "value": "110 cm"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00DYGV2S9WNTD2YFDG",
+          "url": "https://images.unsplash.com/photo-1771237873540-4e4f4d5b0def?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Bolsa redonda de fibra trançada"
+        },
+        {
+          "photo_id": "pho_01M6A6FT002S6GMY9JW67MP2Z0",
+          "url": "https://images.unsplash.com/photo-1771237873540-4e4f4d5b0def?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: bolsa redonda de fibra trançada"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00N2XSK67C2Y0QZ1KJ",
+          "url": "https://images.unsplash.com/photo-1534953342533-7711c98712be?w=1200&q=72&auto=format&fit=crop",
+          "alt": "Mãos trançando palha, no ateliê de Dona Lia"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "novo"
+      ],
+      "materials": [
+        "fibra de bananeira"
+      ],
+      "tags": [
+        "bolsa",
+        "acessório",
+        "presente",
+        "colorido"
+      ],
+      "rank": 120,
+      "placements": [
+        "home.forno"
+      ],
+      "seq": 21,
+      "created_at": "2026-10-13T00:00:00Z",
+      "updated_at": "2026-10-13T00:00:00Z",
+      "published_at": "2026-10-13T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT008SCJSHB3T7A51WN7",
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "title": "Bastidor bordado à mão",
+      "description": "Flores bordadas à mão em linho, no ponto das bordadeiras de Caicó. O avesso é tão bem acabado quanto a frente — é assim que se reconhece um bordado do Seridó.\n\nVem no bastidor de madeira, pronto para pendurar. As bordadeiras incluem um nome ou uma frase curta, se você quiser.",
+      "category": "bordado",
+      "category_path": "Decoração > Quadros e bastidores",
+      "price": {
+        "amount": 9800,
+        "currency": "BRL"
+      },
+      "quantity": 1,
+      "stock": 1,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:tecido",
+          "label": "Tecido",
+          "kind": "text",
+          "value": "Linho"
+        },
+        {
+          "key": "livre:linha",
+          "label": "Linha",
+          "kind": "text",
+          "value": "Algodão mercerizado"
+        },
+        {
+          "key": "livre:bastidor",
+          "label": "Bastidor",
+          "kind": "text",
+          "value": "Oval, 20 × 15 cm"
+        },
+        {
+          "key": "livre:ponto",
+          "label": "Ponto",
+          "kind": "text",
+          "value": "Bordado livre de Caicó"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00XMVJ2E5P2SZ2W0AE",
+          "url": "https://images.unsplash.com/photo-1771409046893-d5c43a196743?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores em bastidor oval"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00NDME12MFA03AVHZF",
+          "url": "https://images.unsplash.com/photo-1771409046893-d5c43a196743?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.6&fp-x=0.5&fp-y=0.45",
+          "alt": "De perto: bordado de flores em bastidor oval"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "peca-unica"
+      ],
+      "materials": [
+        "linho",
+        "linha de algodão"
+      ],
+      "tags": [
+        "bordado",
+        "parede",
+        "decoração",
+        "presente",
+        "flores",
+        "colorido",
+        "mãe"
+      ],
+      "rank": 121,
+      "placements": [
+        "home.destaques",
+        "colecao.presentes"
+      ],
+      "seq": 22,
+      "created_at": "2026-09-19T00:00:00Z",
+      "updated_at": "2026-09-19T00:00:00Z",
+      "published_at": "2026-09-19T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00EPQ40EG8NZWKDF49",
+      "storefront_id": "stf_01M6A6FT007395WETBBW6V5B1X",
+      "title": "Bordado floral em linho",
+      "description": "Bordado floral em linho cru, com flores do sertão em linha de algodão. As cores podem ser trocadas para combinar com o seu canto da casa.",
+      "category": "bordado",
+      "category_path": "Decoração > Quadros e bastidores",
+      "price": {
+        "amount": 12500,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:tecido",
+          "label": "Tecido",
+          "kind": "text",
+          "value": "Linho cru"
+        },
+        {
+          "key": "livre:linha",
+          "label": "Linha",
+          "kind": "text",
+          "value": "Algodão"
+        },
+        {
+          "key": "livre:bastidor",
+          "label": "Bastidor",
+          "kind": "text",
+          "value": "Redondo, 22 cm"
+        },
+        {
+          "key": "livre:cor",
+          "label": "Cor",
+          "kind": "text",
+          "value": "Rosa, verde e mostarda"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00ZZSXV91BJDT94TDT",
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Bordado de flores em bastidor"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00WSRP6RR6DTJCQAYF",
+          "url": "https://images.unsplash.com/photo-1766418393788-dc829192ab5f?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.6&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: bordado de flores em bastidor"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "linho",
+        "linha de algodão"
+      ],
+      "tags": [
+        "bordado",
+        "parede",
+        "decoração",
+        "presente",
+        "flores",
+        "mãe"
+      ],
+      "rank": 122,
+      "placements": [
+        "colecao.presentes",
+        "colecao.sala"
+      ],
+      "seq": 23,
+      "created_at": "2026-08-28T00:00:00Z",
+      "updated_at": "2026-08-28T00:00:00Z",
+      "published_at": "2026-08-28T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00KMVZ0R5SEFWNB4D0",
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "title": "Pulseiras de miçanga e sementes",
+      "description": "Trio de pulseiras de miçanga de vidro e sementes de açaí, enfiadas uma a uma pelas jovens do Coletivo Miçanga, em Belém.\n\nO coletivo monta outras combinações de cor — cada cor tem um nome que elas dão.",
+      "category": "biojoias",
+      "category_path": "Moda e acessórios > Biojoias",
+      "price": {
+        "amount": 8500,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "Miçanga de vidro e sementes de açaí"
+        },
+        {
+          "key": "livre:pecas",
+          "label": "Peças",
+          "kind": "text",
+          "value": "3 pulseiras"
+        },
+        {
+          "key": "livre:tamanho",
+          "label": "Tamanho",
+          "kind": "text",
+          "value": "Ajustável, 15 a 19 cm"
+        },
+        {
+          "key": "livre:cor",
+          "label": "Cor",
+          "kind": "text",
+          "value": "Coral, turquesa e terra"
+        },
+        {
+          "key": "livre:fecho",
+          "label": "Fecho",
+          "kind": "text",
+          "value": "Nó corrediço"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00VMWQ91X5DM30AAG4",
+          "url": "https://images.unsplash.com/photo-1766560360281-d3c264734a1f?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Pulseiras de miçanga coloridas enfileiradas"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00A1DPNFR45FZYPA1B",
+          "url": "https://images.unsplash.com/photo-1766560360281-d3c264734a1f?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: pulseiras de miçanga coloridas enfileiradas"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "miçanga",
+        "sementes de açaí"
+      ],
+      "tags": [
+        "pulseira",
+        "acessório",
+        "presente",
+        "colorido",
+        "barato",
+        "amazônia"
+      ],
+      "rank": 123,
+      "placements": [
+        "colecao.presentes",
+        "home.forno"
+      ],
+      "seq": 24,
+      "created_at": "2026-10-10T00:00:00Z",
+      "updated_at": "2026-10-10T00:00:00Z",
+      "published_at": "2026-10-10T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT007C4N0B0K0RWPGHPY",
+      "storefront_id": "stf_01M6A6FT00RXPEXP31XYCEBZ23",
+      "title": "Suporte de macramê para plantas",
+      "description": "Suporte de macramê em algodão para vaso de até 20 cm. Os nós são feitos à mão, sem cola nem argola de plástico.\n\nPode ser feito mais comprido, para pé-direito alto.",
+      "category": "biojoias",
+      "category_path": "Casa > Plantas e jardim",
+      "price": {
+        "amount": 9000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": true,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "Algodão"
+        },
+        {
+          "key": "livre:comprimento",
+          "label": "Comprimento",
+          "kind": "text",
+          "value": "90 cm"
+        },
+        {
+          "key": "livre:vaso",
+          "label": "Vaso",
+          "kind": "text",
+          "value": "Até 20 cm de diâmetro"
+        },
+        {
+          "key": "livre:cor",
+          "label": "Cor",
+          "kind": "text",
+          "value": "Cru"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00BCJ3XVBEGEJCXWBQ",
+          "url": "https://images.unsplash.com/photo-1633594308237-3dcfa56b4e69?w=1000&q=72&auto=format&fit=crop",
+          "alt": "Suporte de macramê com planta pendurada"
+        },
+        {
+          "photo_id": "pho_01M6A6FT00NSNQR59080X386YN",
+          "url": "https://images.unsplash.com/photo-1633594308237-3dcfa56b4e69?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.2&fp-x=0.5&fp-y=0.5",
+          "alt": "De perto: suporte de macramê com planta pendurada"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "algodão"
+      ],
+      "tags": [
+        "macramê",
+        "planta",
+        "varanda",
+        "decoração",
+        "claro"
+      ],
+      "rank": 124,
+      "placements": [
+        "colecao.varanda"
+      ],
+      "seq": 25,
+      "created_at": "2026-08-05T00:00:00Z",
+      "updated_at": "2026-08-05T00:00:00Z",
+      "published_at": "2026-08-05T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00CGNKH8NV8ZEJPG74",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Garrafa alta de gargalo fino",
+      "description": "Garrafa alta de gargalo fino, feita à mão por Ateliê Barro Vivo.",
+      "category": "ceramica",
+      "category_path": "Cerâmica",
+      "price": {
+        "amount": 23000,
+        "currency": "BRL"
+      },
+      "quantity": 1,
+      "stock": 1,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "barro"
+        },
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "queima noborigama"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00HRXCMSZKY3GYB8VH",
+          "url": "https://images.unsplash.com/photo-1520408222757-6f9f95d87d5d?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=1.8&fp-x=0.55&fp-y=0.32",
+          "alt": "Garrafa alta de barro natural, de gargalo fino"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "peca-unica"
+      ],
+      "materials": [
+        "barro",
+        "queima noborigama"
+      ],
+      "tags": [
+        "garrafa",
+        "vaso",
+        "decoração",
+        "sala",
+        "terroso",
+        "presente"
+      ],
+      "section": {
+        "slug": "vasos",
+        "name": "Vasos e potes"
+      },
+      "rank": 2,
+      "placements": [],
+      "seq": 26,
+      "created_at": "2026-07-28T00:00:00Z",
+      "updated_at": "2026-07-28T00:00:00Z",
+      "published_at": "2026-07-28T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00QHT5ACHRY7553V3Q",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Par de jarras com interior azul",
+      "description": "Par de jarras com interior azul, feita à mão por Ateliê Barro Vivo.",
+      "category": "ceramica",
+      "category_path": "Cerâmica",
+      "price": {
+        "amount": 29000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 20,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "grés"
+        },
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "esmalte de cobalto"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00TCC2QH8DBT0M6T5G",
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=1.6&fp-x=0.6&fp-y=0.55",
+          "alt": "Duas jarras de grés claro com interior azul, uma com lavanda"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "encomenda"
+      ],
+      "materials": [
+        "grés",
+        "esmalte de cobalto"
+      ],
+      "tags": [
+        "jarra",
+        "mesa posta",
+        "flores",
+        "azul",
+        "claro",
+        "presente"
+      ],
+      "section": {
+        "slug": "jarras",
+        "name": "Jarras e copos"
+      },
+      "rank": 3,
+      "placements": [],
+      "seq": 27,
+      "created_at": "2026-09-05T00:00:00Z",
+      "updated_at": "2026-09-05T00:00:00Z",
+      "published_at": "2026-09-05T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00M58GTDFCSWX8JWSG",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Tigela verde celadon",
+      "description": "Tigela verde celadon, feita à mão por Ateliê Barro Vivo.",
+      "category": "ceramica",
+      "category_path": "Cerâmica",
+      "price": {
+        "amount": 9800,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "grés"
+        },
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "esmalte celadon"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00K24Q2664D00403GQ",
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.57&fp-y=0.83",
+          "alt": "Tigela de cerâmica verde-clara vista de cima"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "novo"
+      ],
+      "materials": [
+        "grés",
+        "esmalte celadon"
+      ],
+      "tags": [
+        "tigela",
+        "mesa posta",
+        "cozinha",
+        "verde",
+        "presente",
+        "barato"
+      ],
+      "section": {
+        "slug": "tigelas",
+        "name": "Tigelas e bowls"
+      },
+      "rank": 4,
+      "placements": [],
+      "seq": 28,
+      "created_at": "2026-10-16T00:00:00Z",
+      "updated_at": "2026-10-16T00:00:00Z",
+      "published_at": "2026-10-16T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00G8JTJ6YN0ECYQ02X",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Vaso bojudo de barro natural",
+      "description": "Vaso bojudo de barro natural, feita à mão por Ateliê Barro Vivo.",
+      "category": "ceramica",
+      "category_path": "Cerâmica",
+      "price": {
+        "amount": 18500,
+        "currency": "BRL"
+      },
+      "quantity": 1,
+      "stock": 1,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "barro"
+        },
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "queima noborigama"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00F0V3XRCYVYSQEDZR",
+          "url": "https://images.unsplash.com/photo-1520408222757-6f9f95d87d5d?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.66&fp-y=0.68",
+          "alt": "Vaso de barro natural de corpo arredondado e boca curta"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "peca-unica"
+      ],
+      "materials": [
+        "barro",
+        "queima noborigama"
+      ],
+      "tags": [
+        "vaso",
+        "decoração",
+        "estante",
+        "terroso"
+      ],
+      "section": {
+        "slug": "vasos",
+        "name": "Vasos e potes"
+      },
+      "rank": 5,
+      "placements": [],
+      "seq": 29,
+      "created_at": "2026-10-08T00:00:00Z",
+      "updated_at": "2026-10-08T00:00:00Z",
+      "published_at": "2026-10-08T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00DFTQB0BRGDQ3VF0R",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Saladeira de grés com azul-cobalto",
+      "description": "Saladeira de grés com azul-cobalto, feita à mão por Ateliê Barro Vivo.",
+      "category": "ceramica",
+      "category_path": "Cerâmica",
+      "price": {
+        "amount": 26000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "grés"
+        },
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "esmalte de cobalto"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT004S2E6J70MCD6JRMV",
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2&fp-x=0.83&fp-y=0.72",
+          "alt": "Saladeira de grés claro com interior azul-cobalto"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "grés",
+        "esmalte de cobalto"
+      ],
+      "tags": [
+        "saladeira",
+        "tigela",
+        "mesa posta",
+        "cozinha",
+        "azul",
+        "jantar"
+      ],
+      "section": {
+        "slug": "tigelas",
+        "name": "Tigelas e bowls"
+      },
+      "rank": 6,
+      "placements": [],
+      "seq": 30,
+      "created_at": "2026-10-01T00:00:00Z",
+      "updated_at": "2026-10-01T00:00:00Z",
+      "published_at": "2026-10-01T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00X6SZ8M0HB7MS2ZM8",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Tigela salpicada de cinzas",
+      "description": "Tigela salpicada de cinzas, feita à mão por Ateliê Barro Vivo.",
+      "category": "ceramica",
+      "category_path": "Cerâmica",
+      "price": {
+        "amount": 11000,
+        "currency": "BRL"
+      },
+      "quantity": 1,
+      "stock": 1,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "grés"
+        },
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "esmalte de cinzas"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT0061JQEFXSR3QY4X7S",
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.13&fp-y=0.62",
+          "alt": "Tigela cinza-escura salpicada de pontos, vista de cima"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "peca-unica"
+      ],
+      "materials": [
+        "grés",
+        "esmalte de cinzas"
+      ],
+      "tags": [
+        "tigela",
+        "mesa posta",
+        "cozinha",
+        "escuro",
+        "presente"
+      ],
+      "section": {
+        "slug": "tigelas",
+        "name": "Tigelas e bowls"
+      },
+      "rank": 7,
+      "placements": [],
+      "seq": 31,
+      "created_at": "2026-10-03T00:00:00Z",
+      "updated_at": "2026-10-03T00:00:00Z",
+      "published_at": "2026-10-03T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00JHD2QYXK379XM2H7",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Tigela coral de esmalte de cobre",
+      "description": "Tigela coral de esmalte de cobre, feita à mão por Ateliê Barro Vivo.",
+      "category": "ceramica",
+      "category_path": "Cerâmica",
+      "price": {
+        "amount": 9600,
+        "currency": "BRL"
+      },
+      "quantity": 2,
+      "stock": 2,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "grés"
+        },
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "esmalte de cobre"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00A481717J6Q8970FF",
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.7&fp-y=0.66",
+          "alt": "Tigela de cerâmica com interior coral e borda escura"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "ultimas"
+      ],
+      "materials": [
+        "grés",
+        "esmalte de cobre"
+      ],
+      "tags": [
+        "tigela",
+        "mesa posta",
+        "cozinha",
+        "colorido",
+        "presente",
+        "barato"
+      ],
+      "section": {
+        "slug": "tigelas",
+        "name": "Tigelas e bowls"
+      },
+      "rank": 8,
+      "placements": [],
+      "seq": 32,
+      "created_at": "2026-09-27T00:00:00Z",
+      "updated_at": "2026-09-27T00:00:00Z",
+      "published_at": "2026-09-27T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT004VHCH85FH3PQY2TZ",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Bowls empilháveis com copo",
+      "description": "Bowls empilháveis com copo, feita à mão por Ateliê Barro Vivo.",
+      "category": "ceramica",
+      "category_path": "Cerâmica",
+      "price": {
+        "amount": 34000,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 20,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "grés"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00BXM9806SYCWGQAS9",
+          "url": "https://images.unsplash.com/photo-1610128361323-6e941c97f023?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=1.8&fp-x=0.2&fp-y=0.62",
+          "alt": "Dois bowls de grés empilhados com um copo por cima"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [
+        "encomenda"
+      ],
+      "materials": [
+        "grés"
+      ],
+      "tags": [
+        "bowl",
+        "conjunto",
+        "mesa posta",
+        "cozinha",
+        "claro",
+        "jantar"
+      ],
+      "section": {
+        "slug": "conjuntos",
+        "name": "Conjuntos para a mesa"
+      },
+      "rank": 9,
+      "placements": [],
+      "seq": 33,
+      "created_at": "2026-08-15T00:00:00Z",
+      "updated_at": "2026-08-15T00:00:00Z",
+      "published_at": "2026-08-15T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00HBYCQXZEWPBFQHYK",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Tigela cinza-chumbo",
+      "description": "Tigela cinza-chumbo, feita à mão por Ateliê Barro Vivo.",
+      "category": "ceramica",
+      "category_path": "Cerâmica",
+      "price": {
+        "amount": 9500,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "grés"
+        },
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "esmalte de cinzas"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00D7S1XP5H4H6MBHNQ",
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.68&fp-y=0.275",
+          "alt": "Tigela de cerâmica cinza-chumbo vista de cima"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "grés",
+        "esmalte de cinzas"
+      ],
+      "tags": [
+        "tigela",
+        "mesa posta",
+        "cozinha",
+        "escuro",
+        "barato"
+      ],
+      "section": {
+        "slug": "tigelas",
+        "name": "Tigelas e bowls"
+      },
+      "rank": 10,
+      "placements": [],
+      "seq": 34,
+      "created_at": "2026-09-12T00:00:00Z",
+      "updated_at": "2026-09-12T00:00:00Z",
+      "published_at": "2026-09-12T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00JHN2255TDDDEQXFE",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Tigela branca de borda fina",
+      "description": "Tigela branca de borda fina, feita à mão por Ateliê Barro Vivo.",
+      "category": "ceramica",
+      "category_path": "Cerâmica",
+      "price": {
+        "amount": 8800,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "porcelana"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00R22XN2GWMF7D43KM",
+          "url": "https://images.unsplash.com/photo-1577576223085-3eb295cd414f?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.51&fp-y=0.49",
+          "alt": "Tigela branca de cerâmica vista de cima"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "porcelana"
+      ],
+      "tags": [
+        "tigela",
+        "mesa posta",
+        "cozinha",
+        "claro",
+        "barato"
+      ],
+      "section": {
+        "slug": "tigelas",
+        "name": "Tigelas e bowls"
+      },
+      "rank": 11,
+      "placements": [],
+      "seq": 35,
+      "created_at": "2026-08-22T00:00:00Z",
+      "updated_at": "2026-08-22T00:00:00Z",
+      "published_at": "2026-08-22T00:00:00Z"
+    },
+    {
+      "id": "lst_01M6A6FT00ZH3A34BJ9GBK84EN",
+      "storefront_id": "stf_01M6A6FT00CZM240S7HHZMNRKX",
+      "title": "Par de vasos miniatura",
+      "description": "Par de vasos miniatura, feita à mão por Ateliê Barro Vivo.",
+      "category": "ceramica",
+      "category_path": "Cerâmica",
+      "price": {
+        "amount": 7200,
+        "currency": "BRL"
+      },
+      "quantity": 3,
+      "stock": 3,
+      "production_days": 0,
+      "customizable": false,
+      "ships_abroad": false,
+      "attributes": [
+        {
+          "key": "livre:materia",
+          "label": "Matéria",
+          "kind": "text",
+          "value": "barro"
+        }
+      ],
+      "photos": [
+        {
+          "photo_id": "pho_01M6A6FT00QR3NK55DYX043J6A",
+          "url": "https://images.unsplash.com/photo-1520408222757-6f9f95d87d5d?w=1000&q=72&auto=format&fit=crop&h=1000&crop=focalpoint&fp-z=2.4&fp-x=0.8&fp-y=0.8",
+          "alt": "Dois vasos pequenos de barro natural"
+        }
+      ],
+      "status": "published",
+      "curated_badges": [],
+      "materials": [
+        "barro"
+      ],
+      "tags": [
+        "vaso",
+        "miniatura",
+        "decoração",
+        "estante",
+        "terroso",
+        "presente",
+        "barato"
+      ],
+      "section": {
+        "slug": "vasos",
+        "name": "Vasos e potes"
+      },
+      "rank": 12,
+      "placements": [],
+      "seq": 36,
+      "created_at": "2026-09-08T00:00:00Z",
+      "updated_at": "2026-09-08T00:00:00Z",
+      "published_at": "2026-09-08T00:00:00Z"
+    }
+  ]
+}
