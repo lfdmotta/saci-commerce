@@ -1,0 +1,25 @@
+[package]
+name = "saci-support-api"
+version = "0.1.0"
+description = "support-api: chamados das vitrines, protocolo e conversa, abertos pela Caipora (proposta 5.11)."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+aws = ["saci-commerce-kit/aws"]
+
+[dependencies]
+saci-commerce-kit.workspace = true
+saci-ids.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true
+
+[lints]
+workspace = true
