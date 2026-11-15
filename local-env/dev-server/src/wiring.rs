@@ -82,7 +82,7 @@ pub(crate) struct App {
     pub support: Arc<dyn HttpService>,
     /// Notificações.
     pub notifications: Arc<dyn HttpService>,
-    /// Sandbox do `identity`.
+    /// `/v1/identity`: sandbox ou o `saci-identity-dev` (ponte).
     pub identity: Arc<dyn HttpService>,
     /// Sandbox do `payments`.
     pub payments: Arc<dyn HttpService>,
@@ -98,8 +98,8 @@ pub(crate) struct App {
     pub dev_signer: DevUrlSigner,
     /// Papéis de vitrine (o autorizador lê daqui).
     pub grants: Arc<MemoryGrants>,
-    /// Chave das sessões.
-    pub session_key: Arc<Es256Key>,
+    /// Chave pública que confere as sessões (a do sandbox ou a do saci-identity-dev).
+    pub session_public_key: Vec<u8>,
     /// Chave do guest token.
     pub guest_key: Arc<Es256Key>,
     /// Sandbox (repasse da Caipora simulado).
@@ -152,6 +152,15 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
         public_url,
     )?;
     sandbox.register(&local);
+    // Com SACI_DEV_IDENTITY_URL, identity e kyc são o saci-identity de verdade.
+    let identity_bridge = crate::identity_bridge::Bridge::from_env()?;
+    if let Some(bridge) = &identity_bridge {
+        bridge.register(&local);
+    }
+    let session_public_key = match &identity_bridge {
+        Some(bridge) => bridge.session_public_key()?,
+        None => session_key.public_key(),
+    };
 
     let catalog_store = store(&bus);
     let catalog = Catalog {
@@ -296,7 +305,11 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
         orders: Arc::new(orders.clone()),
         support: Arc::new(support.clone()),
         notifications: Arc::new(notifications),
-        identity: Arc::new(IdentityHttp(sandbox.clone())),
+        identity: match identity_bridge {
+            Some(bridge) => Arc::new(bridge),
+            None => Arc::new(IdentityHttp(sandbox.clone())),
+        },
+        session_public_key,
         payments: Arc::new(PaymentsHttp(sandbox.clone())),
         pipeline,
         quarantine,
@@ -304,7 +317,6 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
         files,
         dev_signer,
         grants,
-        session_key,
         guest_key,
         sandbox: sandbox.clone(),
         bus,

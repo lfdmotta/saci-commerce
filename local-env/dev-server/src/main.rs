@@ -21,11 +21,13 @@
 //! | `SACI_DEV_PUBLIC_URL` | `http://localhost:8787` | Base das URLs devolvidas (troque pelo IP da máquina para o app no celular) |
 //! | `SACI_DEV_ORIGINS` | `http://localhost:8081,http://localhost:19006` | Origens aceitas no CORS |
 //! | `SACI_DEV_BIND` | `127.0.0.1` | Interface de rede (use `0.0.0.0` para o celular na mesma rede) |
+//! | `SACI_DEV_IDENTITY_URL` | — | Usa o `saci-identity-dev` (`http://localhost:8788`) no lugar do sandbox de `identity` e `kyc` (`identity_bridge.rs`) |
 //! | `RUST_LOG` | `info` | Nível de log |
 //!
 //! Detalhes e roteiro de teste em `local-env/README.md`. **Só para
 //! desenvolvimento**: chaves geradas a cada início, dados em memória.
 
+mod identity_bridge;
 mod wiring;
 
 use std::collections::HashMap;
@@ -270,7 +272,7 @@ fn authenticate(app: &App, req: &mut Request) -> Result<(), saci_commerce_kit::P
         .and_then(|h| h.strip_prefix("Bearer "))
         .map(str::to_owned)
     {
-        let claims = jwt::verify(&bearer, &app.session_key.public_key(), now)
+        let claims = jwt::verify(&bearer, &app.session_public_key, now)
             .map_err(|_| problem("unauthorized"))?;
         if claims["exp"].as_u64().unwrap_or(0) < now {
             return Err(problem("session-expired"));
