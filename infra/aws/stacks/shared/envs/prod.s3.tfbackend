@@ -1,0 +1,6 @@
+bucket       = "saci-tfstate-<ACCOUNT_ID>-sa-east-1"
+# O papel de implantação do domínio só escreve em services/<domínio>/.
+key          = "services/commerce-shared/terraform.tfstate"
+region       = "sa-east-1"
+encrypt      = true
+use_lockfile = true
