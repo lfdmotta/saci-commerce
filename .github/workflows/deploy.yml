@@ -1,0 +1,248 @@
+# Implantação dos domínios: dev a cada push na main; staging e prod por
+# aprovação no ambiente do GitHub (revisores obrigatórios).
+#
+# Cada domínio é um "serviço" para a plataforma (ADR 0003): um binário
+# (saci-<domínio>), um stack (domains/<domínio>/infra/aws), um papel de
+# implantação (saci-<env>-deploy-<domínio>, registrado em
+# ci/aws/stacks/github-oidc do saci-boiuna) e um estado (services/<domínio>/).
+# Só o workflow reutilizável da plataforma assume esses papéis (OIDC preso a
+# job_workflow_ref, seção 9.8).
+#
+# A ordem segue as dependências das migrações (sellers → catalog → ...). O
+# stack compartilhado (infra/aws/stacks/shared) é aplicado uma vez por
+# ambiente pelo runbook docs/runbooks/primeira-implantacao.md.
+#
+# Pendência da plataforma (ADR 0002): o reusable-deploy-service.yml clona o
+# saci-boiuna em .platform/; este repositório usa os crates e módulos em
+# ../saci-boiuna. Até a plataforma publicar a tag v0.1.0 (dependências git)
+# ou aceitar o checkout ao lado, a implantação por CI fica bloqueada.
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  sellers-dev:
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: sellers-dev
+      saci-environment: dev
+      service: sellers
+      lambda-bin: saci-sellers
+      infra-dir: domains/sellers/infra/aws
+      platform-ref: v1
+
+  catalog-dev:
+    needs: [sellers-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: catalog-dev
+      saci-environment: dev
+      service: catalog
+      lambda-bin: saci-catalog
+      infra-dir: domains/catalog/infra/aws
+      platform-ref: v1
+
+  media-dev:
+    needs: [catalog-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: media-dev
+      saci-environment: dev
+      service: media
+      lambda-bin: saci-media
+      infra-dir: domains/media/infra/aws
+      platform-ref: v1
+
+  shipping-dev:
+    needs: [media-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: shipping-dev
+      saci-environment: dev
+      service: shipping
+      lambda-bin: saci-shipping
+      infra-dir: domains/shipping/infra/aws
+      platform-ref: v1
+
+  orders-dev:
+    needs: [shipping-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: orders-dev
+      saci-environment: dev
+      service: orders
+      lambda-bin: saci-orders
+      infra-dir: domains/orders/infra/aws
+      platform-ref: v1
+
+  checkout-dev:
+    needs: [orders-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: checkout-dev
+      saci-environment: dev
+      service: checkout
+      lambda-bin: saci-checkout
+      infra-dir: domains/checkout/infra/aws
+      platform-ref: v1
+
+  customers-dev:
+    needs: [checkout-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: customers-dev
+      saci-environment: dev
+      service: customers
+      lambda-bin: saci-customers
+      infra-dir: domains/customers/infra/aws
+      platform-ref: v1
+
+  reviews-dev:
+    needs: [customers-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: reviews-dev
+      saci-environment: dev
+      service: reviews
+      lambda-bin: saci-reviews
+      infra-dir: domains/reviews/infra/aws
+      platform-ref: v1
+
+  support-dev:
+    needs: [reviews-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: support-dev
+      saci-environment: dev
+      service: support
+      lambda-bin: saci-support
+      infra-dir: domains/support/infra/aws
+      platform-ref: v1
+
+  notifications-dev:
+    needs: [support-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: notifications-dev
+      saci-environment: dev
+      service: notifications
+      lambda-bin: saci-notifications
+      infra-dir: domains/notifications/infra/aws
+      platform-ref: v1
+
+  sellers-prod:
+    needs: [sellers-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: sellers-prod
+      saci-environment: prod
+      service: sellers
+      lambda-bin: saci-sellers
+      infra-dir: domains/sellers/infra/aws
+      platform-ref: v1
+
+  catalog-prod:
+    needs: [sellers-prod, catalog-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: catalog-prod
+      saci-environment: prod
+      service: catalog
+      lambda-bin: saci-catalog
+      infra-dir: domains/catalog/infra/aws
+      platform-ref: v1
+
+  media-prod:
+    needs: [catalog-prod, media-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: media-prod
+      saci-environment: prod
+      service: media
+      lambda-bin: saci-media
+      infra-dir: domains/media/infra/aws
+      platform-ref: v1
+
+  shipping-prod:
+    needs: [media-prod, shipping-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: shipping-prod
+      saci-environment: prod
+      service: shipping
+      lambda-bin: saci-shipping
+      infra-dir: domains/shipping/infra/aws
+      platform-ref: v1
+
+  orders-prod:
+    needs: [shipping-prod, orders-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: orders-prod
+      saci-environment: prod
+      service: orders
+      lambda-bin: saci-orders
+      infra-dir: domains/orders/infra/aws
+      platform-ref: v1
+
+  checkout-prod:
+    needs: [orders-prod, checkout-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: checkout-prod
+      saci-environment: prod
+      service: checkout
+      lambda-bin: saci-checkout
+      infra-dir: domains/checkout/infra/aws
+      platform-ref: v1
+
+  customers-prod:
+    needs: [checkout-prod, customers-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: customers-prod
+      saci-environment: prod
+      service: customers
+      lambda-bin: saci-customers
+      infra-dir: domains/customers/infra/aws
+      platform-ref: v1
+
+  reviews-prod:
+    needs: [customers-prod, reviews-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: reviews-prod
+      saci-environment: prod
+      service: reviews
+      lambda-bin: saci-reviews
+      infra-dir: domains/reviews/infra/aws
+      platform-ref: v1
+
+  support-prod:
+    needs: [reviews-prod, support-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: support-prod
+      saci-environment: prod
+      service: support
+      lambda-bin: saci-support
+      infra-dir: domains/support/infra/aws
+      platform-ref: v1
+
+  notifications-prod:
+    needs: [support-prod, notifications-dev]
+    uses: saci-art/saci-boiuna/.github/workflows/reusable-deploy-service.yml@v1
+    with:
+      github-environment: notifications-prod
+      saci-environment: prod
+      service: notifications
+      lambda-bin: saci-notifications
+      infra-dir: domains/notifications/infra/aws
+      platform-ref: v1
