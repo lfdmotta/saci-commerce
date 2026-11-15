@@ -1,0 +1,29 @@
+# Metadados do serviço (seção 9.7). Validado por ci/schemas/service.schema.json
+# do saci-boiuna e pelas políticas de classe de dado.
+name: dispatcher
+domain: notifications
+owner: saci-art/commerce
+language: rust
+runtime: aws-lambda
+account: prod
+# Funções (SACI_FUNCTION) do binário saci-notifications que pertencem a este serviço (ADR 0003).
+routes: []
+data:
+  stores:
+    - name: saci-<env>-notifications-push
+      kind: sqs
+      class: C2
+      kms_key_class: C2
+logging:
+  request_body: false
+events:
+  publishes: []
+  consumes:
+    - checkout.order.confirmed.v1
+    - orders.sale.shipped.v1
+    - orders.sale.delivered.v1
+    - support.ticket.opened.v1
+    - finance.payout.sent.v1
+slo:
+  availability: 99.9
+  latency_p99_ms: 300

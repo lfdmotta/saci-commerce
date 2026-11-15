@@ -1,0 +1,26 @@
+[package]
+name = "saci-notifications-dispatcher"
+version = "0.1.0"
+description = "dispatcher e push-sender: eventos → preferências → avisos push, enviados em paralelo."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+aws = ["saci-commerce-kit/aws", "saci-notifications-api/aws"]
+
+[dependencies]
+saci-commerce-kit.workspace = true
+saci-ids.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+saci-notifications-api.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true
+
+[lints]
+workspace = true

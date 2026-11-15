@@ -1,0 +1,26 @@
+[package]
+name = "saci-notifications-api"
+version = "0.1.0"
+description = "notifications-api: aparelhos e preferências de notificação (/v1/notifications, proposta 9.6)."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+aws = ["saci-commerce-kit/aws"]
+
+[dependencies]
+saci-commerce-kit.workspace = true
+saci-ids.workspace = true
+serde.workspace = true
+hex.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true
+
+[lints]
+workspace = true
