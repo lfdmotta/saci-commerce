@@ -570,6 +570,40 @@ impl IdentityHttp {
                 )
                 .await
             }
+            ("POST", ["v1", "identity", "me", "contact-confirmations"]) => {
+                // A troca de contato pedida em `PATCH /v1/customers/me` passa a valer.
+                let account_id = auth::user(req)?.to_owned();
+                #[derive(Deserialize)]
+                struct Body {
+                    code: String,
+                }
+                let b: Body = req.json()?;
+                let (mut account, version) = s.account(&account_id).await?;
+                let pending_key = format!("PENDINGCONTACT#{account_id}");
+                let Some((pending, _)) = s.store.load::<Value>(&pending_key, "META").await? else {
+                    return Err(problem("code-expired"));
+                };
+                if b.code != VERIFICATION_CODE {
+                    return Err(problem("invalid-code").with_field("code", "O código não confere."));
+                }
+                let value = pending["value"].as_str().map(str::to_owned);
+                if pending["channel"] == "email" {
+                    account.email = value;
+                } else {
+                    account.phone = value;
+                }
+                account.pending_contact = None;
+                s.store
+                    .write(vec![
+                        WriteOp::replace(
+                            Item::new(format!("ACC#{account_id}"), "META", &account)?,
+                            version,
+                        ),
+                        WriteOp::delete(pending_key, "META"),
+                    ])
+                    .await?;
+                Ok(Response::no_content())
+            }
             ("DELETE", ["v1", "identity", "sessions", "current"]) => {
                 if let Some(token) = cookie(req, REFRESH_COOKIE) {
                     s.store
@@ -790,12 +824,24 @@ impl InternalHandler for IdentityInternal {
                         a.pending_contact =
                             Some(json!({ "channel": "sms", "masked_destination": mask_phone(p) }));
                     }
-                    s.store
-                        .write(vec![WriteOp::replace(
-                            Item::new(format!("ACC#{id}"), "META", &a)?,
-                            version,
-                        )])
-                        .await?;
+                    let mut ops = vec![WriteOp::replace(
+                        Item::new(format!("ACC#{id}"), "META", &a)?,
+                        version,
+                    )];
+                    // O contato novo só vale com o código (`POST /v1/identity/me/contact-confirmations`).
+                    let pending = match (body["email"].as_str(), body["phone"].as_str()) {
+                        (Some(e), _) => Some(json!({ "channel": "email", "value": e })),
+                        (_, Some(p)) => Some(json!({ "channel": "sms", "value": p })),
+                        _ => None,
+                    };
+                    if let Some(pending) = pending {
+                        ops.push(WriteOp::put(Item::new(
+                            format!("PENDINGCONTACT#{id}"),
+                            "META",
+                            &pending,
+                        )?));
+                    }
+                    s.store.write(ops).await?;
                     reply(&json!({}))
                 }
                 "notify" | "send_to_address" => {

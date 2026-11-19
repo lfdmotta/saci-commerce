@@ -218,11 +218,21 @@ impl Customers {
             {
                 return Err(invalid("phone", "Use o celular com DDD, só números."));
             }
+            // Só os campos que vieram: no cofre, `null` tira o contato e ausente
+            // mantém. Mandar `"phone": null` quando só o e-mail mudou apagaria o
+            // celular.
+            let mut change = json!({ "account_id": account });
+            if let Some(email) = &patch.email {
+                change["email"] = json!(email);
+            }
+            if let Some(phone) = &patch.phone {
+                change["phone"] = json!(phone);
+            }
             let _: Value = internal::call(
                 self.internal.as_ref(),
                 "identity",
                 "request_contact_change",
-                &json!({ "account_id": account, "email": patch.email, "phone": patch.phone }),
+                &change,
             )
             .await?;
         }
