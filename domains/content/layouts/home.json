@@ -256,11 +256,11 @@
       "type": "artisan-spotlight",
       "props": {
         "eyebrow": "Artesã do mês",
-        "artisanId": "art-isabel",
+        "artisanId": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
         "source": {
           "resource": "listings",
           "params": {
-            "artisanId": "art-isabel",
+            "artisanId": "stf_01M6A6FT00SKD6SGC1XPC7KS7E",
             "limit": 3
           }
         },
