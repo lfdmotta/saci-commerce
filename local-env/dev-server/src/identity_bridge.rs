@@ -1,5 +1,7 @@
-//! Ponte opcional com o servidor de desenvolvimento do `saci-identity`
-//! (`SACI_DEV_IDENTITY_URL=http://localhost:8788`).
+//! Ponte opcional com os servidores de desenvolvimento de outros repositórios:
+//! o do `saci-identity` (`SACI_DEV_IDENTITY_URL=http://localhost:8788`) e o do
+//! `saci-payments` (`SACI_DEV_PAYMENTS_URL=http://localhost:8789`, ver
+//! `payments_bridge.rs`).
 //!
 //! Sem a variável, nada muda: `identity` e `kyc` são o sandbox. Com ela:
 //!
@@ -29,6 +31,9 @@ use serde_json::Value;
 #[derive(Debug, Clone)]
 pub(crate) struct Bridge {
     host: String,
+    /// Repassa a conta conferida aqui (`x-saci-dev-account`, `x-saci-dev-auth-time`),
+    /// como o contexto do autorizador chega às funções na nuvem (ponte do payments).
+    forward_account: bool,
 }
 
 /// Resposta crua.
@@ -82,15 +87,29 @@ fn parse(raw: &[u8]) -> Option<Raw> {
 impl Bridge {
     /// Lê `SACI_DEV_IDENTITY_URL`. Ausente: sem ponte.
     pub(crate) fn from_env() -> Result<Option<Self>, String> {
-        let Ok(url) = std::env::var("SACI_DEV_IDENTITY_URL") else {
+        Self::from_var("SACI_DEV_IDENTITY_URL", false)
+    }
+
+    /// Lê a URL de outro servidor de desenvolvimento em `var`. Ausente: sem ponte.
+    pub(crate) fn from_var(var: &str, forward_account: bool) -> Result<Option<Self>, String> {
+        let Ok(url) = std::env::var(var) else {
             return Ok(None);
         };
         let host = url
             .strip_prefix("http://")
-            .ok_or("SACI_DEV_IDENTITY_URL deve ser http://localhost:<porta>")?
+            .ok_or_else(|| format!("{var} deve ser http://localhost:<porta>"))?
             .trim_end_matches('/')
             .to_owned();
-        Ok(Some(Self { host }))
+        Ok(Some(Self {
+            host,
+            forward_account,
+        }))
+    }
+
+    /// `POST` de um JSON (eventos para o outro servidor).
+    pub(crate) async fn post_json(&self, target: &str, body: &[u8]) -> Result<u16, String> {
+        let headers = [("content-type".to_owned(), "application/json".to_owned())];
+        Ok(self.send("POST", target, &headers, body).await?.status)
     }
 
     /// A chave pública (ponto não comprimido) das sessões do `saci-identity-dev`.
@@ -149,7 +168,12 @@ impl Bridge {
 
     /// Troca os alvos `identity` e `kyc` do sandbox pelos de verdade.
     pub(crate) fn register(&self, local: &LocalInternal) {
-        for target in ["identity", "kyc"] {
+        self.register_targets(local, &["identity", "kyc"]);
+    }
+
+    /// Troca os alvos internos dados pelos do outro servidor (`/internal/{alvo}`).
+    pub(crate) fn register_targets(&self, local: &LocalInternal, targets: &[&'static str]) {
+        for target in targets.iter().copied() {
             local.register(
                 target,
                 std::sync::Arc::new(Remote {
@@ -214,6 +238,16 @@ impl HttpService for Bridge {
             }
             if let Some(order) = req.auth.as_ref().and_then(|a| a.order_id.clone()) {
                 headers.push(("x-saci-dev-guest-order".into(), order));
+            }
+            if self.forward_account
+                && let Some(auth) = &req.auth
+                && let Some(account) = &auth.account_id
+            {
+                headers.push(("x-saci-dev-account".into(), account.clone()));
+                headers.push((
+                    "x-saci-dev-auth-time".into(),
+                    auth.auth_time.unwrap_or(0).to_string(),
+                ));
             }
             match self.send(&req.method, &target, &headers, &req.body).await {
                 Ok(raw) => {

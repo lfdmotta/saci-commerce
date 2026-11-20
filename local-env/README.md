@@ -26,7 +26,11 @@ O servidor faz o papel de toda a borda: CORS para o site do Expo, autenticação
 
 ### Com o saci-identity de verdade
 
-Com o `saci-identity-dev` no ar (`task dev` no `saci-identity`, porta 8788), suba este servidor com `SACI_DEV_IDENTITY_URL=http://localhost:8788`: `/v1/identity/*` passa a ser repassado a ele (cadastro, sessões, MFA, pedidos do titular), os alvos internos `identity` (cofre) e `kyc` vão para `/internal/{alvo}` dele, e o `Authorization` é conferido com a chave pública das sessões dele. O resto (payments, finance, assistant) continua no sandbox. As contas de exemplo são as mesmas; o perfil passa a vir com e-mail e celular **mascarados**, como o cofre devolve. Detalhes em `saci-identity/local-env/README.md` e `src/identity_bridge.rs`.
+Com o `saci-identity-dev` no ar (`task dev` no `saci-identity`, porta 8788), suba este servidor com `SACI_DEV_IDENTITY_URL=http://localhost:8788`: `/v1/identity/*` passa a ser repassado a ele (cadastro, sessões, MFA, pedidos do titular), os alvos internos `identity` (cofre) e `kyc` vão para `/internal/{alvo}` dele, e o `Authorization` é conferido com a chave pública das sessões dele. O resto (finance, assistant e, sem a ponte abaixo, payments) continua no sandbox. As contas de exemplo são as mesmas; o perfil passa a vir com e-mail e celular **mascarados**, como o cofre devolve. Detalhes em `saci-identity/local-env/README.md` e `src/identity_bridge.rs`.
+
+### Com o saci-payments de verdade
+
+Com o `saci-payments-dev` no ar (`task dev` no `saci-payments`, porta 8789), suba este servidor também com `SACI_DEV_PAYMENTS_URL=http://localhost:8789`: `/v1/payments/*` (`pay.`) passa a ser repassado a ele com a conta já conferida aqui (`x-saci-dev-account`, o papel do contexto do autorizador), o alvo interno `payments` (`charge`, `charge_status`) vai para `/internal/payments` dele, os eventos `payments.*` chegam ao barramento daqui por `POST /dev/events` e `checkout.order.abandoned.v1` vai para lá. O `client-config` passa a apontar a tokenização para o PSP simulado de lá (`http://localhost:8789/psp/sandbox/tokens`). Detalhes em `saci-payments/local-env/README.md` e `src/payments_bridge.rs`.
 
 ### Contas de exemplo
 

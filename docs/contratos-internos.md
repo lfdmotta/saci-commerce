@@ -60,6 +60,9 @@ Hoje atendidas pelo **sandbox** (`crates/sandbox`, só fora de produção). Quan
 
 ### `saci-payments` (alvo `payments`)
 
+O repositório já existe: o contrato formal está em `saci-contracts/internal/payments.yaml` (com `refund`, `payout`, `payout_status` e `payment_records` além das duas abaixo), e no servidor de desenvolvimento a ponte `SACI_DEV_PAYMENTS_URL` troca o sandbox pelo `saci-payments-dev`. Na nuvem, falta apontar `external_functions.payments` para a função `saci-<env>-payments-internal` (saída `internal_function_arn` do stack do domínio de lá). `charge` também pode responder `paid`, que o checkout já trata.
+
+
 | Operação | Entrada | Saída |
 | --- | --- | --- |
 | `charge` | `{ order_id, account_id?, method, amount, card_token?, saved_card_id?, save_card, splits: [{ storefront_id, amount }] }` | `{ charge_id, status: authorized\|declined\|pending, pix?: { code, expires_at }, next_action? }` (idempotente por `order_id`) |
