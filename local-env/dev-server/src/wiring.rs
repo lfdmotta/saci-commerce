@@ -84,8 +84,10 @@ pub(crate) struct App {
     pub notifications: Arc<dyn HttpService>,
     /// `/v1/identity`: sandbox ou o `saci-identity-dev` (ponte).
     pub identity: Arc<dyn HttpService>,
-    /// Sandbox do `payments`.
+    /// `/v1/payments`: sandbox ou o `saci-payments-dev` (ponte).
     pub payments: Arc<dyn HttpService>,
+    /// Ponte com o `saci-payments-dev`, quando ligada (`SACI_DEV_PAYMENTS_URL`).
+    pub payments_bridge: Option<crate::identity_bridge::Bridge>,
     /// Esteira de imagens.
     pub pipeline: Pipeline,
     /// Quarentena e CDN e `files.` em memória.
@@ -156,6 +158,11 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
     let identity_bridge = crate::identity_bridge::Bridge::from_env()?;
     if let Some(bridge) = &identity_bridge {
         bridge.register(&local);
+    }
+    // Com SACI_DEV_PAYMENTS_URL, o alvo interno payments é o saci-payments de verdade.
+    let payments_bridge = crate::payments_bridge::from_env()?;
+    if let Some(bridge) = &payments_bridge {
+        bridge.register_targets(&local, &["payments"]);
     }
     let session_public_key = match &identity_bridge {
         Some(bridge) => bridge.session_public_key()?,
@@ -273,7 +280,7 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
     local.register("orders", Arc::new(orders.clone()));
     local.register("support", Arc::new(support.clone()));
 
-    let consumers: Vec<Arc<dyn Consumer>> = vec![
+    let mut consumers: Vec<Arc<dyn Consumer>> = vec![
         Arc::new(saci_catalog_api::consumer::ArtisanSync(catalog.clone())),
         Arc::new(indexer.clone()),
         Arc::new(WorkspaceProjector(sellers.clone())),
@@ -284,6 +291,11 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
         Arc::new(Handoffs(support.clone())),
         Arc::new(dispatcher),
     ];
+    if let Some(bridge) = &payments_bridge {
+        consumers.push(Arc::new(crate::payments_bridge::PaymentsEvents(
+            bridge.clone(),
+        )));
+    }
     let worker = Worker {
         rx: Mutex::new(Some(rx)),
         consumers,
@@ -310,7 +322,11 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
             None => Arc::new(IdentityHttp(sandbox.clone())),
         },
         session_public_key,
-        payments: Arc::new(PaymentsHttp(sandbox.clone())),
+        payments: match &payments_bridge {
+            Some(bridge) => Arc::new(bridge.clone()),
+            None => Arc::new(PaymentsHttp(sandbox.clone())),
+        },
+        payments_bridge,
         pipeline,
         quarantine,
         cdn,

@@ -7,7 +7,8 @@
 //! - O papel da **borda**: CORS para o site do Expo e autenticação equivalente
 //!   ao autorizador da plataforma (JWT ES256, papéis de vitrine, guest token).
 //! - O **sandbox** dos domínios ainda sem repositório (`/v1/identity`,
-//!   `/v1/payments`, KYC, Caipora), com as contas de exemplo das sementes.
+//!   `/v1/payments`, KYC, Caipora), com as contas de exemplo das sementes;
+//!   `identity` e `payments` podem ser os servidores de verdade (pontes).
 //! - O **CDN** e o `files.` locais: envio direto de imagens, fotos publicadas,
 //!   etiquetas assinadas e os layouts de `domains/content/layouts`.
 //!
@@ -22,12 +23,14 @@
 //! | `SACI_DEV_ORIGINS` | `http://localhost:8081,http://localhost:19006` | Origens aceitas no CORS |
 //! | `SACI_DEV_BIND` | `127.0.0.1` | Interface de rede (use `0.0.0.0` para o celular na mesma rede) |
 //! | `SACI_DEV_IDENTITY_URL` | — | Usa o `saci-identity-dev` (`http://localhost:8788`) no lugar do sandbox de `identity` e `kyc` (`identity_bridge.rs`) |
+//! | `SACI_DEV_PAYMENTS_URL` | — | Usa o `saci-payments-dev` (`http://localhost:8789`) no lugar do sandbox de `payments`: `/v1/payments`, cobrança, Pix e eventos (`payments_bridge.rs`) |
 //! | `RUST_LOG` | `info` | Nível de log |
 //!
 //! Detalhes e roteiro de teste em `local-env/README.md`. **Só para
 //! desenvolvimento**: chaves geradas a cada início, dados em memória.
 
 mod identity_bridge;
+mod payments_bridge;
 mod wiring;
 
 use std::collections::HashMap;
@@ -370,6 +373,9 @@ async fn dev_routes(app: &App, req: &Request, rest: &str) -> Response {
             }
         }
         ("POST", "assistant/handoffs") => handoff(app, req).await,
+        // Eventos de outro servidor de desenvolvimento (o saci-payments-dev publica
+        // payments.* aqui), entregues aos consumidores como o barramento faria.
+        ("POST", "events") => external_event(app, req),
         // A tokenização do PSP do sandbox (a interface chama direto, como faria com o PSP).
         ("POST", "psp/tokens") => app.payments.handle(req.clone()).await,
         ("POST", r) if r.starts_with("carrier/") => {
@@ -384,6 +390,23 @@ async fn dev_routes(app: &App, req: &Request, rest: &str) -> Response {
         }
         _ => Response::problem(not_found()),
     }
+}
+
+/// Publica no barramento em processo um CloudEvent vindo de outro servidor de
+/// desenvolvimento. Só `payments.*` (o que o saci-payments-dev publica).
+fn external_event(app: &App, req: &Request) -> Response {
+    use saci_commerce_kit::store::EventSink;
+    let Ok(event) = serde_json::from_slice::<saci_commerce_kit::events::Event>(&req.body) else {
+        return Response::problem(saci_commerce_kit::problem::invalid(
+            "event",
+            "CloudEvent esperado.",
+        ));
+    };
+    if app.payments_bridge.is_none() || !event.event_type.starts_with("payments.") {
+        return Response::problem(problem("forbidden"));
+    }
+    app.bus.publish(vec![event]);
+    Response::json(202, &json!({ "accepted": true }))
 }
 
 /// Resposta de arquivo: bytes em latin-1 dentro do `Response` de texto (ver `to_hyper`).

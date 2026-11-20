@@ -146,9 +146,11 @@ async function buy(item, payment, opts = {}) {
   };
   return call('POST', '/v1/checkout', { body, token: opts.anon ? undefined : token, idem: opts.idem ?? uuid() });
 }
-const tokenize = async (number) => (await call('POST', `${BASE}/dev/psp/tokens?appId=pk_sandbox`, { body: { type: 'card', card: { number, holder_name: 'MARINA', exp_month: 12, exp_year: 2030, cvv: '123' } } })).json.id;
+// O cartão vai direto ao PSP, na URL e com a chave pública do client-config (o
+// sandbox daqui ou o PSP simulado do saci-payments-dev, com SACI_DEV_PAYMENTS_URL).
 const cfg = await call('GET', '/v1/payments/client-config');
-check('client-config do PSP', cfg.json?.tokenize_url?.endsWith('/dev/psp/tokens'));
+check('client-config do PSP', Boolean(cfg.json?.tokenize_url && cfg.json?.public_key), cfg.json);
+const tokenize = async (number) => (await call('POST', `${cfg.json.tokenize_url}?appId=${encodeURIComponent(cfg.json.public_key)}`, { body: { type: 'card', card: { number, holder_name: 'MARINA', exp_month: 12, exp_year: 2030, cvv: '123' } } })).json.id;
 const idem = uuid();
 const card = await buy(forSale[0], { method: 'credito', card_token: await tokenize('4111111111111111') }, { idem });
 check('cartão aprovado → 201 pago', card.status === 201 && card.json.order.status === 'paid', card.json);
