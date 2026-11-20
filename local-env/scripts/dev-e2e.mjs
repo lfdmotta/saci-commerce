@@ -118,6 +118,12 @@ const me = await call('GET', '/v1/customers/me', { token });
 check('perfil com endereço do cofre', me.status === 200 && me.json.cpf_masked && me.json.address?.postal_code === '60175047', me.json);
 check('sem token: 401', (await call('GET', '/v1/customers/me')).json?.code === 'unauthorized');
 check('trocar e-mail pede senha (USER+)', (await call('PATCH', '/v1/customers/me', { token: (await login(BUYER)).access_token.replace(/./, (c) => c), body: { email: 'novo@exemplo.com' } })).status !== 500);
+// A troca só vale com o código que chega ao contato novo (rota acrescentada ao contrato do identity).
+const confirmed = await call('POST', '/v1/identity/me/contact-confirmations', { token, body: { code: '123456' } });
+check('troca de contato confirmada com o código', confirmed.status === 204, confirmed.json);
+const afterChange = await call('GET', '/v1/customers/me', { token });
+// O PATCH só com o e-mail não pode mandar `phone: null` ao cofre (null tira o contato).
+check('trocar o e-mail mantém o celular', Boolean(afterChange.json?.phone) && !afterChange.json?.pending_contact, afterChange.json);
 const purchases = await call('GET', '/v1/orders/me/purchases', { token });
 check('compras com pacotes', purchases.status === 200 && purchases.json.items.length > 0 && purchases.json.items[0].packages);
 check('favoritar', (await call('PUT', `/v1/customers/me/favorites/${piece.id}`, { token })).status === 204);

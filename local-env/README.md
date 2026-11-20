@@ -16,10 +16,11 @@ Dois jeitos de rodar o `saci-commerce` na máquina, com **o mesmo código Rust**
 # terminal 1: o back-end (http://localhost:8787)
 task dev                                  # ou: cargo run -p saci-commerce-dev
 
-# terminal 2: a interface
-cp local-env/interface.env.example ../saci-interface/.env
+# terminal 2: a interface (sem .env ela já aponta para http://localhost:8787)
 cd ../saci-interface && npm run web       # http://localhost:8081
 ```
+
+A interface simula na própria máquina só os domínios que ainda não têm serviço (`finance` e `assistant`); o resto vem deste servidor. Para mudar isso, ou liberar as fotos das sementes, copie [`interface.env.example`](interface.env.example) para `saci-interface/.env`. O guia de tudo junto (identity, commerce, interface e LocalStack) está em `saci-sume/ambiente-local.md`.
 
 O servidor faz o papel de toda a borda: CORS para o site do Expo, autenticação equivalente ao autorizador da plataforma (JWT ES256, papéis de vitrine lidos das concessões que o `sellers` grava, guest token do checkout), o `cdn.` e o `files.` (envio direto de imagens, fotos publicadas, etiquetas assinadas) e os layouts de `domains/content/layouts`.
 
@@ -59,26 +60,16 @@ KYC do sandbox: nascimento de menor de 18 anos → `underage`; nascimento em 1º
 
 ```bash
 task dev            # terminal 1
-task dev:e2e        # terminal 2: 80 verificações pelos caminhos da interface
+task dev:e2e        # terminal 2: 82 verificações pelos caminhos da interface
 ```
 
 O roteiro (`scripts/dev-e2e.mjs`) cobre vitrine aberta, conta, compra com cartão, recusa, Pix, compra sem conta, painel, anúncio com foto pela esteira, vendas, etiqueta, entrega pela transportadora, equipe e chamados.
 
-### O que ainda muda na interface
+### Interface e contratos
 
-A interface segue os contratos, mas cinco leituras ainda usam o formato anterior ao `saci-contracts` (lista em `saci-contracts/docs/divergencias-da-interface.md`). Com `EXPO_PUBLIC_USE_MOCKS=false`, estas telas precisam do ajuste na interface:
+A interface segue os contratos de `saci-contracts` e confere os tipos no `npm run typecheck` (`src/types/contractConformance.ts`). As divergências levantadas em `saci-contracts/docs/divergencias-da-interface.md` foram resolvidas na integração (#18): listas em `{ items }`, `next_cursor` ausente na última página, `If-Match` nas edições da vitrine e do anúncio, pacotes por vitrine nas compras e a confirmação da troca de contato.
 
-| Rota | A interface lê | O back-end devolve (contrato) |
-| --- | --- | --- |
-| `GET /v1/sellers/storefront-fonts` | `{ options }` | `{ items }` |
-| `GET /v1/catalog/listing-attributes` | `{ attributes }` | `{ items }` |
-| `GET /v1/sellers/me/team` | `{ members }` | `{ items }` |
-| `POST /v1/shipping/quotes` | lista solta | `{ items }` |
-| `GET /v1/support/me/tickets` | `{ tickets }` | `{ items }` (proposta 5.11) |
-| `GET /v1/orders/me/sales` | `{ orders, counts }` | `{ items, counts }` (proposta 5.8) |
-| `PUT /me/storefront`, `PUT /me/listings/{id}` | sem `If-Match` | `If-Match` obrigatório (ETag do `GET`) |
-
-Logotipo e capa enviados no servidor local saem em `http://localhost:8787/dev/cdn/...`; a interface só aceita imagem de vitrine em `https` (S-22), então nessa combinação ela mostra a identidade padrão. As fotos de anúncio aparecem normalmente.
+Logotipo e capa enviados no servidor local saem em `http://localhost:8787/dev/cdn/...`. Fora da nuvem (ambiente `local` da interface), a origem do back-end local entra na lista de mídia confiável (S-22), então eles aparecem; na nuvem, só `https` em `cdn.saci.art.br`.
 
 ## LocalStack (a infraestrutura de verdade)
 

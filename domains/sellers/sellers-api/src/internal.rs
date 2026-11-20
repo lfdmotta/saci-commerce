@@ -103,6 +103,27 @@ struct Count {
 }
 
 impl WorkspaceProjector {
+    /// Monta a projeção inteira de uma vitrine, perguntando as três contagens
+    /// aos donos delas. Usado quando a projeção ainda não existe: vitrines
+    /// semeadas por migração (as sementes de `catalog`, `orders` e `support`
+    /// não publicam eventos) ou anteriores ao consumidor.
+    ///
+    /// # Errors
+    ///
+    /// A chamada interna a um dos domínios falhou.
+    pub async fn rebuild(&self, storefront: &str) -> Result<Counts, Problem> {
+        for what in ["listings", "orders", "tickets"] {
+            self.refresh(storefront, what).await?;
+        }
+        Ok(self
+            .0
+            .store
+            .load::<Counts>(&keys::storefront(storefront), keys::COUNTS)
+            .await?
+            .map(|(c, _)| c)
+            .unwrap_or_default())
+    }
+
     async fn refresh(&self, storefront: &str, what: &str) -> Result<(), Problem> {
         let s = &self.0;
         let (target, op) = match what {

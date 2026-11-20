@@ -649,12 +649,20 @@ impl Sellers {
             return Err(not_found());
         };
         let (s, _) = self.storefront(&m.storefront_id).await?;
-        let counts = self
+        let counts = match self
             .store
             .load::<Counts>(&keys::storefront(&s.id), keys::COUNTS)
             .await?
-            .map(|(c, _)| c)
-            .unwrap_or_default();
+        {
+            Some((c, _)) => c,
+            // Projeção ainda não montada (vitrine semeada, sem eventos): monta agora.
+            // Se um domínio não responder, o painel abre com zero e a projeção
+            // se acerta no próximo evento.
+            None => crate::internal::WorkspaceProjector(self.clone())
+                .rebuild(&s.id)
+                .await
+                .unwrap_or_default(),
+        };
         let mut out = json!({
             "storefront_url_name": s.url_name, "brand_name": s.brand_name, "role": m.role,
             "permissions": if m.role == "owner" { Vec::new() } else { m.permissions },
