@@ -23,12 +23,14 @@
 //! | `SACI_DEV_ORIGINS` | `http://localhost:8081,http://localhost:19006` | Origens aceitas no CORS |
 //! | `SACI_DEV_BIND` | `127.0.0.1` | Interface de rede (use `0.0.0.0` para o celular na mesma rede) |
 //! | `SACI_DEV_IDENTITY_URL` | — | Usa o `saci-identity-dev` (`http://localhost:8788`) no lugar do sandbox de `identity` e `kyc` (`identity_bridge.rs`) |
+//! | `SACI_DEV_FINANCE_URL` | — | Usa o `saci-finance-dev` (`http://localhost:8790`): `/v1/finance`, `sale_payment`, eventos e `POST /internal/orders` para ele (`finance_bridge.rs`) |
 //! | `SACI_DEV_PAYMENTS_URL` | — | Usa o `saci-payments-dev` (`http://localhost:8789`) no lugar do sandbox de `payments`: `/v1/payments`, cobrança, Pix e eventos (`payments_bridge.rs`) |
 //! | `RUST_LOG` | `info` | Nível de log |
 //!
 //! Detalhes e roteiro de teste em `local-env/README.md`. **Só para
 //! desenvolvimento**: chaves geradas a cada início, dados em memória.
 
+mod finance_bridge;
 mod identity_bridge;
 mod payments_bridge;
 mod wiring;
@@ -224,6 +226,15 @@ async fn handle(app: &App, req: hyper::Request<Incoming>, peer: SocketAddr) -> R
         source_ip: Some(peer.ip().to_string()),
     };
 
+    // Operações internas para outros servidores de desenvolvimento (só da máquina).
+    if let Some(target) = path.strip_prefix("/internal/")
+        && peer.ip().is_loopback()
+        && target == "orders"
+        && app.finance.is_some()
+    {
+        return internal_call(app, target, &request).await;
+    }
+
     // Arquivos do CDN, de `files.` e o envio direto.
     if let Some(rest) = path.strip_prefix("/dev/") {
         return dev_routes(app, &request, rest).await;
@@ -258,6 +269,10 @@ async fn handle(app: &App, req: hyper::Request<Incoming>, peer: SocketAddr) -> R
         ["v1", "notifications", ..] => &app.notifications,
         ["v1", "identity", ..] => &app.identity,
         ["v1", "payments", ..] => &app.payments,
+        ["v1", "finance", ..] => match &app.finance {
+            Some(finance) => finance,
+            None => return finish(Err(not_found()), &request_id),
+        },
         _ => return finish(Err(not_found()), &request_id),
     };
     let started = std::time::Instant::now();
@@ -392,8 +407,24 @@ async fn dev_routes(app: &App, req: &Request, rest: &str) -> Response {
     }
 }
 
+/// Uma operação interna em processo, no formato `{op, payload}` das Lambdas.
+async fn internal_call(app: &App, target: &str, req: &Request) -> Response {
+    use saci_commerce_kit::internal::{InternalClient, InternalRequest, InternalResponse};
+    let Ok(call) = serde_json::from_slice::<InternalRequest>(&req.body) else {
+        return Response::problem(saci_commerce_kit::problem::invalid(
+            "op",
+            "Corpo {op, payload} esperado.",
+        ));
+    };
+    let out = match app.internal.call(target, &call.op, call.payload).await {
+        Ok(v) => InternalResponse::Ok(v),
+        Err(p) => InternalResponse::Error(p),
+    };
+    Response::ok(&out)
+}
+
 /// Publica no barramento em processo um CloudEvent vindo de outro servidor de
-/// desenvolvimento. Só `payments.*` (o que o saci-payments-dev publica).
+/// desenvolvimento: `payments.*` (saci-payments-dev) e `finance.*` (saci-finance-dev).
 fn external_event(app: &App, req: &Request) -> Response {
     use saci_commerce_kit::store::EventSink;
     let Ok(event) = serde_json::from_slice::<saci_commerce_kit::events::Event>(&req.body) else {
@@ -402,7 +433,9 @@ fn external_event(app: &App, req: &Request) -> Response {
             "CloudEvent esperado.",
         ));
     };
-    if app.payments_bridge.is_none() || !event.event_type.starts_with("payments.") {
+    let from_payments = app.payments_bridge.is_some() && event.event_type.starts_with("payments.");
+    let from_finance = app.finance.is_some() && event.event_type.starts_with("finance.");
+    if !from_payments && !from_finance {
         return Response::problem(problem("forbidden"));
     }
     app.bus.publish(vec![event]);
