@@ -20,17 +20,21 @@ task dev                                  # ou: cargo run -p saci-commerce-dev
 cd ../saci-interface && npm run web       # http://localhost:8081
 ```
 
-A interface simula na própria máquina só os domínios que ainda não têm serviço (`finance` e `assistant`); o resto vem deste servidor. Para mudar isso, ou liberar as fotos das sementes, copie [`interface.env.example`](interface.env.example) para `saci-interface/.env`. O guia de tudo junto (identity, commerce, interface e LocalStack) está em `saci-sume/ambiente-local.md`.
+A interface simula na própria máquina, por padrão, o `finance` e o `assistant`; o resto vem deste servidor. Com o `saci-finance` no ar (abaixo), use `EXPO_PUBLIC_MOCKS=assistant` na interface. Para mudar isso, ou liberar as fotos das sementes, copie [`interface.env.example`](interface.env.example) para `saci-interface/.env`. O guia de tudo junto (identity, commerce, interface e LocalStack) está em `saci-sume/ambiente-local.md`.
 
 O servidor faz o papel de toda a borda: CORS para o site do Expo, autenticação equivalente ao autorizador da plataforma (JWT ES256, papéis de vitrine lidos das concessões que o `sellers` grava, guest token do checkout), o `cdn.` e o `files.` (envio direto de imagens, fotos publicadas, etiquetas assinadas) e os layouts de `domains/content/layouts`.
 
 ### Com o saci-identity de verdade
 
-Com o `saci-identity-dev` no ar (`task dev` no `saci-identity`, porta 8788), suba este servidor com `SACI_DEV_IDENTITY_URL=http://localhost:8788`: `/v1/identity/*` passa a ser repassado a ele (cadastro, sessões, MFA, pedidos do titular), os alvos internos `identity` (cofre) e `kyc` vão para `/internal/{alvo}` dele, e o `Authorization` é conferido com a chave pública das sessões dele. O resto (finance, assistant e, sem a ponte abaixo, payments) continua no sandbox. As contas de exemplo são as mesmas; o perfil passa a vir com e-mail e celular **mascarados**, como o cofre devolve. Detalhes em `saci-identity/local-env/README.md` e `src/identity_bridge.rs`.
+Com o `saci-identity-dev` no ar (`task dev` no `saci-identity`, porta 8788), suba este servidor com `SACI_DEV_IDENTITY_URL=http://localhost:8788`: `/v1/identity/*` passa a ser repassado a ele (cadastro, sessões, MFA, pedidos do titular), os alvos internos `identity` (cofre) e `kyc` vão para `/internal/{alvo}` dele, e o `Authorization` é conferido com a chave pública das sessões dele. O resto (assistant e, sem as pontes abaixo, payments e finance) continua no sandbox. As contas de exemplo são as mesmas; o perfil passa a vir com e-mail e celular **mascarados**, como o cofre devolve. Detalhes em `saci-identity/local-env/README.md` e `src/identity_bridge.rs`.
 
 ### Com o saci-payments de verdade
 
 Com o `saci-payments-dev` no ar (`task dev` no `saci-payments`, porta 8789), suba este servidor também com `SACI_DEV_PAYMENTS_URL=http://localhost:8789`: `/v1/payments/*` (`pay.`) passa a ser repassado a ele com a conta já conferida aqui (`x-saci-dev-account`, o papel do contexto do autorizador), o alvo interno `payments` (`charge`, `charge_status`) vai para `/internal/payments` dele, os eventos `payments.*` chegam ao barramento daqui por `POST /dev/events` e `checkout.order.abandoned.v1` vai para lá. O `client-config` passa a apontar a tokenização para o PSP simulado de lá (`http://localhost:8789/psp/sandbox/tokens`). Detalhes em `saci-payments/local-env/README.md` e `src/payments_bridge.rs`.
+
+### Com o saci-finance de verdade
+
+Com o `saci-finance-dev` no ar (`task dev` no `saci-finance`, porta 8790), suba este servidor também com `SACI_DEV_FINANCE_URL=http://localhost:8790`: `/v1/finance/*` passa a ser repassado a ele com a conta **e o papel na vitrine** conferidos aqui (`x-saci-dev-account`, `x-saci-dev-storefront`, `x-saci-dev-role`: o Financeiro é só da pessoa responsável), o alvo interno `finance` (`sale_payment`, os valores da venda no painel) vai para `/internal/finance` dele, os eventos que ele assina (`payments.*`, `orders.sale.delivered.v1`, `orders.return.opened.v1`, `shipping.label.purchased.v1`) são entregues em `POST /dev/events` de lá, e `finance.payout.sent.v1` chega aqui (o `orders` marca as vendas como `invoiced`). O finance busca as vendas de cada pedido pago em `POST /internal/orders` daqui (`sales_for_finance`, só de `127.0.0.1`). Detalhes em `saci-finance/local-env/README.md` e `src/finance_bridge.rs`.
 
 ### Contas de exemplo
 

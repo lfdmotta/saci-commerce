@@ -88,6 +88,10 @@ pub(crate) struct App {
     pub payments: Arc<dyn HttpService>,
     /// Ponte com o `saci-payments-dev`, quando ligada (`SACI_DEV_PAYMENTS_URL`).
     pub payments_bridge: Option<crate::identity_bridge::Bridge>,
+    /// `/v1/finance`: o `saci-finance-dev` (ponte, `SACI_DEV_FINANCE_URL`); sem ela, nada.
+    pub finance: Option<Arc<dyn HttpService>>,
+    /// Chamadas internas em processo (o finance chama `orders` por `/internal/orders`).
+    pub internal: Arc<LocalInternal>,
     /// Esteira de imagens.
     pub pipeline: Pipeline,
     /// Quarentena e CDN e `files.` em memória.
@@ -163,6 +167,11 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
     let payments_bridge = crate::payments_bridge::from_env()?;
     if let Some(bridge) = &payments_bridge {
         bridge.register_targets(&local, &["payments"]);
+    }
+    // Com SACI_DEV_FINANCE_URL, o alvo interno finance é o saci-finance de verdade.
+    let finance_bridge = crate::finance_bridge::from_env()?;
+    if let Some(bridge) = &finance_bridge {
+        bridge.register_targets(&local, &["finance"]);
     }
     let session_public_key = match &identity_bridge {
         Some(bridge) => bridge.session_public_key()?,
@@ -296,6 +305,11 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
             bridge.clone(),
         )));
     }
+    if let Some(bridge) = &finance_bridge {
+        consumers.push(Arc::new(crate::finance_bridge::FinanceEvents(
+            bridge.clone(),
+        )));
+    }
     let worker = Worker {
         rx: Mutex::new(Some(rx)),
         consumers,
@@ -327,6 +341,8 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
             None => Arc::new(PaymentsHttp(sandbox.clone())),
         },
         payments_bridge,
+        finance: finance_bridge.map(|b| Arc::new(b) as Arc<dyn HttpService>),
+        internal: Arc::clone(&local),
         pipeline,
         quarantine,
         cdn,

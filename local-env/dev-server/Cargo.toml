@@ -16,6 +16,7 @@ base64.workspace = true
 http-body-util.workspace = true
 hyper.workspace = true
 hyper-util.workspace = true
+saci-authz.workspace = true
 saci-catalog-api.workspace = true
 saci-carrier-webhooks.workspace = true
 saci-checkout-saga.workspace = true

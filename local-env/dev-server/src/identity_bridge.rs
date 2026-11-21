@@ -31,8 +31,9 @@ use serde_json::Value;
 #[derive(Debug, Clone)]
 pub(crate) struct Bridge {
     host: String,
-    /// Repassa a conta conferida aqui (`x-saci-dev-account`, `x-saci-dev-auth-time`),
-    /// como o contexto do autorizador chega às funções na nuvem (ponte do payments).
+    /// Repassa a conta conferida aqui (`x-saci-dev-account`, `x-saci-dev-auth-time`,
+    /// e o papel na vitrine em `x-saci-dev-storefront` e `x-saci-dev-role`), como o
+    /// contexto do autorizador chega às funções na nuvem (pontes do payments e do finance).
     forward_account: bool,
 }
 
@@ -248,6 +249,14 @@ impl HttpService for Bridge {
                     "x-saci-dev-auth-time".into(),
                     auth.auth_time.unwrap_or(0).to_string(),
                 ));
+                if let (Some(storefront), Some(role)) = (&auth.storefront_id, auth.role) {
+                    headers.push(("x-saci-dev-storefront".into(), storefront.clone()));
+                    let role = match role {
+                        saci_authz::Role::Owner => "owner",
+                        saci_authz::Role::Member => "member",
+                    };
+                    headers.push(("x-saci-dev-role".into(), role.into()));
+                }
             }
             match self.send(&req.method, &target, &headers, &req.body).await {
                 Ok(raw) => {

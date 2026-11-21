@@ -363,6 +363,36 @@ impl InternalHandler for Orders {
                         "city": sale.buyer["city"], "state": sale.buyer["state"],
                     }))
                 }
+                "sales_for_finance" => {
+                    // As vendas de um pedido (ou uma venda), com os valores que o
+                    // saci-finance precisa para lançar: peças, frete e serviço.
+                    #[derive(serde::Deserialize)]
+                    struct Ref {
+                        #[serde(default)]
+                        order_id: Option<String>,
+                        #[serde(default)]
+                        sale_id: Option<String>,
+                    }
+                    let r: Ref = payload(body)?;
+                    let ids = match (&r.order_id, &r.sale_id) {
+                        (_, Some(sale)) => vec![sale.clone()],
+                        (Some(order), None) => self.order(order).await?.sale_ids,
+                        (None, None) => return Err(saci_commerce_kit::problem::not_found()),
+                    };
+                    let mut items = Vec::new();
+                    for id in &ids {
+                        let (s, _) = self.sale(id).await?;
+                        items.push(json!({
+                            "sale_id": s.id, "order_id": s.order_id, "number": s.number,
+                            "storefront_id": s.storefront_id, "placed_at": s.placed_at, "status": s.status,
+                            "items_total": s.items_total(),
+                            "quantity": s.items.iter().map(|i| i.quantity).sum::<u32>(),
+                            "shipping": { "service": s.shipping.service, "price": s.shipping.price, "delivered_at": s.shipping.delivered_at },
+                            "destination_state": s.buyer["state"],
+                        }));
+                    }
+                    reply(&json!({ "items": items }))
+                }
                 "sale_summary" => {
                     let (s, _) = self.sale(&payload::<SaleRef>(body)?.sale_id).await?;
                     reply(

@@ -2666,6 +2666,7 @@ dependencies = [
  "http-body-util",
  "hyper",
  "hyper-util",
+ "saci-authz",
  "saci-carrier-webhooks",
  "saci-catalog-api",
  "saci-checkout-saga",
