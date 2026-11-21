@@ -31,6 +31,7 @@ No fio: `{"op": "<operação>", "payload": {...}}` → `{"ok": {...}}` ou `{"err
 | `orders` | `sale_summary` | `{ sale_id }` | `{ storefront_id, status, number, tracking_code }` | shipping |
 | `orders` | `sale_for_label` | `{ sale_id }` | `{ storefront_id, number, service, sender, recipient, postal_code }` (só em `awaiting_shipment`) | shipping |
 | `orders` | `sale_parties`, `order_parties` | `{ sale_id }` / `{ order_id }` | conta e vitrine | notifications |
+| `orders` | `sales_for_finance` | `{ order_id }` ou `{ sale_id }` | `{ items: [{ sale_id, order_id, number, storefront_id, placed_at, status, items_total, quantity, shipping: { service, price, delivered_at? }, destination_state? }] }` | finance |
 | `support` | `open_tickets` | `{ storefront_id }` | `{ count }` | sellers |
 
 ## Esperadas de outros repositórios
@@ -71,6 +72,8 @@ O repositório já existe: o contrato formal está em `saci-contracts/internal/p
 E os eventos `payments.{charge.authorized,charge.failed,pix.paid,pix.expired}.v1`, que o `checkout` consome.
 
 ### `saci-finance` (alvo `finance`)
+
+O repositório já existe: o contrato formal está em `saci-contracts/internal/finance.yaml` (com as operações do painel interno além da abaixo), e no servidor de desenvolvimento a ponte `SACI_DEV_FINANCE_URL` troca o sandbox pelo `saci-finance-dev`. Na nuvem, falta apontar `external_functions.finance` para a função `saci-<env>-finance-internal` (saída `internal_function_arn` do stack de lá) e pôr o papel do `orders` em `internal_principals` de lá. O finance chama `sales_for_finance` daqui.
 
 | Operação | Entrada | Saída |
 | --- | --- | --- |
