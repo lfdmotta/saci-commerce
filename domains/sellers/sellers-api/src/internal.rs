@@ -11,7 +11,8 @@
 //! O consumidor `sellers-workspace` atualiza as contagens do painel (peças,
 //! vendas a fazer, chamados abertos), tira a vitrine do rascunho na primeira
 //! peça publicada e ativa convites de quem acabou de abrir a conta
-//! (`identity.account.verified.v1`).
+//! (`identity.account.verified.v1`) ou de informar o CPF depois
+//! (`identity.account.document_added.v1`: o cadastro não pede CPF desde o #27).
 
 use saci_commerce_kit::events::{self, ConsumeError, Consumer, Event, data};
 use saci_commerce_kit::internal::{self, InternalHandler, payload, reply, unknown_op};
@@ -172,18 +173,23 @@ impl WorkspaceProjector {
         let s = &self.0;
         #[derive(Deserialize)]
         struct Fingerprint {
-            fingerprint: String,
+            #[serde(default)]
+            fingerprint: Option<String>,
         }
-        let fp: Fingerprint = internal::call(
+        let found: Fingerprint = internal::call(
             s.internal.as_ref(),
             "identity",
             "cpf_fingerprint_of",
             &json!({ "account_id": account }),
         )
         .await?;
+        // Conta ainda sem CPF: os convites esperam o `identity.account.document_added.v1`.
+        let Some(fingerprint) = found.fingerprint else {
+            return Ok(());
+        };
         for pending in s
             .store
-            .query_all(keys::pending(&fp.fingerprint), String::new())
+            .query_all(keys::pending(&fingerprint), String::new())
             .await?
         {
             let inv: Value = pending.parse()?;
@@ -236,6 +242,7 @@ impl Consumer for WorkspaceProjector {
             "support.ticket.opened.v1",
             "support.ticket.resolved.v1",
             "identity.account.verified.v1",
+            "identity.account.document_added.v1",
         ]
     }
 

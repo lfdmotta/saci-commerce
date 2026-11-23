@@ -79,8 +79,8 @@ const CATALOG: &[Entry] = &[
     (
         "invalid-credentials",
         401,
-        "Documento ou senha não conferem",
-        "CPF/CNPJ ou senha não conferem.",
+        "Entrada ou senha não conferem",
+        "E-mail ou celular e senha não conferem.",
     ),
     (
         "wrong-password",
@@ -123,6 +123,43 @@ const CATALOG: &[Entry] = &[
         422,
         "Contato obrigatório",
         "Mantenha um e-mail ou um celular para receber os avisos.",
+    ),
+    // cadastro sem CPF obrigatório (#27)
+    (
+        "phone-country-not-supported",
+        422,
+        "DDI não aceito",
+        "Ainda não enviamos mensagens para o país deste celular.",
+    ),
+    (
+        "contact-unavailable",
+        409,
+        "Contato indisponível",
+        "Este contato não pode ser usado nesta conta.",
+    ),
+    (
+        "contact-already-verified",
+        409,
+        "Contato já confirmado",
+        "Este contato já está confirmado.",
+    ),
+    (
+        "document-required",
+        422,
+        "CPF necessário",
+        "Informe o seu CPF para continuar.",
+    ),
+    (
+        "document-already-set",
+        409,
+        "CPF já informado",
+        "A conta já tem um CPF. Para corrigir, fale com a gente.",
+    ),
+    (
+        "document-unavailable",
+        409,
+        "CPF indisponível",
+        "Este CPF não pode ser usado nesta conta. Se ele é seu, fale com a gente.",
     ),
     (
         "identity-mismatch",

@@ -86,7 +86,7 @@ module "domain" {
       event_types = [
         "catalog.listing.published.v1", "catalog.listing.paused.v1", "catalog.listing.withdrawn.v1", "catalog.stock.changed.v1",
         "checkout.order.confirmed.v1", "orders.sale.ready.v1", "orders.sale.shipped.v1", "orders.sale.delivered.v1", "orders.return.opened.v1",
-        "support.ticket.opened.v1", "support.ticket.resolved.v1", "identity.account.verified.v1",
+        "support.ticket.opened.v1", "support.ticket.resolved.v1", "identity.account.verified.v1", "identity.account.document_added.v1",
       ]
     }
   }

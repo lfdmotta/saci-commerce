@@ -100,7 +100,9 @@ pub struct ItemRequest {
 
 #[derive(Debug, Deserialize)]
 struct Buyer {
-    cpf: String,
+    /// "CPF na nota fiscal?": opcional (#27). Informado, vai para a nota.
+    #[serde(default)]
+    cpf: Option<String>,
     name: String,
     #[serde(default)]
     email: Option<String>,
@@ -221,7 +223,9 @@ impl Checkout {
                 .buyer
                 .as_ref()
                 .ok_or_else(|| invalid("buyer", "Informe quem está comprando."))?;
-            if !saci_mask::is_valid_cpf(&buyer.cpf) || buyer.cpf.len() != 11 {
+            if let Some(cpf) = buyer.cpf.as_deref().filter(|c| !c.is_empty())
+                && (!saci_mask::is_valid_cpf(cpf) || cpf.len() != 11)
+            {
                 return Err(invalid("buyer.cpf", "Confira o CPF."));
             }
             if buyer.name.trim().chars().count() < 3 {
@@ -232,6 +236,14 @@ impl Checkout {
                     "buyer.email",
                     "Informe um e-mail ou um celular para receber o pedido.",
                 ));
+            }
+            // Só o formato: o DDI na lista aceita é conferido pelo cofre.
+            if buyer
+                .phone
+                .as_deref()
+                .is_some_and(|p| saci_commerce_kit::text::normalize_phone(p).is_none())
+            {
+                return Err(invalid("buyer.phone", "Confira o celular, com o DDD."));
             }
         }
         match body.payment.method.as_str() {
@@ -346,7 +358,8 @@ impl Checkout {
                     client,
                     "identity",
                     "put_guest_buyer",
-                    &json!({ "order_id": order_id, "cpf": b.cpf, "name": b.name, "email": b.email, "phone": b.phone }),
+                    &json!({ "order_id": order_id, "cpf": b.cpf.as_deref().filter(|c| !c.is_empty()), "name": b.name, "email": b.email,
+                             "phone": b.phone.as_deref().and_then(saci_commerce_kit::text::normalize_phone) }),
                 )
                 .await?;
                 first_name(&b.name)

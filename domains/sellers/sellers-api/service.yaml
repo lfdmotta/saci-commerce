@@ -59,6 +59,7 @@ events:
     - orders.sale.ready.v1
     - support.ticket.opened.v1
     - identity.account.verified.v1
+    - identity.account.document_added.v1
 slo:
   availability: 99.9
   latency_p99_ms: 300
