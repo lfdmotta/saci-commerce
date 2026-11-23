@@ -159,11 +159,18 @@ impl Customers {
         .await?;
         let mut out = json!({
             "id": account,
-            "cpf_masked": identity["cpf_masked"],
             "identity_status": identity.get("identity_status").cloned().unwrap_or_else(|| json!("unverified")),
             "created_at": identity.get("created_at").cloned().unwrap_or_else(|| json!(record.created_at)),
         });
-        for field in ["email", "phone", "pending_contact"] {
+        // O CPF é opcional (#27): só vem quando a conta tem.
+        for field in [
+            "cpf_masked",
+            "email",
+            "email_verified",
+            "phone",
+            "phone_verified",
+            "pending_contact",
+        ] {
             if let Some(v) = identity
                 .get_mut(field)
                 .map(Value::take)
@@ -213,10 +220,12 @@ impl Customers {
             {
                 return Err(invalid("email", "Confira o e-mail."));
             }
+            // Só o formato (E.164, ou o brasileiro antigo sem DDI): o DDI na lista
+            // aceita é conferido pelo cofre (`phone-country-not-supported`).
             if let Some(Some(phone)) = &patch.phone
-                && (!(10..=11).contains(&phone.len()) || !phone.bytes().all(|b| b.is_ascii_digit()))
+                && saci_commerce_kit::text::normalize_phone(phone).is_none()
             {
-                return Err(invalid("phone", "Use o celular com DDD, só números."));
+                return Err(invalid("phone", "Confira o celular, com o DDD."));
             }
             // Só os campos que vieram: no cofre, `null` tira o contato e ausente
             // mantém. Mandar `"phone": null` quando só o e-mail mudou apagaria o

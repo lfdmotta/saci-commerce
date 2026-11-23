@@ -159,14 +159,55 @@ pub fn mask_email(email: &str) -> String {
     }
 }
 
-/// Celular mascarado: `(85) *****-1234`.
+/// Celular mascarado: `(85) *****-1234`, ou `+55 (85) *****-1234` em E.164.
 #[must_use]
 pub fn mask_phone(phone: &str) -> String {
     let d: String = phone.chars().filter(char::is_ascii_digit).collect();
+    if phone.trim_start().starts_with('+') {
+        // E.164: `+55 (85) *****-7777` no Brasil.
+        if let Some(national) = d.strip_prefix("55").filter(|n| n.len() >= 10) {
+            return format!(
+                "+55 ({}) *****-{}",
+                &national[..2],
+                &national[national.len() - 4..]
+            );
+        }
+        // Fora do Brasil, o DDI exato fica com o cofre (que tem a lista).
+        if d.len() < 8 {
+            return "+** *****-****".into();
+        }
+        return format!("+** *****{}", &d[d.len() - 4..]);
+    }
     if d.len() < 10 {
         return "(**) *****-****".into();
     }
     format!("({}) *****-{}", &d[..2], &d[d.len() - 4..])
+}
+
+/// Celular informado: em E.164 (`+5585988887777`), ou o brasileiro antigo sem
+/// DDI (10 ou 11 dígitos), que vira `+55…`. Só o formato: **quem confere o
+/// DDI na lista aceita é o cofre** do `saci-identity` (`phone-countries.yaml`
+/// do `saci-contracts`).
+#[must_use]
+pub fn normalize_phone(phone: &str) -> Option<String> {
+    let t = phone.trim();
+    if t.is_empty()
+        || !t
+            .chars()
+            .all(|c| c.is_ascii_digit() || matches!(c, '+' | ' ' | '(' | ')' | '-' | '.'))
+        || t.chars().skip(1).any(|c| c == '+')
+    {
+        return None;
+    }
+    let d: String = t.chars().filter(char::is_ascii_digit).collect();
+    let full = if t.starts_with('+') {
+        d
+    } else if (10..=11).contains(&d.len()) {
+        format!("55{d}")
+    } else {
+        return None;
+    };
+    ((8..=15).contains(&full.len()) && !full.starts_with('0')).then(|| format!("+{full}"))
 }
 
 /// Troca padrões de dado pessoal num texto livre (chamados, S-23).
@@ -220,5 +261,15 @@ mod tests {
         assert_eq!(mask_cnpj("12345678000190"), "**.345.678/****-**");
         assert_eq!(mask_email("maria@gmail.com"), "m***@gmail.com");
         assert_eq!(mask_phone("85987651234"), "(85) *****-1234");
+        assert_eq!(mask_phone("+5585987651234"), "+55 (85) *****-1234");
+        assert_eq!(
+            normalize_phone("85987651234").as_deref(),
+            Some("+5585987651234")
+        );
+        assert_eq!(
+            normalize_phone("+351 912 345 678").as_deref(),
+            Some("+351912345678")
+        );
+        assert_eq!(normalize_phone("abc"), None);
     }
 }

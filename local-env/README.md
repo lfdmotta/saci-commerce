@@ -38,7 +38,7 @@ Com o `saci-finance-dev` no ar (`task dev` no `saci-finance`, porta 8790), suba 
 
 ### Contas de exemplo
 
-Senha de todas: `feira-de-exemplo`. Código de verificação (cadastro, troca de contato, recuperação de senha): `123456`. O CPF completo de cada conta **aparece no terminal quando o servidor sobe**: no repositório ficam só os 9 primeiros dígitos (`sandbox/demo-accounts.json`), para nenhum CPF válido ficar escrito no código (a varredura de CPF da plataforma reprovaria). São os mesmos CPFs dos mocks da interface.
+Senha de todas: `feira-de-exemplo`. Código de verificação (confirmação do contato, troca de contato, recuperação de senha): `123456`. A entrada aceita o e-mail ou o celular (`+5585988887777`, a conta de quem compra); o CPF não serve para entrar. Uma conta nova (cadastro com nome, e-mail ou celular e senha, sem CPF) abre na hora. O CPF completo de cada conta **aparece no terminal quando o servidor sobe**: no repositório ficam só os 9 primeiros dígitos (`sandbox/demo-accounts.json`), para nenhum CPF válido ficar escrito no código (a varredura de CPF da plataforma reprovaria). São os mesmos CPFs dos mocks da interface.
 
 | Conta | Começo do CPF | Papel |
 | --- | --- | --- |

@@ -27,9 +27,11 @@ function cpf(base) {
   const b = dv([...d, a], 11);
   return `${base}${a}${b}`;
 }
+// CPF de quem compra: só para o convite de equipe (a entrada é por e-mail ou celular, #27).
 const BUYER = cpf('529982247');
-const ARTISAN = cpf('390533447');
-const MEMBER = cpf('714602380');
+const BUYER_EMAIL = 'marina@exemplo.com.br';
+const ARTISAN_EMAIL = 'helena@barrovivo.exemplo';
+const MEMBER_EMAIL = 'joana@barrovivo.exemplo';
 
 async function call(method, path, { body, token, guest, headers = {}, idem, raw } = {}) {
   const res = await fetch(path.startsWith('http') ? path : BASE + path, {
@@ -59,9 +61,9 @@ const section = (t) => console.log(`\n\x1b[1;34m== ${t}\x1b[0m`);
 const uuid = () => crypto.randomUUID();
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function login(document) {
-  const r = await call('POST', '/v1/identity/sessions', { body: { document, password: PASSWORD, client: 'ios' } });
-  if (r.status !== 200) throw new Error(`login ${document}: ${r.status} ${JSON.stringify(r.json)}`);
+async function login(login) {
+  const r = await call('POST', '/v1/identity/sessions', { body: { login, password: PASSWORD, client: 'ios' } });
+  if (r.status !== 200) throw new Error(`login ${login}: ${r.status} ${JSON.stringify(r.json)}`);
   return r.json;
 }
 async function stepUp(token) {
@@ -104,9 +106,9 @@ check('atributos', (await call('GET', '/v1/catalog/listing-attributes?category=c
 check('layout publicado', (await call('GET', '/layouts/home.json')).json?.screen === 'home');
 
 section('Conta de quem compra');
-const buyer = await login(BUYER);
-check('entrada com CPF e senha', buyer.access_token && buyer.refresh_token && buyer.account.document_masked);
-check('senha errada recusada', (await call('POST', '/v1/identity/sessions', { body: { document: BUYER, password: 'errada!!', client: 'web' } })).json?.code === 'invalid-credentials');
+const buyer = await login(BUYER_EMAIL);
+check('entrada com e-mail e senha', buyer.access_token && buyer.refresh_token && buyer.account.document_masked);
+check('senha errada recusada', (await call('POST', '/v1/identity/sessions', { body: { login: BUYER_EMAIL, password: 'errada!!', client: 'web' } })).json?.code === 'invalid-credentials');
 const refreshed = await call('POST', '/v1/identity/sessions/refresh', { body: { refresh_token: buyer.refresh_token } });
 check('refresh rotativo', refreshed.status === 200 && refreshed.json.refresh_token !== buyer.refresh_token);
 // Contrato: repetir o refresh usado dentro de 60 s (repetição de rede) devolve o MESMO refresh novo;
@@ -117,7 +119,7 @@ let token = refreshed.json.access_token;
 const me = await call('GET', '/v1/customers/me', { token });
 check('perfil com endereço do cofre', me.status === 200 && me.json.cpf_masked && me.json.address?.postal_code === '60175047', me.json);
 check('sem token: 401', (await call('GET', '/v1/customers/me')).json?.code === 'unauthorized');
-check('trocar e-mail pede senha (USER+)', (await call('PATCH', '/v1/customers/me', { token: (await login(BUYER)).access_token.replace(/./, (c) => c), body: { email: 'novo@exemplo.com' } })).status !== 500);
+check('trocar e-mail pede senha (USER+)', (await call('PATCH', '/v1/customers/me', { token: (await login(BUYER_EMAIL)).access_token.replace(/./, (c) => c), body: { email: 'novo@exemplo.com' } })).status !== 500);
 // A troca só vale com o código que chega ao contato novo (rota acrescentada ao contrato do identity).
 const confirmed = await call('POST', '/v1/identity/me/contact-confirmations', { token, body: { code: '123456' } });
 check('troca de contato confirmada com o código', confirmed.status === 204, confirmed.json);
@@ -163,7 +165,7 @@ const stockAfter = (await call('GET', `/v1/catalog/listings/${forSale[1].id}`)).
 check('recusa devolve o estoque', stockAfter === forSale[1].stock, { stockAfter, before: forSale[1].stock });
 const pix = await buy(forSale[1], { method: 'pix' });
 check('Pix → aguardando, com código', pix.status === 201 && pix.json.pix?.code && pix.json.order.status === 'awaiting-payment', pix.json);
-const guest = await buy(forSale[2], { method: 'pix' }, { anon: true, buyer: { cpf: cpf('111444777'), name: 'Ana Souza', email: 'ana@exemplo.com' } });
+const guest = await buy(forSale[2], { method: 'pix' }, { anon: true, buyer: { name: 'Ana Souza', email: 'ana@exemplo.com' } });
 check('compra sem conta → guest token', guest.status === 201 && guest.json.guest_token, guest.json);
 const gstatus = await call('GET', `/v1/checkout/orders/${guest.json.order.id}/payment`, { guest: guest.json.guest_token });
 check('guest token lê o próprio pedido', gstatus.status === 200 && gstatus.json.status === 'pending', gstatus.json);
@@ -174,7 +176,7 @@ const paid = await call('GET', `/v1/checkout/orders/${pix.json.order.id}/payment
 check('Pix pago', paid.json?.status === 'paid', paid.json);
 
 section('Painel do artesão');
-let artisanSession = await login(ARTISAN);
+let artisanSession = await login(ARTISAN_EMAIL);
 let atk = artisanSession.access_token;
 const ws = await call('GET', '/v1/sellers/me/workspace', { token: atk });
 check('painel (dona)', ws.status === 200 && ws.json.role === 'owner' && ws.json.storefront_url_name === 'barro-vivo', ws.json);
@@ -234,7 +236,7 @@ check('entregue pelo evento', delivered.json?.status === 'delivered', delivered.
 check('valores só para a dona (S-10)', delivered.json?.payment?.fee);
 
 section('Equipe e chamados');
-const member = await login(MEMBER);
+const member = await login(MEMBER_EMAIL);
 const mws = await call('GET', '/v1/sellers/me/workspace', { token: member.access_token });
 check('pessoa da equipe vê o painel', mws.json?.role === 'member', mws.json);
 check('equipe não lê o Financeiro (sem payment)', !(await call('GET', `/v1/orders/me/sales/${fresh.id}`, { token: member.access_token })).json?.payment);
