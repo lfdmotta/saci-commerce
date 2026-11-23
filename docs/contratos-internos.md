@@ -44,11 +44,11 @@ Hoje atendidas pelo **sandbox** (`crates/sandbox`, só fora de produção). Quan
 | --- | --- | --- | --- |
 | `account_profile` | `{ account_id }` | `{ id, name?, preferred_name?, document_type, document_masked, cpf_masked, identity_status, email?, phone?, pending_contact?, created_at }` | Só o mascarado sai do cofre |
 | `lookup_cpf` | `{ cpf }` | `{ fingerprint, account_id? }` | Digital por HMAC com chave do cofre |
-| `cpf_fingerprint_of` | `{ account_id }` | `{ fingerprint }` | Para casar convites pendentes |
+| `cpf_fingerprint_of` | `{ account_id }` | `{ fingerprint? }` (`null` na conta sem CPF) | Para casar convites pendentes; sem CPF, o `sellers` espera o `identity.account.document_added.v1` |
 | `put_address` | `{ owner_account_id, purpose: delivery\|business, address }` | `{ ref }` (`addr_…`) | Endereço cifrado no cofre |
 | `open_address` | `{ ref, purpose: sale\|label\|business\|delivery, … }` | `{ address }` | Regra por quem pede (tabela da seção 9.3) |
 | `default_address` | `{ account_id }` | `{ ref? }` | Endereço já conhecido da conta |
-| `put_guest_buyer` | `{ order_id, cpf, name, email?, phone? }` | `{}` | Compra sem conta: nada disso fica no checkout |
+| `put_guest_buyer` | `{ order_id, cpf?, name, email?, phone? }` | `{}` | Compra sem conta: nada disso fica no checkout. O CPF é opcional ("CPF na nota fiscal?", #27); o celular vai em E.164 |
 | `request_contact_change` | `{ account_id, email?, phone? }` | `{}` ou `contact-required` | Confirmação no destino novo, aviso no antigo (S-12) |
 | `notify`, `send_to_address` | `{ account_id \| email, template, token? }` | `{}` | E-mail e SMS saem pelo cofre |
 
