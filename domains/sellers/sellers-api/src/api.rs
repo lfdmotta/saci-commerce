@@ -102,6 +102,9 @@ struct IdentityBody {
 #[derive(Debug, Deserialize)]
 struct BusinessBody {
     cnpj: String,
+    /// CEP do ateliê (etapa anterior): o KYC o compara com o endereço do CNPJ.
+    #[serde(default)]
+    postal_code: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -150,11 +153,11 @@ struct PermissionsBody {
     permissions: Vec<String>,
 }
 
+/// Resposta do `kyc-gateway` às conferências: a consulta à Receita segue fora da
+/// resposta e vira a nota de fraude da conta (`saci-identity`, ADR 0010).
 #[derive(Debug, Deserialize)]
 struct KycIdentity {
     result: String,
-    #[serde(default)]
-    official_name: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -162,10 +165,6 @@ struct KycBusiness {
     result: String,
     #[serde(default)]
     cnpj_masked: Option<String>,
-    #[serde(default)]
-    legal_name: Option<String>,
-    #[serde(default)]
-    trade_name: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -379,6 +378,8 @@ impl Sellers {
             &json!({ "account_id": account, "birth_date": body.birth_date }),
         )
         .await?;
+        // A Receita é consultada depois, fora da resposta: a divergência baixa a
+        // nota de fraude da conta, não recusa a etapa. Só a idade recusa aqui.
         match kyc.result.as_str() {
             "ok" => {}
             "underage" => {
@@ -386,25 +387,22 @@ impl Sellers {
                     problem("underage").with_field("birth_date", "É preciso ter 18 anos ou mais.")
                 );
             }
-            _ => {
-                return Err(
-                    problem("identity-mismatch").with_field("birth_date", "Confira a data.")
-                );
+            other => {
+                return Err(problem("service-unavailable")
+                    .with_message(format!("Resposta inesperada do KYC: {other}")));
             }
         }
         let check = CheckRecord {
             check_id: saci_ids::Id::new("chk").to_string(),
             kind: "identity".into(),
-            official_name: kyc.official_name.clone(),
+            official_name: None,
             cnpj_masked: None,
             legal_name: None,
             trade_name: None,
             at: self.clock.epoch(),
         };
         self.save_check(&account, &check).await?;
-        Ok(Response::ok(
-            &json!({ "check_id": check.check_id, "official_name": kyc.official_name.unwrap_or_default() }),
-        ))
+        Ok(Response::ok(&json!({ "check_id": check.check_id })))
     }
 
     async fn check_business(&self, req: &Request) -> HttpResult {
@@ -416,6 +414,11 @@ impl Sellers {
         {
             return Err(invalid("cnpj", "Confira o CNPJ."));
         }
+        if let Some(cep) = &body.postal_code
+            && !is_postal_code(cep)
+        {
+            return Err(invalid("postal_code", "Use os 8 dígitos do CEP."));
+        }
         limits::hit(
             self.store.as_ref(),
             &format!("{account}:business"),
@@ -425,36 +428,85 @@ impl Sellers {
             "rate-limited",
         )
         .await?;
+        let address = match &body.postal_code {
+            Some(cep) => Some(self.workshop_address(cep).await),
+            None => None,
+        };
         let kyc: KycBusiness = internal::call(
             self.internal.as_ref(),
             "kyc",
             "check_business",
-            &json!({ "account_id": account, "cnpj": body.cnpj }),
+            &json!({ "account_id": account, "cnpj": body.cnpj, "address": address }),
         )
         .await?;
-        match kyc.result.as_str() {
-            "ok" => {}
-            "inactive" => return Err(problem("cnpj-inactive").with_field("cnpj", "CNPJ inativo.")),
-            _ => {
-                return Err(problem("cnpj-not-partner")
-                    .with_field("cnpj", "O seu CPF não é sócio deste CNPJ."));
-            }
+        // A situação, o quadro de sócios e o endereço do CNPJ entram na nota de
+        // fraude depois, fora da resposta (`saci-identity`, ADR 0010).
+        if kyc.result != "ok" {
+            return Err(problem("service-unavailable")
+                .with_message(format!("Resposta inesperada do KYC: {}", kyc.result)));
         }
         let check = CheckRecord {
             check_id: saci_ids::Id::new("chk").to_string(),
             kind: "business".into(),
             official_name: None,
             cnpj_masked: kyc.cnpj_masked.clone(),
-            legal_name: kyc.legal_name.clone(),
-            trade_name: kyc.trade_name.clone(),
+            legal_name: None,
+            trade_name: None,
             at: self.clock.epoch(),
         };
         self.save_check(&account, &check).await?;
-        let mut out = json!({ "check_id": check.check_id, "cnpj_masked": check.cnpj_masked, "legal_name": check.legal_name });
-        if let Some(t) = check.trade_name {
-            out["trade_name"] = json!(t);
+        Ok(Response::ok(
+            &json!({ "check_id": check.check_id, "cnpj_masked": check.cnpj_masked }),
+        ))
+    }
+
+    /// O nome da conta no cadastro: o que a pessoa usa, ou o de registro.
+    async fn account_name(&self, account: &str) -> Option<String> {
+        #[derive(Deserialize)]
+        struct Profile {
+            #[serde(default)]
+            name: Option<String>,
+            #[serde(default)]
+            preferred_name: Option<String>,
         }
-        Ok(Response::ok(&out))
+        let profile: Profile = internal::call(
+            self.internal.as_ref(),
+            "identity",
+            "account_profile",
+            &json!({ "account_id": account }),
+        )
+        .await
+        .ok()?;
+        profile
+            .preferred_name
+            .or(profile.name)
+            .map(|n| n.trim().to_owned())
+            .filter(|n| !n.is_empty())
+    }
+
+    /// O ateliê para o KYC: o CEP, com a rua, a cidade e a UF quando o CEP é
+    /// conhecido. Sem resposta do `shipping`, só o CEP (o KYC compara o que tiver).
+    async fn workshop_address(&self, cep: &str) -> Value {
+        #[derive(Deserialize)]
+        struct Place {
+            city: String,
+            state: String,
+            #[serde(default)]
+            street: Option<String>,
+        }
+        let place: Result<Place, Problem> = internal::call(
+            self.internal.as_ref(),
+            "shipping",
+            "postal_code",
+            &json!({ "postal_code": cep }),
+        )
+        .await;
+        match place {
+            Ok(p) => {
+                json!({ "postal_code": cep, "street": p.street, "city": p.city, "state": p.state })
+            }
+            Err(_) => json!({ "postal_code": cep }),
+        }
     }
 
     async fn save_check(&self, account: &str, check: &CheckRecord) -> Result<(), Problem> {
@@ -526,11 +578,19 @@ impl Sellers {
             &json!({ "postal_code": body.postal_code }),
         )
         .await?;
-        let brand = business
+        // Nome inicial da marca (a pessoa troca na personalização): a Receita não
+        // responde mais nas etapas (ADR 0010), então vale o nome do cadastro.
+        let recorded = business
             .as_ref()
             .and_then(|b| b.trade_name.clone().or_else(|| b.legal_name.clone()))
-            .or_else(|| identity.official_name.clone())
-            .unwrap_or_else(|| "Minha vitrine".into());
+            .or_else(|| identity.official_name.clone());
+        let brand = match recorded {
+            Some(name) => name,
+            None => self
+                .account_name(&account)
+                .await
+                .unwrap_or_else(|| "Minha vitrine".into()),
+        };
         let id = saci_ids::Id::new(saci_ids::prefix::STOREFRONT).to_string();
         #[derive(Deserialize)]
         struct Ref {
