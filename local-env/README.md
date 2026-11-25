@@ -62,7 +62,7 @@ Senha de todas: `feira-de-exemplo`. Código de verificação (confirmação do c
 | `POST /dev/carrier/sandbox` `{ "event_id", "tracking_code", "status": "delivered" }` | A transportadora avisar uma entrega (assinado pelo servidor) |
 | `GET /dev/health` | Saúde |
 
-KYC do sandbox: nascimento de menor de 18 anos → `underage`; nascimento em 1º de janeiro → `identity-mismatch`; CNPJ começando por `00` → `cnpj-inactive`, por `99` → `cnpj-not-partner`.
+KYC do sandbox (como o `kyc-gateway` do `saci-identity`, ADR 0010: a conferência responde na hora e a divergência só baixa a nota de fraude, lida em `fraud_score`): nascimento de menor de 18 anos → `underage` (a única recusa); conta sem CPF → `document-required`; nascimento em 1º de janeiro → nota com `birth_date` 0; CNPJ começando por `00` → `cnpj_active` 0, por `99` → `qsa_name` 0, por `88` → `address` 0, por `77` → `company_age` 0 (empresa aberta há menos de 30 dias).
 
 ### Teste ponta a ponta
 

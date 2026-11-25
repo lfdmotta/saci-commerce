@@ -1,15 +1,20 @@
 //! Sandbox de `kyc`, `finance` e `assistant`.
 //!
-//! **KYC** (conferência na Receita pelo `kyc-gateway`):
+//! **KYC** (o `kyc-gateway` do `saci-identity`, ADR 0010): as conferências
+//! respondem na hora e a divergência com a Receita só baixa a nota de fraude.
+//! Aqui a nota é gravada na hora, com estas regras:
 //!
 //! | Entrada | Resultado |
 //! | --- | --- |
-//! | Nascimento com menos de 18 anos | `underage` |
-//! | Nascimento em 1º de janeiro de qualquer ano | `mismatch` (para testar a recusa) |
-//! | Outro nascimento | `ok`, com o nome de registro da conta |
-//! | CNPJ começando por `00` | `inactive` |
-//! | CNPJ começando por `99` | `not_partner` |
-//! | Outro CNPJ válido | `ok` |
+//! | Nascimento com menos de 18 anos | `underage` (recusa na hora) |
+//! | Conta sem CPF | `422 document-required` |
+//! | Nascimento em 1º de janeiro de qualquer ano | `ok`, com `birth_date` 0 na nota |
+//! | Outro nascimento | `ok`; o nome que a pessoa usa vira o de registro |
+//! | CNPJ começando por `00` | `ok`, com `cnpj_active` 0 |
+//! | CNPJ começando por `99` | `ok`, com `qsa_name` 0 |
+//! | CNPJ começando por `88` | `ok`, com `address` 0 |
+//! | CNPJ começando por `77` | `ok`, com `company_age` 0 (aberto há menos de 30 dias) |
+//! | Outro CNPJ válido | `ok`, nota cheia |
 //!
 //! **Finance**: comissão fixa de 12% e repasse 7 dias depois da entrega.
 //!
@@ -18,6 +23,7 @@
 
 use saci_commerce_kit::clock::parse_date;
 use saci_commerce_kit::internal::{InternalHandler, payload, reply, unknown_op};
+use saci_commerce_kit::problem::{invalid, problem};
 use saci_commerce_kit::store::{Item, StoreExt, WriteOp};
 use saci_commerce_kit::text::mask_cnpj;
 use saci_commerce_kit::types::Money;
@@ -31,6 +37,22 @@ use crate::Sandbox;
 #[derive(Debug, Clone)]
 pub struct Kyc(pub Sandbox);
 
+impl Kyc {
+    /// Grava as dimensões de uma conferência, como o `kyc-gateway` faria depois
+    /// da Receita (aqui, na hora).
+    async fn record(&self, account: &str, sk: &str, doc: &Value) -> Result<(), Problem> {
+        self.0
+            .store
+            .write(vec![WriteOp::put(Item::new(
+                format!("ACC#{account}"),
+                sk,
+                doc,
+            )?)])
+            .await?;
+        Ok(())
+    }
+}
+
 impl InternalHandler for Kyc {
     fn call<'a>(&'a self, op: &'a str, body: Value) -> BoxFut<'a, Result<Value, Problem>> {
         Box::pin(async move {
@@ -43,7 +65,7 @@ impl InternalHandler for Kyc {
                     }
                     let q: Q = payload(body)?;
                     let Some(birth) = parse_date(&q.birth_date) else {
-                        return reply(&json!({ "result": "mismatch" }));
+                        return Err(invalid("birth_date", "Use a data no formato AAAA-MM-DD."));
                     };
                     let today = self.0.clock.today();
                     let mut age = today.year() - birth.year();
@@ -52,24 +74,20 @@ impl InternalHandler for Kyc {
                     {
                         age -= 1;
                     }
+                    if birth > today || age > 130 {
+                        return Err(invalid("birth_date", "Confira a data de nascimento."));
+                    }
                     if age < 18 {
                         return reply(&json!({ "result": "underage" }));
                     }
-                    if u8::from(birth.month()) == 1 && birth.day() == 1 {
-                        return reply(&json!({ "result": "mismatch" }));
+                    let (mut a, v) = self.0.account(&q.account_id).await?;
+                    if a.document.is_none() {
+                        return Err(problem("document-required"));
                     }
-                    let name = self
-                        .0
-                        .account(&q.account_id)
-                        .await
-                        .ok()
-                        .and_then(|(a, _)| a.name)
-                        .unwrap_or_else(|| "Pessoa de Exemplo da Silva".into());
-                    // Guarda o nome de registro na conta, como o cofre faria depois da conferência.
-                    if let Ok((mut a, v)) = self.0.account(&q.account_id).await
-                        && a.name.is_none()
-                    {
-                        a.name = Some(name.clone());
+                    let matches = !(u8::from(birth.month()) == 1 && birth.day() == 1);
+                    // Como o cofre: o nome de registro só fica quando CPF e nascimento conferem.
+                    if matches && a.name.is_none() {
+                        a.name = a.preferred_name.clone();
                         self.0
                             .store
                             .write(vec![WriteOp::replace(
@@ -78,24 +96,58 @@ impl InternalHandler for Kyc {
                             )])
                             .await?;
                     }
-                    reply(&json!({ "result": "ok", "official_name": name }))
+                    let birth_score = if matches { 100 } else { 0 };
+                    self.record(
+                        &q.account_id,
+                        "KYC#IDENTITY",
+                        &json!({ "status": "done", "dimensions": { "cpf_active": 100, "birth_date": birth_score, "name": 100 } }),
+                    )
+                    .await?;
+                    reply(&json!({ "result": "ok", "status": "pending" }))
                 }
                 "check_business" => {
                     #[derive(Deserialize)]
                     struct Q {
+                        account_id: String,
                         cnpj: String,
                     }
                     let q: Q = payload(body)?;
-                    let result = if q.cnpj.starts_with("00") {
-                        "inactive"
-                    } else if q.cnpj.starts_with("99") {
-                        "not_partner"
-                    } else {
-                        "ok"
-                    };
-                    reply(
-                        &json!({ "result": result, "cnpj_masked": mask_cnpj(&q.cnpj), "legal_name": "Ateliê de Exemplo Artesanato Ltda", "trade_name": "Ateliê de Exemplo" }),
+                    let flag = |p: &str| if q.cnpj.starts_with(p) { 0 } else { 100 };
+                    self.record(
+                        &q.account_id,
+                        "KYC#BUSINESS",
+                        &json!({ "status": "done", "cnpj_masked": mask_cnpj(&q.cnpj), "dimensions": {
+                            "cnpj_active": flag("00"), "qsa_name": flag("99"), "address": flag("88"), "company_age": flag("77") } }),
                     )
+                    .await?;
+                    reply(
+                        &json!({ "result": "ok", "status": "pending", "cnpj_masked": mask_cnpj(&q.cnpj) }),
+                    )
+                }
+                "fraud_score" => {
+                    #[derive(Deserialize)]
+                    struct Q {
+                        account_id: String,
+                    }
+                    let q: Q = payload(body)?;
+                    let pk = format!("ACC#{}", q.account_id);
+                    let mut out = json!({ "account_id": q.account_id, "status": "none" });
+                    let mut values: Vec<u64> = Vec::new();
+                    for (sk, field) in [("KYC#IDENTITY", "identity"), ("KYC#BUSINESS", "business")]
+                    {
+                        if let Some((doc, _)) = self.0.store.load::<Value>(&pk, sk).await? {
+                            if let Some(d) = doc["dimensions"].as_object() {
+                                values.extend(d.values().filter_map(Value::as_u64));
+                            }
+                            out[field] = doc;
+                        }
+                    }
+                    if !values.is_empty() {
+                        let n = values.len() as u64;
+                        out["status"] = json!("done");
+                        out["score"] = json!((values.iter().sum::<u64>() + n / 2) / n);
+                    }
+                    reply(&out)
                 }
                 _ => Err(unknown_op("kyc", op)),
             }
