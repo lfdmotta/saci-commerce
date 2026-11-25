@@ -1,6 +1,6 @@
 # saci-commerce
 
-Os serviços públicos da **Saci**, o marketplace que conecta artesãos a quem compra: a vitrine aberta (catálogo, busca, vitrines, avaliações, frete), a compra (checkout, pedidos) e o painel do artesão (anúncios, imagens, vendas, equipe, atendimento). É o repositório de domínio que a [proposta do back-end](../saci-sume/back-end-proposta.md) chama de `saci-commerce` (seção 9.2), criado na etapa 1 do [plano de ação](../saci-sume/back-end-plano-de-acao.md) e completado nas etapas 3 e 4.
+Os serviços públicos da **Saci**, o marketplace que conecta artesãos a quem compra: a vitrine aberta (catálogo, busca, vitrines, avaliações, frete), a compra (checkout, pedidos) e o painel do artesão (anúncios, imagens, vendas, equipe, atendimento). 
 
 | | |
 | --- | --- |
