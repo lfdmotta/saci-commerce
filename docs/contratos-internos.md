@@ -58,7 +58,7 @@ Hoje atendidas pelo **sandbox** (`crates/sandbox`, só fora de produção). Quan
 | --- | --- | --- |
 | `check_identity` | `{ account_id, birth_date }` | `{ result: ok\|underage, status: pending }`; `422 document-required` (conta sem CPF) |
 | `check_business` | `{ account_id, cnpj, address?: { postal_code, street?, city, state } }` | `{ result: ok, status: pending, cnpj_masked }` |
-| `fraud_score` | `{ account_id }` | `{ status: none\|pending\|done, score?, identity?, business? }` |
+| `fraud_score` | `{ account_id }` | `{ status: none\|pending\|done, score?, identity?, business? }`: `score` é a nota total (a média de todas as dimensões); `identity` e `business` trazem a nota de cada dimensão (`cpf_active`, `birth_date`, `name`; `cnpj_active`, `qsa_name`, `address`, `company_age`) |
 
 A consulta à Receita é assíncrona (`saci-identity`, ADR 0010): as conferências respondem na hora, e a divergência baixa a nota de fraude da conta (0 a 100) em vez de recusar. O `sellers` só recusa menor de idade. O endereço do ateliê vem do CEP informado em `POST /v1/sellers/onboarding/business` (`postal_code`), completado pelo `shipping`.
 

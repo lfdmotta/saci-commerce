@@ -13,6 +13,7 @@
 //! | CNPJ começando por `00` | `ok`, com `cnpj_active` 0 |
 //! | CNPJ começando por `99` | `ok`, com `qsa_name` 0 |
 //! | CNPJ começando por `88` | `ok`, com `address` 0 |
+//! | CNPJ começando por `77` | `ok`, com `company_age` 0 (aberto há menos de 30 dias) |
 //! | Outro CNPJ válido | `ok`, nota cheia |
 //!
 //! **Finance**: comissão fixa de 12% e repasse 7 dias depois da entrega.
@@ -116,7 +117,7 @@ impl InternalHandler for Kyc {
                         &q.account_id,
                         "KYC#BUSINESS",
                         &json!({ "status": "done", "cnpj_masked": mask_cnpj(&q.cnpj), "dimensions": {
-                            "cnpj_active": flag("00"), "qsa_name": flag("99"), "address": flag("88") } }),
+                            "cnpj_active": flag("00"), "qsa_name": flag("99"), "address": flag("88"), "company_age": flag("77") } }),
                     )
                     .await?;
                     reply(
