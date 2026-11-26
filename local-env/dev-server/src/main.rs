@@ -424,7 +424,8 @@ async fn internal_call(app: &App, target: &str, req: &Request) -> Response {
 }
 
 /// Publica no barramento em processo um CloudEvent vindo de outro servidor de
-/// desenvolvimento: `payments.*` (saci-payments-dev) e `finance.*` (saci-finance-dev).
+/// desenvolvimento: `payments.*` (saci-payments-dev), `finance.*`
+/// (saci-finance-dev) e `identity.*` (saci-identity-dev).
 fn external_event(app: &App, req: &Request) -> Response {
     use saci_commerce_kit::store::EventSink;
     let Ok(event) = serde_json::from_slice::<saci_commerce_kit::events::Event>(&req.body) else {
@@ -435,7 +436,8 @@ fn external_event(app: &App, req: &Request) -> Response {
     };
     let from_payments = app.payments_bridge.is_some() && event.event_type.starts_with("payments.");
     let from_finance = app.finance.is_some() && event.event_type.starts_with("finance.");
-    if !from_payments && !from_finance {
+    let from_identity = app.identity_events && event.event_type.starts_with("identity.");
+    if !from_payments && !from_finance && !from_identity {
         return Response::problem(problem("forbidden"));
     }
     app.bus.publish(vec![event]);

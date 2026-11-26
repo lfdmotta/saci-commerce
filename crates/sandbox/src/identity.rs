@@ -6,7 +6,11 @@
 //! (e `/confirm`), `PUT /me/document`, `POST /sessions`,
 //! `POST /sessions/refresh`, `POST /sessions/step-up`, `DELETE /sessions/current`,
 //! `DELETE /sessions`, `POST /password-resets`, `POST /password-resets/confirm`,
-//! `PUT /me/password`, `POST /me/contact-confirmations`.
+//! `PUT /me/password`, `POST /me/contact-confirmations`,
+//! `POST /guest-contact-verifications` (e `/{id}/confirm`).
+//!
+//! Compra sem conta (#35): o contato preferido é confirmado antes de pagar, e
+//! os pedidos passam à conta que tiver o mesmo contato confirmado.
 //!
 //! Como o `saci-identity` (#27): o cadastro pede só nome, e-mail **ou**
 //! celular e senha, sem CPF; a conta abre na hora (201, com a sessão) e o
@@ -32,6 +36,9 @@
 //! | `RT#<token>` | `META` | refresh token |
 //! | `ADDR#<ref>` | `META` | endereço guardado (cofre) |
 //! | `GUEST#<pedido>` | `META` | comprador sem conta (cofre) |
+//! | `GUESTVER#<id>` | `META` | código do contato de quem vai comprar sem conta |
+//! | `GUESTORDERS#<contato>` | `ORD#<pedido>` | pedidos de visitante do contato confirmado |
+//! | `GUESTADDR#<pedido>` | `META` | endereço da compra sem conta |
 //! | `REVOKED#<conta>` | `META` | "encerrar em todos os aparelhos" |
 
 use saci_commerce_kit::auth;
@@ -381,9 +388,53 @@ impl Sandbox {
         ))
     }
 
-    /// Abre a conta nova: índices, evento e a sessão (201) com a confirmação do
-    /// contato em andamento.
-    async fn open_account(&self, account: &Account, web: bool) -> Result<Response, Problem> {
+    /// Entrega à conta os pedidos de visitante dos contatos confirmados dela,
+    /// como o `saci-identity` (#35).
+    async fn claim_guest_orders(&self, account_id: &str) -> Result<(), Problem> {
+        let (account, _) = self.account(account_id).await?;
+        let mut orders = Vec::new();
+        let mut ops = Vec::new();
+        for (contact, verified) in [
+            (&account.email, account.email_verified),
+            (&account.phone, account.phone_verified),
+        ] {
+            let (Some(contact), true) = (contact, verified) else {
+                continue;
+            };
+            let pk = format!("GUESTORDERS#{contact}");
+            for item in self.store.query_all(pk.clone(), "ORD#".into()).await? {
+                if item.doc["claimed_by"].is_null() {
+                    let order = item.doc["order_id"].as_str().unwrap_or_default().to_owned();
+                    ops.push(WriteOp::put(Item::new(
+                        pk.clone(),
+                        item.sk.clone(),
+                        &json!({ "order_id": order, "claimed_by": account_id }),
+                    )?));
+                    orders.push(order);
+                }
+            }
+        }
+        if orders.is_empty() {
+            return Ok(());
+        }
+        ops.push(WriteOp::Publish(events::event(
+            "identity",
+            "identity.account.guest_orders_claimed.v1",
+            account_id,
+            &json!({ "account_id": account_id, "order_ids": orders }),
+        )?));
+        Ok(self.store.write(ops).await?)
+    }
+
+    /// Abre a conta nova: índices, evento e a sessão (201). No cadastro comum,
+    /// com a confirmação do contato em andamento; a partir de uma compra
+    /// (`from_order`), o contato já foi confirmado e não há outro código.
+    async fn open_account(
+        &self,
+        account: &Account,
+        web: bool,
+        from_order: bool,
+    ) -> Result<Response, Problem> {
         let mut ops = vec![WriteOp::create(Item::new(
             format!("ACC#{}", account.id),
             "META",
@@ -406,7 +457,9 @@ impl Sandbox {
         let now = self.clock.epoch();
         let mut response = self.session(account, now, web).await?;
         let mut body: Value = serde_json::from_str(&response.body).unwrap_or(Value::Null);
-        if let Some((channel, destination)) = account.unverified() {
+        if let Some((channel, destination)) = account.unverified()
+            && !from_order
+        {
             tracing::info!(
                 channel,
                 "sandbox: código de confirmação do contato {VERIFICATION_CODE}"
@@ -540,7 +593,90 @@ impl IdentityHttp {
                     pending_contact: None,
                     created_at: s.clock.rfc3339(),
                 };
-                s.open_account(&account, is_web(req)).await
+                s.open_account(&account, is_web(req), false).await
+            }
+            ("POST", ["v1", "identity", "guest-contact-verifications"]) => {
+                #[derive(Deserialize)]
+                struct Body {
+                    #[serde(default)]
+                    email: Option<String>,
+                    #[serde(default)]
+                    phone: Option<String>,
+                }
+                let b: Body = req.json()?;
+                // Um código: ao e-mail; sem ele, ao celular.
+                let (channel, destination) = guest_contact(b.email.as_deref(), b.phone.as_deref())?;
+                let id = saci_ids::Id::new("gcv").to_string();
+                let expires = now + 15 * 60;
+                s.store
+                    .write(vec![WriteOp::put(
+                        Item::new(
+                            format!("GUESTVER#{id}"),
+                            "META",
+                            &json!({ "contact": destination, "confirmed": false, "attempts": 0, "expires_at": expires }),
+                        )?
+                        .expiring(expires + 3_600),
+                    )])
+                    .await?;
+                tracing::info!(
+                    channel,
+                    "sandbox: código para confirmar a compra {VERIFICATION_CODE}"
+                );
+                Ok(Response::json(
+                    202,
+                    &json!({
+                        "verification_id": id, "channel": channel,
+                        "masked_destination": masked(channel, &destination),
+                        "expires_at": rfc3339_epoch(expires),
+                    }),
+                ))
+            }
+            (
+                "POST",
+                [
+                    "v1",
+                    "identity",
+                    "guest-contact-verifications",
+                    id,
+                    "confirm",
+                ],
+            ) => {
+                #[derive(Deserialize)]
+                struct Body {
+                    code: String,
+                }
+                let b: Body = req.json()?;
+                let key = format!("GUESTVER#{id}");
+                let (mut ver, version) = s
+                    .store
+                    .load::<Value>(&key, "META")
+                    .await?
+                    .filter(|(v, _)| v["expires_at"].as_u64().unwrap_or(0) > now)
+                    .ok_or_else(|| problem("code-expired"))?;
+                let attempts = ver["attempts"].as_u64().unwrap_or(0);
+                if attempts >= 5 {
+                    return Err(problem("attempts-exceeded"));
+                }
+                let ok = b.code == VERIFICATION_CODE;
+                let expires = now + 3_600;
+                if ok {
+                    ver["confirmed"] = json!(true);
+                    ver["expires_at"] = json!(expires);
+                } else {
+                    ver["attempts"] = json!(attempts + 1);
+                }
+                s.store
+                    .write(vec![WriteOp::replace(
+                        Item::new(key, "META", &ver)?,
+                        version,
+                    )])
+                    .await?;
+                if !ok {
+                    return Err(problem("invalid-code").with_field("code", "O código não confere."));
+                }
+                Ok(Response::ok(
+                    &json!({ "verification_id": id, "expires_at": rfc3339_epoch(expires) }),
+                ))
             }
             ("POST", ["v1", "identity", "accounts", "from-order"]) => {
                 let order_id = auth::guest_order(req)?.to_owned();
@@ -568,33 +704,46 @@ impl IdentityHttp {
                     (None, Some(p)) => ("phone", p.clone()),
                     _ => return Err(problem("contact-required")),
                 };
-                for contact in [email.as_deref(), phone.as_deref()].into_iter().flatten() {
-                    if s.account_by_key(&contact_key(contact)).await?.is_some() {
-                        return s.neutral_verification(channel, &destination).await;
-                    }
+                // Só o contato confirmado vai para a conta (e decide se ela abre);
+                // o CPF da nota fiscal não vai (#35).
+                let verified = buyer["verified_channel"].as_str().unwrap_or_default();
+                let email = email.filter(|_| verified == "email");
+                let phone = phone.filter(|_| verified == "phone");
+                let contact = email.as_deref().or(phone.as_deref()).unwrap_or_default();
+                if s.account_by_key(&contact_key(contact)).await?.is_some() {
+                    return s.neutral_verification(channel, &destination).await;
                 }
-                // O CPF da nota fiscal entra na conta só se ainda não é de outra.
-                let document = match buyer["cpf"].as_str().filter(|c| !c.is_empty()) {
-                    Some(cpf) if s.account_by_document(cpf).await?.is_none() => {
-                        Some(cpf.to_owned())
-                    }
-                    _ => None,
-                };
                 let id = saci_ids::Id::new(saci_ids::prefix::ACCOUNT).to_string();
                 let account = Account {
                     password_hash: hash_password(&id, &b.password),
                     id,
-                    document,
+                    document: None,
                     name: None,
                     preferred_name: buyer["name"].as_str().map(str::to_owned),
                     email,
-                    email_verified: false,
+                    email_verified: verified == "email",
                     phone,
-                    phone_verified: false,
+                    phone_verified: verified == "phone",
                     pending_contact: None,
                     created_at: s.clock.rfc3339(),
                 };
-                s.open_account(&account, is_web(req)).await
+                let response = s.open_account(&account, is_web(req), true).await?;
+                // O endereço da compra vira o padrão da conta.
+                if let Some((address, _)) = s
+                    .store
+                    .load::<Value>(&format!("GUESTADDR#{order_id}"), "META")
+                    .await?
+                {
+                    s.store
+                        .write(vec![WriteOp::put(Item::new(
+                            format!("DEFAULTADDR#{}", account.id),
+                            "META",
+                            &address,
+                        )?)])
+                        .await?;
+                }
+                s.claim_guest_orders(&account.id).await?;
+                Ok(response)
             }
             ("POST", ["v1", "identity", "verifications", id, "confirm"]) => {
                 // Só o cadastro com contato já cadastrado chega aqui: nunca confere.
@@ -666,6 +815,7 @@ impl IdentityHttp {
                         version,
                     )])
                     .await?;
+                s.claim_guest_orders(&account_id).await?;
                 Ok(Response::no_content())
             }
             ("PUT", ["v1", "identity", "me", "document"]) => {
@@ -726,6 +876,8 @@ impl IdentityHttp {
                 if !password_ok(&account, &b.password) {
                     return Err(problem("invalid-credentials"));
                 }
+                // Quem comprou sem entrar recebe os pedidos agora.
+                s.claim_guest_orders(&account.id).await?;
                 s.session(&account, now, b.client == "web").await
             }
             ("POST", ["v1", "identity", "sessions", "refresh"]) => {
@@ -826,6 +978,7 @@ impl IdentityHttp {
                     )?));
                 }
                 s.store.write(ops).await?;
+                s.claim_guest_orders(&account_id).await?;
                 Ok(Response::no_content())
             }
             ("DELETE", ["v1", "identity", "sessions", "current"]) => {
@@ -943,6 +1096,28 @@ fn password_ok(account: &Account, password: &str) -> bool {
             .is_some_and(|d| account.password_hash == hash_password(d, password))
 }
 
+/// O contato preferido de quem compra sem conta: o e-mail; sem ele, o celular.
+fn guest_contact(
+    email: Option<&str>,
+    phone: Option<&str>,
+) -> Result<(&'static str, String), Problem> {
+    if let Some(e) = email
+        .map(|e| e.trim().to_lowercase())
+        .filter(|e| !e.is_empty())
+    {
+        if !e.contains('@') {
+            return Err(invalid("email", "Confira o e-mail."));
+        }
+        return Ok(("email", e));
+    }
+    match phone.filter(|p| !p.trim().is_empty()) {
+        Some(p) => normalize_phone(p)
+            .map(|p| ("phone", p))
+            .ok_or_else(|| invalid("phone", "Confira o celular, com o DDD.")),
+        None => Err(problem("contact-required")),
+    }
+}
+
 /// As operações internas do cofre (`identity`).
 #[derive(Debug, Clone)]
 pub struct IdentityInternal(pub Sandbox);
@@ -1000,9 +1175,19 @@ impl InternalHandler for IdentityInternal {
                         address: Value,
                     }
                     let p: P = payload(body)?;
-                    reply(
-                        &json!({ "ref": s.put_address(&p.owner_account_id, &p.purpose, p.address).await? }),
-                    )
+                    let reference = s
+                        .put_address(&p.owner_account_id, &p.purpose, p.address)
+                        .await?;
+                    if let Some(order) = p.owner_account_id.strip_prefix("guest:") {
+                        s.store
+                            .write(vec![WriteOp::put(Item::new(
+                                format!("GUESTADDR#{order}"),
+                                "META",
+                                &json!({ "ref": reference }),
+                            )?)])
+                            .await?;
+                    }
+                    reply(&json!({ "ref": reference }))
                 }
                 "open_address" => {
                     #[derive(Deserialize)]
@@ -1020,11 +1205,47 @@ impl InternalHandler for IdentityInternal {
                 }
                 "put_guest_buyer" => {
                     let order = body["order_id"].as_str().unwrap_or_default().to_owned();
+                    let (channel, destination) =
+                        guest_contact(body["email"].as_str(), body["phone"].as_str())?;
+                    // Como o cofre: sem o contato preferido confirmado, nada de pedido.
+                    let id = body["verification_id"].as_str().unwrap_or_default();
+                    let verified = s
+                        .store
+                        .load::<Value>(&format!("GUESTVER#{id}"), "META")
+                        .await?
+                        .is_some_and(|(v, _)| {
+                            v["confirmed"] == json!(true)
+                                && v["contact"] == json!(destination)
+                                && v["expires_at"].as_u64().unwrap_or(0) > s.clock.epoch()
+                        });
+                    if !verified {
+                        return Err(problem("contact-verification-required"));
+                    }
+                    let mut buyer = body.clone();
+                    buyer["verified_channel"] = json!(channel);
                     s.store
                         .write(vec![WriteOp::put(Item::new(
                             format!("GUEST#{order}"),
                             "META",
-                            &body,
+                            &buyer,
+                        )?)])
+                        .await?;
+                    reply(&json!({}))
+                }
+                "confirm_guest_order" => {
+                    let order = body["order_id"].as_str().unwrap_or_default().to_owned();
+                    let (buyer, _) = s
+                        .store
+                        .load::<Value>(&format!("GUEST#{order}"), "META")
+                        .await?
+                        .ok_or_else(not_found)?;
+                    let (_, destination) =
+                        guest_contact(buyer["email"].as_str(), buyer["phone"].as_str())?;
+                    s.store
+                        .write(vec![WriteOp::put(Item::new(
+                            format!("GUESTORDERS#{destination}"),
+                            format!("ORD#{order}"),
+                            &json!({ "order_id": order, "claimed_by": null }),
                         )?)])
                         .await?;
                     reply(&json!({}))

@@ -4,7 +4,7 @@
 //! | --- | --- | --- |
 //! | `api` | API Gateway (compras: `user`; pedido sem conta: `mixed`) | `/v1/orders` |
 //! | `internal` | Invocação direta | pedido do checkout, vendas para `shipping`, `reviews`, `sellers`, `catalog` |
-//! | `progress` | Fila de `shipping.*` e `finance.payout.sent.v1` | etiqueta, entrega, repasse |
+//! | `progress` | Fila de `shipping.*`, `finance.payout.sent.v1` e `identity.account.guest_orders_claimed.v1` | etiqueta, entrega, repasse, pedidos de visitante para a conta |
 //! | `relay` | DynamoDB Streams | *outbox* → EventBridge |
 //! | `migrate` | Terraform | compras e vendas de exemplo (fora de produção) |
 //!
@@ -20,7 +20,7 @@ use saci_commerce_kit::aws::lambda::{
 };
 use saci_commerce_kit::aws::sdk_config;
 use saci_commerce_kit::clock::{Clock, SystemClock};
-use saci_orders_api::{Orders, SaleProgress};
+use saci_orders_api::{GuestOrderClaim, Orders, SaleProgress};
 use serde_json::json;
 
 #[tokio::main]
@@ -39,7 +39,17 @@ async fn main() -> Result<(), Error> {
     match function.as_str() {
         "api" => run_http(Arc::new(orders)).await,
         "internal" => run_internal(Arc::new(orders)).await,
-        "progress" => run_consumer(store, vec![Arc::new(SaleProgress(orders))], clock).await,
+        "progress" => {
+            run_consumer(
+                store,
+                vec![
+                    Arc::new(SaleProgress(orders.clone())),
+                    Arc::new(GuestOrderClaim(orders)),
+                ],
+                clock,
+            )
+            .await
+        }
         "relay" => run_relay(&config).await,
         "migrate" => {
             let fixtures = saci_commerce_kit::env_or("SACI_SEED_FIXTURES", "false") == "true";

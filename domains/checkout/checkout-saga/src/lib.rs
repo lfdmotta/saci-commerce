@@ -129,6 +129,10 @@ struct CheckoutRequest {
     buyer: Option<Buyer>,
     payment: Payment,
     expected_total: Money,
+    /// Sem conta: a confirmação do contato preferido (e-mail; sem ele, o
+    /// celular), de `POST /v1/identity/guest-contact-verifications` (#35).
+    #[serde(default)]
+    contact_verification_id: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -271,6 +275,28 @@ impl Checkout {
         Self::validate(account.as_deref(), &body)?;
         let client = self.internal.as_ref();
 
+        // 0. Com conta, algum contato dela precisa estar confirmado: é por ele
+        //    que vão os avisos do pedido (#35). Sem conta, quem confere é o
+        //    cofre, no passo 4. Nada é cobrado sem isso.
+        let profile: Option<Value> = match &account {
+            Some(a) => {
+                let profile: Value = internal::call(
+                    client,
+                    "identity",
+                    "account_profile",
+                    &json!({ "account_id": a }),
+                )
+                .await?;
+                if profile["email_verified"] != json!(true)
+                    && profile["phone_verified"] != json!(true)
+                {
+                    return Err(problem("contact-verification-required"));
+                }
+                Some(profile)
+            }
+            None => None,
+        };
+
         // 1. Preço e estoque do catálogo: o preço nunca vem do cliente.
         #[derive(Deserialize)]
         struct Items {
@@ -340,6 +366,27 @@ impl Checkout {
         let owner = account
             .clone()
             .unwrap_or_else(|| format!("guest:{order_id}"));
+        // Sem conta, o cofre só guarda quem compra com o contato confirmado
+        // (`contact-verification-required`): vem antes do endereço e da cobrança.
+        let buyer_first_name = match (&profile, &body.buyer) {
+            (None, Some(b)) => {
+                let _: Value = internal::call(
+                    client,
+                    "identity",
+                    "put_guest_buyer",
+                    &json!({ "order_id": order_id, "cpf": b.cpf.as_deref().filter(|c| !c.is_empty()), "name": b.name, "email": b.email,
+                             "phone": b.phone.as_deref().and_then(saci_commerce_kit::text::normalize_phone),
+                             "verification_id": body.contact_verification_id }),
+                )
+                .await?;
+                first_name(&b.name)
+            }
+            (Some(profile), _) => profile["preferred_name"]
+                .as_str()
+                .or_else(|| profile["name"].as_str())
+                .map_or_else(|| "Cliente".into(), first_name),
+            _ => "Cliente".into(),
+        };
         #[derive(Deserialize)]
         struct Ref {
             #[serde(rename = "ref")]
@@ -352,33 +399,6 @@ impl Checkout {
             &json!({ "owner_account_id": owner, "purpose": "delivery", "address": body.shipping_address }),
         )
         .await?;
-        let buyer_first_name = match (&account, &body.buyer) {
-            (_, Some(b)) if account.is_none() => {
-                let _: Value = internal::call(
-                    client,
-                    "identity",
-                    "put_guest_buyer",
-                    &json!({ "order_id": order_id, "cpf": b.cpf.as_deref().filter(|c| !c.is_empty()), "name": b.name, "email": b.email,
-                             "phone": b.phone.as_deref().and_then(saci_commerce_kit::text::normalize_phone) }),
-                )
-                .await?;
-                first_name(&b.name)
-            }
-            (Some(a), _) => {
-                let profile: Value = internal::call(
-                    client,
-                    "identity",
-                    "account_profile",
-                    &json!({ "account_id": a }),
-                )
-                .await?;
-                profile["preferred_name"]
-                    .as_str()
-                    .or_else(|| profile["name"].as_str())
-                    .map_or_else(|| "Cliente".into(), first_name)
-            }
-            _ => "Cliente".into(),
-        };
         let (city, state) = match &body.shipping_address {
             ShippingAddress::Brasil { city, state, .. } => (city.clone(), state.clone()),
             ShippingAddress::Exterior { city, country, .. } => (city.clone(), country.clone()),
@@ -446,6 +466,26 @@ impl Checkout {
                 return Err(p);
             }
         };
+
+        // O pedido de visitante entra no índice do contato confirmado: a conta
+        // que provar o mesmo contato, agora ou anos depois, o recebe (#35). Só
+        // depois de o pedido existir, e antes da cobrança.
+        if account.is_none()
+            && let Err(p) = internal::call::<_, Value>(
+                client,
+                "identity",
+                "confirm_guest_order",
+                &json!({ "order_id": order_id }),
+            )
+            .await
+        {
+            self.abandon(&mut saga, "payment-failed", true).await?;
+            return Err(p);
+        }
+        // TODO(#35): mandar o número do pedido ao e-mail confirmado de quem
+        // comprou, assim que houver um meio de envio de e-mails em produção
+        // (no `saci-identity`, que é quem tem o contato). Quem não tem conta
+        // acompanha o pedido por esse contato.
 
         // 7. Cobrança, com split por vitrine.
         let splits: Vec<Value> = by_store

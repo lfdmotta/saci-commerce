@@ -448,6 +448,84 @@ impl InternalHandler for Orders {
     }
 }
 
+/// Consumidor que passa os pedidos de visitante à conta que provou o contato
+/// usado neles (`identity.account.guest_orders_claimed.v1`, #35).
+#[derive(Debug, Clone)]
+pub struct GuestOrderClaim(pub Orders);
+
+#[derive(Debug, Deserialize)]
+struct Claimed {
+    account_id: String,
+    order_ids: Vec<String>,
+}
+
+impl Orders {
+    /// Passa um pedido sem dono à conta: o pedido, **cada venda** dele (as
+    /// avaliações e o suporte conferem a conta na venda) e o histórico, com a
+    /// data da compra. Pedido de outra conta nunca muda de dono; repetir não
+    /// faz nada. Devolve se ligou agora.
+    pub async fn claim_order(&self, order_id: &str, account: &str) -> Result<bool, ConsumeError> {
+        let pk = keys::order(order_id);
+        let Some((mut order, version)) = self.store.load::<OrderRecord>(&pk, keys::META).await?
+        else {
+            // O cofre só indexa pedido que existe: não há o que esperar.
+            tracing::warn!(order = %order_id, "pedido de visitante inexistente, ignorado");
+            return Ok(false);
+        };
+        if let Some(owner) = &order.account_id {
+            if owner != account {
+                tracing::warn!(target: "audit", order = %order_id, "pedido já é de outra conta");
+            }
+            return Ok(false);
+        }
+        order.account_id = Some(account.to_owned());
+        let mut ops = vec![
+            WriteOp::replace(Item::new(pk, keys::META, &order)?, version),
+            WriteOp::put(Item::new(
+                keys::account(account),
+                format!("ORD#{}#{}", order.created_at, order.id),
+                &json!({}),
+            )?),
+        ];
+        for sale_id in &order.sale_ids {
+            let (mut sale, version) = self.sale(sale_id).await?;
+            sale.account_id = Some(account.to_owned());
+            ops.push(WriteOp::replace(
+                Item::new(keys::sale(sale_id), keys::META, &sale)?,
+                version,
+            ));
+        }
+        match self.store.write(ops).await {
+            Ok(()) => Ok(true),
+            // Uma venda mudou no meio do caminho: o barramento entrega de novo.
+            Err(StoreError::Conflict) => {
+                Err(ConsumeError::Retry("conflito ao ligar o pedido".into()))
+            }
+            Err(e) => Err(e.into()),
+        }
+    }
+}
+
+impl Consumer for GuestOrderClaim {
+    fn name(&self) -> &'static str {
+        "orders-guest-claim"
+    }
+
+    fn accepts(&self) -> &'static [&'static str] {
+        &["identity.account.guest_orders_claimed.v1"]
+    }
+
+    fn handle<'a>(&'a self, event: &'a Event) -> BoxFut<'a, Result<(), ConsumeError>> {
+        Box::pin(async move {
+            let claimed: Claimed = data(event)?;
+            for order in &claimed.order_ids {
+                self.0.claim_order(order, &claimed.account_id).await?;
+            }
+            Ok(())
+        })
+    }
+}
+
 /// Consumidor que avança as vendas: etiqueta comprada, entrega, repasse.
 #[derive(Debug, Clone)]
 pub struct SaleProgress(pub Orders);

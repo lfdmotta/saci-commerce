@@ -124,6 +124,13 @@ const CATALOG: &[Entry] = &[
         "Contato obrigatório",
         "Mantenha um e-mail ou um celular para receber os avisos.",
     ),
+    // compra: o contato confirmado antes do pagamento (#35)
+    (
+        "contact-verification-required",
+        422,
+        "Confirme o contato",
+        "Confirme o seu e-mail ou celular com o código antes de pagar.",
+    ),
     // cadastro sem CPF obrigatório (#27)
     (
         "phone-country-not-supported",

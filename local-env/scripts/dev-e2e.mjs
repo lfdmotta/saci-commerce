@@ -145,8 +145,9 @@ async function buy(item, payment, opts = {}) {
     payment,
     expected_total: { amount: opts.total ?? total, currency: 'BRL' },
     ...(opts.buyer ? { buyer: opts.buyer } : {}),
+    ...(opts.verification ? { contact_verification_id: opts.verification } : {}),
   };
-  return call('POST', '/v1/checkout', { body, token: opts.anon ? undefined : token, idem: opts.idem ?? uuid() });
+  return call('POST', '/v1/checkout', { body, token: opts.anon ? undefined : (opts.token ?? token), idem: opts.idem ?? uuid() });
 }
 // O cartão vai direto ao PSP, na URL e com a chave pública do client-config (o
 // sandbox daqui ou o PSP simulado do saci-payments-dev, com SACI_DEV_PAYMENTS_URL).
@@ -165,11 +166,48 @@ const stockAfter = (await call('GET', `/v1/catalog/listings/${forSale[1].id}`)).
 check('recusa devolve o estoque', stockAfter === forSale[1].stock, { stockAfter, before: forSale[1].stock });
 const pix = await buy(forSale[1], { method: 'pix' });
 check('Pix → aguardando, com código', pix.status === 201 && pix.json.pix?.code && pix.json.order.status === 'awaiting-payment', pix.json);
-const guest = await buy(forSale[2], { method: 'pix' }, { anon: true, buyer: { name: 'Ana Souza', email: 'ana@exemplo.com' } });
+// Sem conta, o contato é confirmado antes de qualquer cobrança (#35).
+const visitorEmail = `ana.${Date.now()}@exemplo.com`;
+const visitor = { name: 'Ana Souza', email: visitorEmail, phone: '+5585977775555' };
+const unverified = await buy(forSale[2], { method: 'pix' }, { anon: true, buyer: visitor });
+check('sem confirmar o contato, nada de Pix', unverified.status === 422 && unverified.json.code === 'contact-verification-required', unverified.json);
+async function confirmContact(contact) {
+  const started = await call('POST', '/v1/identity/guest-contact-verifications', { body: contact });
+  const id = started.json?.verification_id;
+  const done = await call('POST', `/v1/identity/guest-contact-verifications/${id}/confirm`, { body: { code: '123456' } });
+  return { id, started, done };
+}
+const verification = await confirmContact({ email: visitorEmail, phone: visitor.phone });
+check('um código, ao e-mail antes do celular', verification.started.json?.channel === 'email' && verification.done.status === 200, verification.started.json);
+const other = await buy(forSale[2], { method: 'pix' }, { anon: true, buyer: { ...visitor, email: `outra.${visitorEmail}` }, verification: verification.id });
+check('confirmação de um e-mail não vale para outro', other.json?.code === 'contact-verification-required', other.json);
+const guest = await buy(forSale[2], { method: 'pix' }, { anon: true, buyer: visitor, verification: verification.id });
 check('compra sem conta → guest token', guest.status === 201 && guest.json.guest_token, guest.json);
 const gstatus = await call('GET', `/v1/checkout/orders/${guest.json.order.id}/payment`, { guest: guest.json.guest_token });
 check('guest token lê o próprio pedido', gstatus.status === 200 && gstatus.json.status === 'pending', gstatus.json);
 check('guest token não lê outro pedido', (await call('GET', `/v1/checkout/orders/${pix.json.order.id}/payment`, { guest: guest.json.guest_token })).status === 404);
+// A conta criada depois recebe o pedido de visitante (#35).
+const fromOrder = await call('POST', '/v1/identity/accounts/from-order', { guest: guest.json.guest_token, body: { order_id: guest.json.order.id, password: 'Feira2026segura', accepted_terms_version: '2026-11', client: 'web' } });
+check('conta a partir da compra, com o contato já confirmado', fromOrder.status === 201 && fromOrder.json.account.email_verified === true && !fromOrder.json.contact_verification, fromOrder.json);
+async function historyOf(token, orderId) {
+  for (let i = 0; i < 30; i += 1) {
+    const list = await call('GET', '/v1/orders/me/purchases', { token });
+    if (list.json?.items?.some((o) => o.id === orderId)) return true;
+    await sleep(200);
+  }
+  return false;
+}
+check('pedido de visitante no histórico da conta nova', await historyOf(fromOrder.json.access_token, guest.json.order.id));
+check('e abre pela conta', (await call('GET', `/v1/orders/me/purchases/${guest.json.order.id}`, { token: fromOrder.json.access_token })).status === 200);
+// Quem já tem conta e compra sem entrar recebe o pedido na próxima entrada.
+const again2 = await confirmContact({ email: visitorEmail });
+const loggedOut = await buy(forSale[3], { method: 'pix' }, { anon: true, buyer: { name: 'Ana Souza', email: visitorEmail }, verification: again2.id });
+const back = await call('POST', '/v1/identity/sessions', { body: { login: visitorEmail, password: 'Feira2026segura', client: 'web' } });
+check('compra sem entrar aparece na entrada seguinte', await historyOf(back.json?.access_token, loggedOut.json?.order?.id), loggedOut.json);
+// Conta com o contato por confirmar também não paga.
+const unconfirmed = await call('POST', '/v1/identity/accounts', { body: { name: 'Rui Lima', email: `rui.${Date.now()}@exemplo.com`, password: 'Feira2026segura', accepted_terms_version: '2026-11', client: 'web' } });
+const blocked = await buy(forSale[3], { method: 'pix' }, { anon: false, token: unconfirmed.json.access_token });
+check('conta sem contato confirmado não paga', blocked.json?.code === 'contact-verification-required', blocked.json);
 console.log('  … aguardando o Pix do sandbox (20 s)');
 await sleep(21_000);
 const paid = await call('GET', `/v1/checkout/orders/${pix.json.order.id}/payment`, { token });

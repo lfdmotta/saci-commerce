@@ -7,6 +7,8 @@
 //!   (libera etiqueta e endereço) e "postada" (rastreio).
 //! - O ciclo avança por eventos: etiqueta comprada, entrega pela transportadora,
 //!   repasse feito.
+//! - **Pedidos de visitante** passam à conta que provar o contato usado neles
+//!   ([`GuestOrderClaim`], #35).
 //!
 //! Publica `orders.sale.{ready,shipped,delivered}.v1`.
 
@@ -16,4 +18,4 @@ pub mod model;
 pub mod seed;
 
 pub use api::Orders;
-pub use internal::SaleProgress;
+pub use internal::{GuestOrderClaim, SaleProgress};
