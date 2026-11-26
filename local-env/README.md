@@ -62,13 +62,15 @@ Senha de todas: `feira-de-exemplo`. Código de verificação (confirmação do c
 | `POST /dev/carrier/sandbox` `{ "event_id", "tracking_code", "status": "delivered" }` | A transportadora avisar uma entrega (assinado pelo servidor) |
 | `GET /dev/health` | Saúde |
 
+Compra (#35): sem conta, o contato é confirmado antes de pagar (`POST /v1/identity/guest-contact-verifications` e `/{id}/confirm`, código `123456`); sem isso, `contact-verification-required`. Com `SACI_DEV_IDENTITY_URL`, o `saci-identity-dev` manda os eventos `identity.*` para o `POST /dev/events` daqui, e é assim que os pedidos de visitante chegam à conta.
+
 KYC do sandbox (como o `kyc-gateway` do `saci-identity`, ADR 0010: a conferência responde na hora e a divergência só baixa a nota de fraude, lida em `fraud_score`): nascimento de menor de 18 anos → `underage` (a única recusa); conta sem CPF → `document-required`; nascimento em 1º de janeiro → nota com `birth_date` 0; CNPJ começando por `00` → `cnpj_active` 0, por `99` → `qsa_name` 0, por `88` → `address` 0, por `77` → `company_age` 0 (empresa aberta há menos de 30 dias).
 
 ### Teste ponta a ponta
 
 ```bash
 task dev            # terminal 1
-task dev:e2e        # terminal 2: 82 verificações pelos caminhos da interface
+task dev:e2e        # terminal 2: 90 verificações pelos caminhos da interface
 ```
 
 O roteiro (`scripts/dev-e2e.mjs`) cobre vitrine aberta, conta, compra com cartão, recusa, Pix, compra sem conta, painel, anúncio com foto pela esteira, vendas, etiqueta, entrega pela transportadora, equipe e chamados.

@@ -56,7 +56,7 @@ Precisa do [Rust](https://rustup.rs) (versão fixa em `rust-toolchain.toml`), do
 
 ```bash
 task dev                         # todos os serviços em http://localhost:8787, com dados de exemplo
-task dev:e2e                     # 82 verificações pelos caminhos da interface (em outro terminal)
+task dev:e2e                     # 90 verificações pelos caminhos da interface (em outro terminal)
 task lint test tf:validate       # qualidade
 ```
 
