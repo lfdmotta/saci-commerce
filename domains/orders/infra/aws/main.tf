@@ -41,7 +41,7 @@ module "domain" {
     progress = {
       function    = "progress"
       description = "Ciclo das vendas"
-      event_types = ["shipping.label.purchased.v1", "shipping.tracking.updated.v1", "finance.payout.sent.v1"]
+      event_types = ["shipping.label.purchased.v1", "shipping.tracking.updated.v1", "finance.payout.sent.v1", "identity.account.guest_orders_claimed.v1"]
     }
   }
 

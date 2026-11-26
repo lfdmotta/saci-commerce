@@ -24,7 +24,7 @@ use saci_media_api::Media;
 use saci_media_pipeline::Pipeline;
 use saci_notifications_api::Notifications;
 use saci_notifications_dispatcher::{Dispatcher, InlineQueue, LogSender};
-use saci_orders_api::{Orders, SaleProgress};
+use saci_orders_api::{GuestOrderClaim, Orders, SaleProgress};
 use saci_reviews_api::Reviews;
 use saci_search_indexer::{Indexer, Search};
 use saci_sellers_api::{Sellers, WorkspaceProjector};
@@ -88,6 +88,9 @@ pub(crate) struct App {
     pub payments: Arc<dyn HttpService>,
     /// Ponte com o `saci-payments-dev`, quando ligada (`SACI_DEV_PAYMENTS_URL`).
     pub payments_bridge: Option<crate::identity_bridge::Bridge>,
+    /// Com o `saci-identity-dev` (`SACI_DEV_IDENTITY_URL`): os eventos
+    /// `identity.*` dele entram pelo `POST /dev/events`.
+    pub identity_events: bool,
     /// `/v1/finance`: o `saci-finance-dev` (ponte, `SACI_DEV_FINANCE_URL`); sem ela, nada.
     pub finance: Option<Arc<dyn HttpService>>,
     /// Chamadas internas em processo (o finance chama `orders` por `/internal/orders`).
@@ -296,6 +299,7 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
         Arc::new(ProfileCreator(customers.clone())),
         Arc::new(LabelBuyer(shipping.clone())),
         Arc::new(SaleProgress(orders.clone())),
+        Arc::new(GuestOrderClaim(orders.clone())),
         Arc::new(PaymentEvents(checkout.clone())),
         Arc::new(Handoffs(support.clone())),
         Arc::new(dispatcher),
@@ -331,6 +335,7 @@ pub(crate) fn build(public_url: &str) -> Result<(App, Worker), String> {
         orders: Arc::new(orders.clone()),
         support: Arc::new(support.clone()),
         notifications: Arc::new(notifications),
+        identity_events: identity_bridge.is_some(),
         identity: match identity_bridge {
             Some(bridge) => Arc::new(bridge),
             None => Arc::new(IdentityHttp(sandbox.clone())),

@@ -39,6 +39,7 @@ events:
     - shipping.label.purchased.v1
     - shipping.tracking.updated.v1
     - finance.payout.sent.v1
+    - identity.account.guest_orders_claimed.v1
 slo:
   availability: 99.9
   latency_p99_ms: 300

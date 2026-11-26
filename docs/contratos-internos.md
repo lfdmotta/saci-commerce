@@ -48,7 +48,8 @@ Hoje atendidas pelo **sandbox** (`crates/sandbox`, só fora de produção). Quan
 | `put_address` | `{ owner_account_id, purpose: delivery\|business, address }` | `{ ref }` (`addr_…`) | Endereço cifrado no cofre |
 | `open_address` | `{ ref, purpose: sale\|label\|business\|delivery, … }` | `{ address }` | Regra por quem pede (tabela da seção 9.3) |
 | `default_address` | `{ account_id }` | `{ ref? }` | Endereço já conhecido da conta |
-| `put_guest_buyer` | `{ order_id, cpf?, name, email?, phone? }` | `{}` | Compra sem conta: nada disso fica no checkout. O CPF é opcional ("CPF na nota fiscal?", #27); o celular vai em E.164 |
+| `put_guest_buyer` | `{ order_id, cpf?, name, email?, phone?, verification_id }` | `{}` ou `422 contact-verification-required` | Compra sem conta: nada disso fica no checkout. **Antes de qualquer cobrança**, o cofre confere que o contato preferido (e-mail; sem ele, celular) foi confirmado (#35). O CPF é opcional ("CPF na nota fiscal?") e não vincula nada |
+| `confirm_guest_order` | `{ order_id }` | `{}` | Chamado pelo `checkout` depois de criar o pedido e antes de cobrar: o pedido entra no índice do contato confirmado |
 | `request_contact_change` | `{ account_id, email?, phone? }` | `{}` ou `contact-required` | Confirmação no destino novo, aviso no antigo (S-12) |
 | `notify`, `send_to_address` | `{ account_id \| email, template, token? }` | `{}` | E-mail e SMS saem pelo cofre |
 
@@ -95,3 +96,7 @@ E o evento `assistant.handoff.requested.v1` (`support` abre o chamado).
 ## Rotas HTTP que o sandbox atende para o teste local
 
 O servidor de desenvolvimento também responde, com o sandbox, as rotas de `/v1/identity` (cadastro com código, entrada, refresh rotativo com cookie `HttpOnly` no site, reautenticação, saída, recuperação de senha) e de `/v1/payments` (`client-config`, preferências, cartões, tokenização em `/dev/psp/tokens`), nos formatos de `saci-contracts/http/identity.yaml` e da seção 5.9, para a interface poder rodar inteira contra o back-end local.
+
+## Pedidos de visitante (#35)
+
+O `orders` consome `identity.account.guest_orders_claimed.v1` `{ account_id, order_ids }` (consumidor `GuestOrderClaim`, na função `progress`): grava a conta no pedido **e em cada venda dele** (avaliações e suporte conferem a conta na venda) e cria o item do histórico com a data da compra. Repetir não faz nada; pedido de outra conta nunca muda de dono; conflito de gravação volta para a fila. O `checkout` também recusa, com `contact-verification-required`, a compra de conta sem nenhum contato confirmado. **TODO:** mandar o número do pedido por e-mail quando houver envio.
